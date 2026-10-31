@@ -122,8 +122,8 @@ h1,h2,h3,h4{font-family:var(--display);font-weight:500;line-height:1.08;margin:0
 .hero .inner{position:relative;z-index:2;text-align:center;padding:90px 20px 40px;display:flex;flex-direction:column;align-items:center}
 .sealwrap{position:relative;width:clamp(196px,22vw,272px);aspect-ratio:1;margin-bottom:28px}
 .sealwrap img{position:absolute;inset:16%;width:68%;height:68%;filter:drop-shadow(0 10px 40px rgba(0,0,0,.6));animation:sealIn 2s var(--ease) both}
-.sealwrap svg{position:absolute;inset:0;width:100%;height:100%;animation:spin 80s linear infinite}
-.sealwrap svg text{font-family:var(--lap);font-size:9.6px;letter-spacing:3.2px;fill:var(--gold2)}
+.sealwrap svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;animation:spin 80s linear infinite;filter:drop-shadow(0 4px 18px rgba(0,0,0,.45))}
+.sealwrap svg text{font-family:var(--lap);font-size:10.8px;font-weight:500;letter-spacing:2px;fill:var(--gold3)}
 @keyframes spin{to{transform:rotate(360deg)}}
 @keyframes sealIn{from{opacity:0;transform:scale(.85) rotate(-30deg)}to{opacity:1;transform:none}}
 .hero h1{font-weight:300;font-size:clamp(40px,6.6vw,96px);line-height:1;letter-spacing:-.015em;max-width:12ch;text-wrap:balance}
@@ -661,7 +661,7 @@ async function home(){
   <section class="hero" id="top">
     <div class="slides">${HERO.hero.map((h,i)=>`<figure${i===0?' class="on"':''} style="--o:${[30,70,50,20,80][i%5]}% ${[40,60,30,70,50][i%5]}%"><img src="${h.src}" alt=""></figure>`).join('')}</div>
     <div class="inner">
-      <div class="sealwrap"><svg viewBox="0 0 200 200" aria-hidden="true"><defs><path id="ring" d="M100,100 m-88,0 a88,88 0 1,1 176,0 a88,88 0 1,1 -176,0"/></defs><circle cx="100" cy="100" r="97" fill="none" stroke="rgba(214,184,120,.35)" stroke-width=".6"/><circle cx="100" cy="100" r="80" fill="none" stroke="rgba(214,184,120,.25)" stroke-width=".6"/><text><textPath href="#ring">${(PILLARS.join(' ✠ ')+' ✠ ')}</textPath></text></svg><img src="${HERO.seal}" alt="Seal of the International Catholic Jurists Forum"></div>
+      <div class="sealwrap"><svg viewBox="0 0 200 200" aria-hidden="true"><defs><path id="ring" d="M100,100 m-87.6,0 a87.6,87.6 0 1,1 175.2,0 a87.6,87.6 0 1,1 -175.2,0"/></defs><circle cx="100" cy="100" r="91.5" fill="none" stroke="rgba(14,13,11,.62)" stroke-width="16"/><circle cx="100" cy="100" r="99.4" fill="none" stroke="rgba(214,184,120,.55)" stroke-width=".7"/><circle cx="100" cy="100" r="83.6" fill="none" stroke="rgba(214,184,120,.45)" stroke-width=".7"/><text><textPath href="#ring" textLength="548" lengthAdjust="spacing">${(PILLARS.join(' ✠ ')+' ✠ ')}</textPath></text></svg><img src="${HERO.seal}" alt="Seal of the International Catholic Jurists Forum"></div>
       <h1><span class="ln"><span>International</span></span><span class="ln"><span>Catholic Jurists</span></span><span class="ln"><span>Forum</span></span></h1>
       <div class="pillars" id="pillars">${PILLARS.map(w=>`<span>${w}</span>`).join('')}</div>
     </div>
