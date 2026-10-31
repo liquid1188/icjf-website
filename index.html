@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script>try{if(localStorage.getItem('icjf-dv')){document.querySelector('meta[name=viewport]').setAttribute('content','width=1280');document.documentElement.classList.add('dv')}}catch(e){}</script>
 <title>International Catholic Jurists Forum</title>
 <meta name="description" content="The International Catholic Jurists Forum (ICJF) operates as a forum for Catholic jurists and scholars to study, research, and discuss important issues of the day related to attacks on the rights of the family, life, and religious freedom.">
 <meta name="robots" content="noindex">
@@ -57,7 +58,7 @@ header.dark nav.main .nl.on{color:var(--gold2)}
 nav.main>div:hover .dd,nav.main>div:focus-within .dd{opacity:1;visibility:visible;transform:none}
 .dd a{display:block;padding:9px 14px;font-size:15.5px;text-decoration:none;line-height:1.35;position:relative;transition:padding .3s var(--ease),color .3s}
 .dd a:hover{padding-left:22px;color:var(--crimson)}
-.dd a:hover::before{content:"✠";position:absolute;left:6px;font-size:10px;top:12px;color:var(--gold)}
+.dd a:hover::before{content:"";position:absolute;left:8px;top:50%;width:6px;height:1px;background:var(--gold)}
 .tools{display:flex;align-items:center;gap:6px;margin-left:10px}
 .iconbtn{width:42px;height:42px;display:grid;place-items:center;border-radius:50%;border:1px solid currentColor;opacity:.75;transition:all .3s}
 .iconbtn:hover{opacity:1;background:var(--crimson);color:var(--paper);border-color:var(--crimson)}
@@ -66,12 +67,13 @@ nav.main>div:hover .dd,nav.main>div:focus-within .dd{opacity:1;visibility:visibl
 kbd{font-family:var(--body);font-size:11px;border:1px solid var(--line);border-bottom-width:2px;padding:1px 6px;border-radius:4px;background:var(--paper)}
 
 /* mobile menu */
-#mm{position:fixed;inset:0;z-index:85;background:var(--ink);color:var(--paper);padding:100px 28px 40px;overflow:auto;clip-path:circle(0 at calc(100% - 44px) 42px);transition:clip-path .7s var(--ease);visibility:hidden}
+#mm{position:fixed;inset:0;z-index:85;background:var(--ink);color:var(--paper);padding:96px 28px 36px;overflow:auto;clip-path:circle(0 at calc(100% - 44px) 42px);transition:clip-path .7s var(--ease);visibility:hidden}
 #mm.open{clip-path:circle(150% at calc(100% - 44px) 42px);visibility:visible}
-#mm a{display:block;text-decoration:none;font-family:var(--display);font-size:34px;line-height:1.25;padding:6px 0;opacity:0;transform:translateY(16px);transition:all .6s var(--ease)}
-#mm a.sub{font-size:20px;padding:3px 0 3px 22px;color:var(--gold2);font-style:italic}
+#mm a{display:block;text-decoration:none;font-family:var(--display);font-size:29px;line-height:1.2;padding:7px 0;opacity:0;transform:translateY(16px);transition:all .6s var(--ease)}
+#mm a.sub{font-size:18px;line-height:1.3;padding:4px 0 4px 16px;margin-left:2px;color:var(--gold2);font-style:italic;border-left:1px solid rgba(214,184,120,.3)}
+#mm a.sub+a:not(.sub){margin-top:6px}
 #mm.open a{opacity:1;transform:none}
-#mm .mmfoot{margin-top:40px;font-family:var(--lap);letter-spacing:.2em;font-size:12px;color:var(--gold2)}
+#mm .mmfoot{margin-top:36px;padding-top:22px;border-top:1px solid var(--line-d);font-family:var(--lap);letter-spacing:.08em;font-size:clamp(9px,2.75vw,12px);white-space:nowrap;color:var(--gold2)}
 
 /* ---------- typography ---------- */
 .eyebrow{font-family:var(--display);font-style:italic;font-size:21px;color:var(--crimson);display:flex;align-items:center;gap:14px;margin:0 0 10px}
@@ -110,14 +112,15 @@ h1,h2,h3,h4{font-family:var(--display);font-weight:500;line-height:1.08;margin:0
 /* ---------- hero ---------- */
 .hero{position:relative;height:100vh;min-height:640px;max-height:1100px;background:#0b0a09;color:var(--paper);overflow:hidden;display:grid;place-items:center}
 .hero .slides,.hero .slides figure{position:absolute;inset:0;margin:0}
-.hero .slides figure{opacity:0;transition:opacity 2.2s ease}
+.hero .slides figure{opacity:0;transition:opacity 3.2s cubic-bezier(.45,0,.55,1)}
 .hero .slides figure.on{opacity:1}
 .hero .slides img{width:100%;height:100%;object-fit:cover;filter:contrast(1.08) brightness(.62);transform:scale(1.14);transform-origin:var(--o,50% 50%)}
-.hero .slides figure.on img{animation:kb 12s linear forwards}
+.hero .slides figure.on,.hero .slides figure.out{z-index:1}.hero .slides figure.on{z-index:2}
+.hero .slides figure.on img,.hero .slides figure.out img{animation:kb 14s linear forwards}
 @keyframes kb{to{transform:scale(1.02)}}
 .hero::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(11,10,9,.15) 0%,rgba(11,10,9,.55) 60%,rgba(11,10,9,.92) 100%),linear-gradient(180deg,rgba(11,10,9,.55) 0%,transparent 30%,transparent 65%,rgba(11,10,9,.85) 100%)}
 .hero .inner{position:relative;z-index:2;text-align:center;padding:90px 20px 40px;display:flex;flex-direction:column;align-items:center}
-.sealwrap{position:relative;width:clamp(170px,19vw,236px);aspect-ratio:1;margin-bottom:28px}
+.sealwrap{position:relative;width:clamp(196px,22vw,272px);aspect-ratio:1;margin-bottom:28px}
 .sealwrap img{position:absolute;inset:16%;width:68%;height:68%;filter:drop-shadow(0 10px 40px rgba(0,0,0,.6));animation:sealIn 2s var(--ease) both}
 .sealwrap svg{position:absolute;inset:0;width:100%;height:100%;animation:spin 80s linear infinite}
 .sealwrap svg text{font-family:var(--lap);font-size:9.6px;letter-spacing:3.2px;fill:var(--gold2)}
@@ -130,13 +133,13 @@ h1,h2,h3,h4{font-family:var(--display);font-weight:500;line-height:1.08;margin:0
 .hero h1 .ln:nth-child(3)>span{animation-delay:.24s}
 @keyframes up{from{transform:translateY(110%)}to{transform:none}}
 .pillars{display:flex;flex-wrap:wrap;justify-content:center;gap:4px 0;margin-top:34px;font-family:var(--lap);font-size:clamp(12px,1.25vw,16px);letter-spacing:.32em;animation:fade 2s 1s both}
-.pillars span{padding:4px 14px;position:relative;color:rgba(246,241,231,.5);transition:color .8s,text-shadow .8s}
+.pillars span{padding:4px 14px;position:relative;color:rgba(239,224,187,.78)}
 .pillars span+span::before{content:"·";position:absolute;left:-3px;color:var(--gold)}
 .pillars span.on{color:var(--gold3);text-shadow:0 0 18px rgba(214,184,120,.55)}
 @keyframes fade{from{opacity:0}to{opacity:1}}
 .hero .counter{position:absolute;z-index:3;left:clamp(20px,4vw,48px);bottom:34px;font-family:var(--lap);font-size:12px;letter-spacing:.25em;color:var(--gold2);display:flex;align-items:center;gap:14px}
 .hero .counter i{display:block;width:90px;height:1px;background:rgba(239,224,187,.25);position:relative;overflow:hidden}
-.hero .counter i::after{content:"";position:absolute;inset:0;background:var(--gold2);transform-origin:left;animation:bar 7s linear infinite}
+.hero .counter i::after{content:"";position:absolute;inset:0;background:var(--gold2);transform-origin:left;animation:bar 8s linear infinite}
 @keyframes bar{from{transform:scaleX(0)}to{transform:scaleX(1)}}
 .hero .cue{position:absolute;z-index:3;left:50%;bottom:26px;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;font-family:var(--display);font-style:italic;font-size:15px;color:var(--gold2);text-decoration:none}
 .hero .cue i{width:1px;height:46px;background:linear-gradient(var(--gold2),transparent);animation:cue 2.4s ease-in-out infinite;transform-origin:top}
@@ -148,7 +151,8 @@ section.s{padding:clamp(80px,11vw,150px) 0;position:relative}
 section.s.dark{background:var(--ink);color:var(--paper)}
 section.s.tint{background:var(--paper2)}
 .shead{display:flex;align-items:end;justify-content:space-between;gap:30px;margin-bottom:clamp(36px,5vw,64px);flex-wrap:wrap}
-.shead .num{font-family:var(--lap);font-size:13px;letter-spacing:.3em;color:var(--gold);margin-bottom:16px;display:block}
+.num{font-family:var(--lap);font-size:14px;letter-spacing:.24em;color:var(--gold);margin-bottom:18px;display:flex;align-items:center;gap:14px}
+.num::after{content:"";width:44px;height:1px;background:currentColor;opacity:.7}
 
 .mission{display:grid;grid-template-columns:1.25fr 1fr;gap:clamp(40px,7vw,110px);align-items:start}
 .mission .big{font-family:var(--display);font-size:clamp(25px,2.5vw,35px);line-height:1.38;font-weight:400}
@@ -162,18 +166,25 @@ section.s.tint{background:var(--paper2)}
 .obj .n{font-family:var(--lap);font-size:15px;letter-spacing:.2em;color:var(--crimson);display:block;margin-bottom:18px;transition:color .5s}
 .obj p{margin:0;font-family:var(--display);font-size:22px;line-height:1.32}
 .obj p a{text-decoration-color:var(--gold)}
-.obj::after{content:attr(data-n);position:absolute;right:-6px;bottom:-34px;font-family:var(--lap);font-size:130px;line-height:1;color:var(--ink);opacity:.035;transition:opacity .5s,transform .8s var(--ease)}
+.obj{min-height:230px;padding-bottom:84px!important}
+.obj::after{content:attr(data-n);position:absolute;right:22px;bottom:12px;font-family:var(--lap);font-size:76px;line-height:1;color:var(--crimson);opacity:.11;transition:opacity .5s,transform .8s var(--ease)}
 .obj:hover{background:var(--ink);color:var(--paper)}
 .obj:hover .n{color:var(--gold2)}
-.obj:hover::after{opacity:.09;color:var(--gold2);transform:translateY(-10px)}
+.obj:hover::after{opacity:.3;color:var(--gold2);transform:translateY(-4px)}
 
 .origins{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(40px,7vw,100px);align-items:center}
 .origins .years{position:relative;display:flex;flex-direction:column;gap:6px}
 .origins .yr{font-family:var(--lap);font-size:clamp(64px,9vw,128px);line-height:.95;color:transparent;-webkit-text-stroke:1px rgba(214,184,120,.45);transition:all .8s var(--ease);cursor:default}
 .origins .yr small{display:block;font-family:var(--display);font-style:italic;-webkit-text-stroke:0;color:var(--gold2);font-size:19px;letter-spacing:0;margin:-4px 0 14px 6px}
 .origins .yr.on{color:var(--gold2);-webkit-text-stroke-color:transparent}
-.origins .copy p{font-size:18px;color:rgba(246,241,231,.82);margin:0 0 1.1em}
+.origins .copy p{font-size:18px;line-height:1.75;color:rgba(246,241,231,.82);margin:0 0 1.3em;text-wrap:pretty}
 .origins .copy a{color:var(--gold2)}
+.ystrip{display:none;list-style:none;margin:0 0 34px;padding:0;position:relative;grid-template-columns:repeat(3,1fr)}
+.ystrip::before{content:"";position:absolute;left:5px;right:16%;top:7px;height:1px;background:linear-gradient(90deg,var(--gold),rgba(180,141,69,.25))}
+.ystrip li{position:relative;padding-top:24px}
+.ystrip li::before{content:"";position:absolute;left:0;top:2px;width:11px;height:11px;border-radius:50%;border:1px solid var(--gold2);background:var(--ink)}
+.ystrip b{display:block;font-family:var(--lap);font-weight:500;font-size:24px;color:var(--gold2);letter-spacing:.04em}
+.ystrip span{font-family:var(--display);font-style:italic;font-size:16px;color:rgba(246,241,231,.65)}
 .photoBand{height:clamp(240px,40vw,520px);position:relative;overflow:hidden;background:#111}
 .photoBand img{width:100%;height:130%;object-fit:cover;filter:grayscale(1) contrast(1.1) brightness(.8);will-change:transform}
 .photoBand blockquote{position:absolute;inset:0;margin:0;display:grid;place-items:center;text-align:center;color:var(--paper);padding:20px;background:linear-gradient(0deg,rgba(11,10,9,.65),rgba(11,10,9,.25))}
@@ -295,6 +306,7 @@ select.yr{font-family:var(--display);font-size:18px;background:transparent;borde
 .phead .wrap{position:relative;z-index:2}
 .crumbs{font-family:var(--display);font-style:italic;font-size:17px;color:var(--gold2);margin-bottom:22px;display:flex;flex-wrap:wrap;gap:10px}
 .crumbs a{text-decoration:none;opacity:.8}
+.crumbs em{font-style:inherit;opacity:.6}
 .crumbs a:hover{opacity:1;text-decoration:underline}
 .crumbs span{opacity:.5}
 .phead h1{font-size:clamp(40px,6vw,88px);font-weight:300;max-width:20ch;text-wrap:balance}
@@ -322,10 +334,9 @@ select.yr{font-family:var(--display);font-size:18px;background:transparent;borde
 .prose>*:first-child{margin-top:0}
 .prose>h1:first-child,.prose>h2:first-child{border-top:0;padding-top:0}
 .prose>h1:first-child::before,.prose>h2:first-child::before{display:none}
-.prose p{margin:0 0 1.15em}
+.prose p{margin:0 0 1.2em;text-wrap:pretty}
 .prose.dropcap>p:first-of-type::first-letter{font-family:var(--lap);float:left;font-size:4.2em;line-height:.85;padding:7px 12px 0 0;color:var(--crimson)}
-.prose h1,.prose h2{font-size:clamp(30px,3vw,40px);margin:1.8em 0 .6em;padding-top:.8em;border-top:1px solid var(--line);position:relative}
-.prose h1::before,.prose h2::before{content:"";position:absolute;top:-1px;left:0;width:70px;height:2px;background:var(--crimson)}
+.prose h1,.prose h2{font-size:clamp(30px,3vw,40px);margin:1.9em 0 .55em;position:relative}
 .prose h3{font-size:clamp(26px,2.4vw,33px);margin:1.6em 0 .55em}
 .prose>h3:first-child{margin-top:0}
 .prose h4,.prose h5,.prose h6{font-size:22px;margin:1.4em 0 .4em;font-style:italic;color:var(--crimson);font-weight:500}
@@ -333,7 +344,9 @@ select.yr{font-family:var(--display);font-size:18px;background:transparent;borde
 .prose a:hover{text-decoration-color:var(--crimson)}
 .prose ul,.prose ol{padding-left:1.3em;margin:0 0 1.2em}
 .prose li{margin:.35em 0}
-.prose ul li::marker{color:var(--gold);content:"✠  ";font-size:.7em}
+.prose ul{list-style:none;padding-left:1.4em}
+.prose ul>li{position:relative}
+.prose ul>li::before{content:"";position:absolute;left:-1.1em;top:.78em;width:6px;height:6px;background:var(--gold);transform:rotate(45deg)}
 .prose ol li::marker{color:var(--crimson);font-family:var(--lap)}
 .prose blockquote{margin:1.6em 0;padding:6px 0 6px 30px;border-left:2px solid var(--gold);font-family:var(--display);font-size:1.24em;line-height:1.5;font-style:italic;color:var(--ink3)}
 .prose aside{margin:0 0 2em;padding:26px 30px;background:var(--paper2);border:1px solid rgba(180,141,69,.45);outline:1px solid rgba(180,141,69,.25);outline-offset:-7px;font-family:var(--display);font-size:1.12em;line-height:1.55}
@@ -370,7 +383,7 @@ select.yr{font-family:var(--display);font-size:18px;background:transparent;borde
 .prof .portrait .fr{position:relative;padding:14px;border:1px solid var(--gold)}
 .prof .portrait .fr::before{content:"";position:absolute;inset:5px;border:1px solid rgba(180,141,69,.4);pointer-events:none}
 .prof .portrait img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 20%;filter:grayscale(.15)}
-.prof .role{font-family:var(--lap);font-size:13px;letter-spacing:.28em;color:var(--crimson);margin-bottom:12px;display:block}
+.prof .role{font-family:var(--display);font-style:italic;font-size:21px;color:var(--crimson);margin-bottom:6px;display:block}
 .prof h2{font-size:clamp(36px,4vw,56px);font-weight:400;margin-bottom:30px}
 .pn{display:flex;justify-content:space-between;gap:20px;margin-top:70px;padding-top:30px;border-top:1px solid var(--line)}
 .pn a{text-decoration:none;max-width:45%}
@@ -416,6 +429,7 @@ footer.ft{background:#0e0d0b;color:rgba(246,241,231,.75);padding:90px 0 40px;fon
 .ft .base{margin-top:70px;padding-top:26px;border-top:1px solid var(--line-d);display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;font-size:14px;color:rgba(246,241,231,.5)}
 .ft .base button{text-decoration:underline;text-underline-offset:3px;font-size:14px}
 #dv{display:none}
+html.dv #dv{display:inline;font-size:28px;padding:10px 0}
 
 /* palette */
 #pal{position:fixed;inset:0;z-index:120;background:rgba(14,13,11,.55);backdrop-filter:blur(6px);display:none;align-items:flex-start;justify-content:center;padding:12vh 16px 16px}
@@ -451,9 +465,8 @@ footer.ft{background:#0e0d0b;color:rgba(246,241,231,.75);padding:90px 0 40px;fon
 @media (max-width:820px){
   body{font-size:17px}
   .mission,.origins,.contact,.prof{grid-template-columns:1fr}
-  .origins .years{flex-direction:row;justify-content:space-between;gap:10px}
-  .origins .yr{font-size:clamp(40px,13vw,64px)}
-  .origins .yr small{font-size:15px;margin:2px 0 0 2px}
+  .origins .years{display:none}
+  .ystrip{display:grid}
   .prof .portrait{position:static;max-width:380px}
   .objectives{grid-template-columns:1fr}
   .ncard,.ncard.feat,.ncard.side{grid-column:1/-1}
@@ -503,6 +516,7 @@ const V=$('#view');
 const ROM=n=>{const m=[[1000,'M'],[900,'CM'],[500,'D'],[400,'CD'],[100,'C'],[90,'XC'],[50,'L'],[40,'XL'],[10,'X'],[9,'IX'],[5,'V'],[4,'IV'],[1,'I']];let r='';for(const[v,s]of m)while(n>=v){r+=s;n-=v}return r};
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const fmtDate=d=>new Date(d+'T12:00:00').toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+const YL=['Rome conference','ICOLF founded','Renamed ICJF'];
 const PILLARS=['LAW','LIFE','FAITH','FAMILY','FIDELITY','FREEDOM'];
 const ICON={ext:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 17 17 7M9 7h8v8"/></svg>',arrow:'<span class="ar">→</span>',search:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>',cross:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M10.6 2h2.8l-.5 6.4L19.3 7.9V10.7l-6.4-.5.5 11.8h-2.8l.5-11.8-6.4.5V7.9l6.4.5z"/></svg>'};
 const store={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
@@ -534,10 +548,12 @@ function buildChrome(){
   $('#yr').textContent=new Date().getFullYear();
   $('#menuBtn').onclick=()=>toggleMenu();
   $('#srchBtn').onclick=()=>openPal();
-  const dv=$('#dv'),vp=$('meta[name=viewport]');
-  const setDV=on=>{vp.content=on?'width=1280':'width=device-width, initial-scale=1';dv.textContent=on?'View mobile version':'View desktop version';store.set('icjf-dv',on?'1':'')};
-  if(store.get('icjf-dv'))setDV(true);
-  dv.onclick=()=>setDV(!store.get('icjf-dv'));
+  const dv=$('#dv'),on=document.documentElement.classList.contains('dv');
+  dv.textContent=on?'View mobile version':'View desktop version';
+  dv.onclick=()=>{store.set('icjf-dv',on?'':'1');
+    // apply immediately, then reload so iOS Safari lays the page out at the new width
+    $('meta[name=viewport]').setAttribute('content',on?'width=device-width, initial-scale=1':'width=1280');
+    document.documentElement.classList.toggle('dv',!on);setTimeout(()=>location.reload(),60)};
 }
 function toggleMenu(force){const m=$('#mm'),open=force??!m.classList.contains('open');m.classList.toggle('open',open);m.setAttribute('aria-hidden',!open);$('#menuBtn').innerHTML=open?'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 6l12 12M18 6 6 18"/></svg>':'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 8h16M4 16h16"/></svg>';document.body.style.overflow=open?'hidden':'';if(open)$('#hdr').classList.add('dark')}
 
@@ -599,15 +615,15 @@ function enhance(root){
     row.classList.add('linkrow');
     const ext=(a.getAttribute('href').match(/\.(pdf|docx?)(\?|$)/i)||[])[1];
     $$('br',a).forEach(b=>b.replaceWith(' '));
-    a.insertAdjacentHTML('afterbegin',ext?`<span class="bdg">${ext.toUpperCase()}</span>`:(/^https?:/.test(a.href)&&!a.href.startsWith(location.origin)?'<span class="bdg ext">LINK</span>':''));
+    if(ext)a.insertAdjacentHTML('afterbegin',`<span class="bdg">${ext.toUpperCase()}</span>`);
   });
   $$('a[href^="http"]',root).forEach(a=>{a.target='_blank';a.rel='noopener'});
 }
 function phead(title,{crumbs=[],sub='',img}={}){
   const bg=img||HERO.hero[(title.length*7)%HERO.hero.length].src;
-  return `<header class="phead"><div class="bg"><img src="${bg}" alt=""></div><img class="seal-bg" src="${HERO.seal}" alt=""><div class="wrap"><nav class="crumbs rv"><a href="#home">Home</a>${crumbs.map(([t,h])=>`<span>/</span>${h?`<a href="#${h}">${esc(t)}</a>`:esc(t)}`).join('')}</nav><h1 class="rv d1">${esc(title)}</h1>${sub?`<div class="sub rv d2">${sub}</div>`:''}</div></header>`;
+  return `<header class="phead"><div class="bg"><img src="${bg}" alt=""></div><img class="seal-bg" src="${HERO.seal}" alt=""><div class="wrap"><nav class="crumbs rv"><a href="#home">Home</a>${crumbs.map(([t,h])=>`<span>/</span>${h?`<a href="#${h}">${esc(t)}</a>`:`<em>${esc(t)}</em>`}`).join('')}</nav><h1 class="rv d1">${esc(title)}</h1>${sub?`<div class="sub rv d2">${sub}</div>`:''}</div></header>`;
 }
-const crumbsFor=s=>PARENT[s]?[[PARENT[s],NAV.find(n=>n.t===PARENT[s]).kids?.[0][1]]]:[];
+const crumbsFor=s=>PARENT[s]?[[PARENT[s],null]]:[];
 function cardHTML(c,i){
   const ext=/^https?:/.test(c.href), yid=CAN_EMBED&&ytId(c.href);
   if(yid)return `<div class="tcard vcard rv d${i%4}">${player(yid,c.title)}<div class="tx"><h3>${esc(c.title)}</h3>${(c.sub||[]).map(s=>`<span class="sub">${esc(s)}</span>`).join('')}<a class="more" href="${esc(c.href)}" target="_blank" rel="noopener" style="margin-top:auto;font-size:16px;align-self:flex-start">YouTube ${ICON.ext.replace('<svg','<svg style="width:13px;height:13px"')}</a></div></div>`;
@@ -647,75 +663,73 @@ async function home(){
     <div class="inner">
       <div class="sealwrap"><svg viewBox="0 0 200 200" aria-hidden="true"><defs><path id="ring" d="M100,100 m-88,0 a88,88 0 1,1 176,0 a88,88 0 1,1 -176,0"/></defs><circle cx="100" cy="100" r="97" fill="none" stroke="rgba(214,184,120,.35)" stroke-width=".6"/><circle cx="100" cy="100" r="80" fill="none" stroke="rgba(214,184,120,.25)" stroke-width=".6"/><text><textPath href="#ring">${(PILLARS.join(' ✠ ')+' ✠ ')}</textPath></text></svg><img src="${HERO.seal}" alt="Seal of the International Catholic Jurists Forum"></div>
       <h1><span class="ln"><span>International</span></span><span class="ln"><span>Catholic Jurists</span></span><span class="ln"><span>Forum</span></span></h1>
-      <div class="pillars" id="pillars">${PILLARS.map((w,i)=>`<span${i?'':' class="on"'}>${w}</span>`).join('')}</div>
+      <div class="pillars" id="pillars">${PILLARS.map(w=>`<span>${w}</span>`).join('')}</div>
     </div>
     <div class="counter"><span id="slN">I</span><i></i><span>${ROM(HERO.hero.length)}</span></div>
-    <a class="cue" href="#home" id="cue">Scroll<i></i></a>
-    <div class="est">MMXIV</div>
   </section>
 
   <section class="s" id="mission"><div class="wrap">
-    <div class="shead"><div><span class="num rv">I</span><p class="eyebrow rv">What We Stand For</p><h2 class="h-l rv d1">${esc(h3s[0]?.textContent||'Mission Statement')}</h2></div><a class="more rv" href="#what-we-stand-for">What We Stand For ${ICON.arrow}</a></div>
+    <div class="shead"><div><span class="num rv">I</span><h2 class="h-l rv d1">${esc(h3s[0]?.textContent||'Mission Statement')}</h2></div><a class="more rv" href="#what-we-stand-for">Read more ${ICON.arrow}</a></div>
     <div class="mission"><p class="big rv">${mission[0]||''}</p><div class="side rv d2">${mission.slice(1).map(p=>`<p>${p}</p>`).join('')}</div></div>
   </div></section>
 
   <section class="s tint"><div class="wrap">
     <div class="shead"><div><span class="num rv">II</span><h2 class="h-l rv d1">${esc(h3s[1]?.textContent||'')}</h2></div></div>
-    <div class="objectives">${objs.map((o,i)=>`<div class="obj rv d${i%3}" data-n="${ROM(i+1)}"><span class="n">${ROM(i+1)}</span><p>${o}</p></div>`).join('')}</div>
+    <div class="objectives">${objs.map((o,i)=>`<div class="obj rv d${i%3}" data-n="${ROM(i+1)}"><p>${o}</p></div>`).join('')}</div>
   </div></section>
 
   <div class="photoBand"><img data-par src="${HERO.hero[5].src}" alt=""><blockquote><p class="rv">${PILLARS.slice(0,3).map(w=>w[0]+w.slice(1).toLowerCase()).join(', ')},<br><em>${PILLARS.slice(3).map(w=>w[0]+w.slice(1).toLowerCase()).join(', ')}</em></p></blockquote></div>
 
   <section class="s dark"><div class="wrap">
     <div class="origins">
-      <div class="years" id="years">${['2013','2014','2021'].map((y,i)=>`<div class="yr rv d${i}" data-y="${y}">${y}<small>${['Rome','ICOLF','ICJF'][i]}</small></div>`).join('')}</div>
-      <div class="copy"><span class="num rv" style="font-family:var(--lap);letter-spacing:.3em;color:var(--gold);font-size:13px">III</span><p class="eyebrow rv">About</p><h2 class="h-l rv d1" style="margin-bottom:30px">${esc(hs.title)}</h2>${origins.map((p,i)=>`<p class="rv d${i%3}" data-yrs="${(p.match(/\b20(13|14|21)\b/g)||[]).join(' ')}">${p}</p>`).join('')}<a class="more rv" href="#who-we-are" style="margin-top:14px">Who We Are ${ICON.arrow}</a></div>
+      <div class="years" id="years">${['2013','2014','2021'].map((y,i)=>`<div class="yr rv d${i}" data-y="${y}">${y}<small>${YL[i]}</small></div>`).join('')}</div>
+      <div class="copy"><span class="num rv">III</span><h2 class="h-l rv d1" style="margin-bottom:30px">${esc(hs.title)}</h2><ol class="ystrip rv">${['2013','2014','2021'].map((y,i)=>`<li><b>${y}</b><span>${YL[i]}</span></li>`).join('')}</ol>${origins.map((p,i)=>`<p class="rv d${i%3}" data-yrs="${(p.match(/\b20(13|14|21)\b/g)||[]).join(' ')}">${p}</p>`).join('')}<a class="more rv" href="#who-we-are" style="margin-top:14px">Who We Are ${ICON.arrow}</a></div>
     </div>
   </div></section>
 
   <section class="s"><div class="wrap">
-    <div class="shead"><div><span class="num rv">IV</span><p class="eyebrow rv">ICJF</p><h2 class="h-l rv d1">${esc(pr.title)}</h2></div><a class="more rv" href="#projects">${esc(pr.title)} ${ICON.arrow}</a></div>
-    <div class="projects">${(pr.sections[0]?.cards||[]).map((c,i)=>{const m=c.title.match(/^(.*?):\s*(.*)$/);return `<a class="pcard rv d${i}" href="${esc(c.href)}"><img src="${c.img}" alt=""><div class="cap"><span class="k">${ROM(i+1)}</span><h3>${esc(m?m[1]:c.title)}${m?`<em>${esc(m[2])}</em>`:''}</h3></div></a>`}).join('')}</div>
+    <div class="shead"><div><span class="num rv">IV</span><h2 class="h-l rv d1">${esc(pr.title)}</h2></div><a class="more rv" href="#projects">View all ${ICON.arrow}</a></div>
+    <div class="projects">${(pr.sections[0]?.cards||[]).map((c,i)=>{const m=c.title.match(/^(.*?):\s*(.*)$/);return `<a class="pcard rv d${i}" href="${esc(c.href)}"><img src="${c.img}" alt=""><div class="cap"><h3>${esc(m?m[1]:c.title)}${m?`<em>${esc(m[2])}</em>`:''}</h3></div></a>`}).join('')}</div>
   </div></section>
 
   <section class="s tint"><div class="wrap">
-    <div class="shead"><div><span class="num rv">V</span><h2 class="h-l rv d1">${esc(bk.title)}</h2></div><a class="more rv" href="#books">${esc(bk.title)} ${ICON.arrow}</a></div>
+    <div class="shead"><div><span class="num rv">V</span><h2 class="h-l rv d1">${esc(bk.title)}</h2></div><a class="more rv" href="#books">View all ${ICON.arrow}</a></div>
     <div class="shelf rv">${(bk.sections[0]?.cards||[]).map(bookCard).join('')}</div>
   </div></section>
 
   <section class="s dark"><div class="wrap">
-    <div class="shead"><div><span class="num rv">VI</span><h2 class="h-l rv d1">${esc(cf.title)}</h2></div><a class="more rv" href="#conferences">${esc(cf.title)} ${ICON.arrow}</a></div>
+    <div class="shead"><div><span class="num rv">VI</span><h2 class="h-l rv d1">${esc(cf.title)}</h2></div><a class="more rv" href="#conferences">View all ${ICON.arrow}</a></div>
     <div class="tl">${tlItems(cf.items.slice(0,5))}</div>
   </div></section>
 
   <section class="s"><div class="wrap">
-    <div class="shead"><div><span class="num rv">VII</span><h2 class="h-l rv d1">News</h2></div><a class="more rv" href="#news">News ${ICON.arrow}</a></div>
+    <div class="shead"><div><span class="num rv">VII</span><h2 class="h-l rv d1">News</h2></div><a class="more rv" href="#news">View all ${ICON.arrow}</a></div>
     <div class="newsgrid">${newsCard(latest[0],t0,'feat')}${latest.slice(1,5).map(p=>newsCard(p,t0,'side')).join('')}</div>
   </div></section>
 
   <section class="s tint"><div class="wrap">
-    <div class="shead"><div><span class="num rv">VIII</span><p class="eyebrow rv">${esc(ww.title)}</p><h2 class="h-l rv d1">${esc(ww.sections[0]?.heading||'')}</h2></div><a class="more rv" href="#who-we-are">${esc(ww.title)} ${ICON.arrow}</a></div>
+    <div class="shead"><div><span class="num rv">VIII</span><h2 class="h-l rv d1">${esc(ww.sections[0]?.heading||'')}</h2></div><a class="more rv" href="#who-we-are">View all ${ICON.arrow}</a></div>
     <div class="people lead">${exec.map(personCard).join('')}</div>
   </div></section>
 
   <section class="s dark"><div class="wrap" style="max-width:980px;text-align:center">
-    <span class="num rv" style="font-family:var(--lap);letter-spacing:.3em;color:var(--gold);font-size:13px;display:block;margin-bottom:16px">IX</span>
-    <p class="eyebrow lt rv" style="justify-content:center">${esc(pc.title)}</p>
+    <span class="num rv" style="justify-content:center">IX</span>
     <h2 class="h-m rv d1" style="margin:10px 0 30px">${esc(pcTitle)}</h2>
     ${pcPs.map(p=>`<p class="rv d2" style="color:rgba(246,241,231,.78);font-size:18px">${p}</p>`).join('')}
     <div class="rv d3" style="margin-top:36px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap"><a class="btn gold" href="#podcast-series">${esc(pc.title)} ${ICON.arrow}</a><a class="btn gold" href="#contact">Contact ${ICON.arrow}</a></div>
   </div></section>`;
   enhance(V);
   startHero();
-  $('#cue').onclick=e=>{e.preventDefault();scrollTo({top:innerHeight-60,behavior:'smooth'})};
   // light the year that matches the paragraph in view
   const yio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){const ys=e.target.dataset.yrs.split(' ');$$('#years .yr').forEach(y=>y.classList.toggle('on',ys.includes(y.dataset.y)))}}),{rootMargin:'-40% 0px -40% 0px'});
   $$('[data-yrs]').forEach(p=>p.dataset.yrs&&yio.observe(p));
 }
 let heroT;
 function startHero(){
-  clearInterval(heroT);let i=0,w=0;const f=$$('.hero .slides figure'),ps=$$('#pillars span');
-  heroT=setInterval(()=>{if(!document.body.contains(f[0]))return clearInterval(heroT);f[i].classList.remove('on');i=(i+1)%f.length;f[i].classList.add('on');const n=$('#slN');if(n)n.textContent=ROM(i+1);ps[w].classList.remove('on');w=(w+1)%ps.length;ps[w].classList.add('on')},7000);
+  clearInterval(heroT);let i=0;const f=$$('.hero .slides figure');
+  heroT=setInterval(()=>{if(!document.body.contains(f[0]))return clearInterval(heroT);
+    f.forEach(x=>x.classList.remove('out'));f[i].classList.replace('on','out');i=(i+1)%f.length;
+    void f[i].offsetWidth;f[i].classList.add('on');const n=$('#slN');if(n)n.textContent=ROM(i+1)},8000);
 }
 function tlItems(items){let last='';return items.map(it=>{const g=it.year===last;last=it.year;return `<div class="tli rv"><div class="y${g?' ghost':''}">${it.year}</div><span class="dot"></span><div class="b">${it.html}</div></div>`}).join('')}
 
@@ -751,8 +765,8 @@ let ORDER=null;
 async function person(p){
   if(!ORDER){const w=await page('who-we-are');ORDER=w.sections.flatMap(x=>x.cards).filter(c=>c.href.startsWith('#')).map(c=>({s:c.href.slice(1),t:c.title,sub:c.sub}))}
   const i=ORDER.findIndex(o=>o.s===p.slug),pv=ORDER[i-1],nx=ORDER[i+1];
-  const role=p.role?p.role[0]+p.role.slice(1).toLowerCase():(ORDER[i]?.sub?.[0]||'');
-  V.innerHTML=phead(p.title,{crumbs:[['About','how-we-started'],['Who We Are','who-we-are']]})+`<section class="s"><div class="wrap"><div class="prof"><div class="portrait rv">${p.img?`<div class="fr"><img src="${p.img}" alt="${esc(p.name||p.title)}"></div>`:''}</div><div>${p.role?`<span class="role rv">${esc(p.role)}</span>`:''}${p.name?`<h2 class="rv d1">${esc(p.name)}</h2>`:''}<div class="prose dropcap rv d2">${p.html}</div>
+  const role=p.role?p.role.toLowerCase().replace(/(^|\s|-)(\S)/g,(m,a,b)=>a+b.toUpperCase()).replace(/\b(Of|And|The|For|To|In|On)\b/g,w=>w.toLowerCase()).replace(/^./,c=>c.toUpperCase()):(ORDER[i]?.sub?.[0]||'');
+  V.innerHTML=phead(p.title,{crumbs:[['About',null],['Who We Are','who-we-are']]})+`<section class="s"><div class="wrap"><div class="prof"><div class="portrait rv">${p.img?`<div class="fr"><img src="${p.img}" alt="${esc(p.name||p.title)}"></div>`:''}</div><div>${p.role?`<span class="role rv">${esc(role)}</span>`:''}${p.name?`<h2 class="rv d1">${esc(p.name)}</h2>`:''}<div class="prose dropcap rv d2">${p.html}</div>
   ${i>=0?`<div class="pn">${pv?`<a href="#${pv.s}"><small>← Previous</small><span>${esc(pv.t)}</span></a>`:''}${nx?`<a class="nx" href="#${nx.s}"><small>Next →</small><span>${esc(nx.t)}</span></a>`:''}</div>`:''}</div></div></div></section>`;
   enhance(V);
 }
