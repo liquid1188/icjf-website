@@ -166,7 +166,7 @@ section.s.tint{background:var(--paper2)}
 .obj .n{font-family:var(--lap);font-size:15px;letter-spacing:.2em;color:var(--crimson);display:block;margin-bottom:18px;transition:color .5s}
 .obj p{margin:0;font-family:var(--display);font-size:22px;line-height:1.32}
 .obj p a{text-decoration-color:var(--gold)}
-.obj::after{content:attr(data-n);position:absolute;right:-6px;bottom:-34px;font-family:var(--lap);font-size:130px;line-height:1;color:var(--ink);opacity:.035;transition:opacity .5s,transform .8s var(--ease)}
+.obj::after{content:attr(data-n);position:absolute;right:-6px;bottom:-34px;font-family:var(--lap);font-size:130px;line-height:1;color:var(--ink);opacity:.06;transition:opacity .5s,transform .8s var(--ease)}
 .obj:hover{background:var(--ink);color:var(--paper)}
 .obj:hover .n{color:var(--gold2)}
 .obj:hover::after{opacity:.09;color:var(--gold2);transform:translateY(-10px)}
@@ -674,7 +674,7 @@ async function home(){
 
   <section class="s tint"><div class="wrap">
     <div class="shead"><div><h2 class="h-l rv d1">${esc(h3s[1]?.textContent||'')}</h2></div></div>
-    <div class="objectives">${objs.map((o,i)=>`<div class="obj rv d${i%3}" data-n="${ROM(i+1)}"><span class="n">${ROM(i+1)}</span><p>${o}</p></div>`).join('')}</div>
+    <div class="objectives">${objs.map((o,i)=>`<div class="obj rv d${i%3}" data-n="${ROM(i+1)}"><p>${o}</p></div>`).join('')}</div>
   </div></section>
 
   <div class="photoBand"><img data-par src="${HERO.hero[5].src}" alt=""><blockquote><p class="rv">${PILLARS.slice(0,3).map(w=>w[0]+w.slice(1).toLowerCase()).join(', ')},<br><em>${PILLARS.slice(3).map(w=>w[0]+w.slice(1).toLowerCase()).join(', ')}</em></p></blockquote></div>
