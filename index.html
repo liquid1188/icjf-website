@@ -37,7 +37,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 #progress{position:fixed;top:0;left:0;height:3px;width:0;z-index:90;background:linear-gradient(90deg,var(--crimson),var(--gold2));transition:width .1s linear}
 header.top{position:fixed;inset:0 0 auto 0;z-index:80;transition:background .5s var(--ease),box-shadow .5s,color .5s,transform .5s var(--ease)}
 header.top .bar{display:flex;align-items:center;gap:24px;height:84px;transition:height .4s var(--ease)}
-header.top.solid{background:rgba(246,241,231,.86);backdrop-filter:blur(14px) saturate(1.2);-webkit-backdrop-filter:blur(14px) saturate(1.2);box-shadow:0 1px 0 var(--line)}
+header.top.solid{background:var(--paper);box-shadow:0 1px 0 var(--line),0 10px 30px -20px rgba(0,0,0,.35)}
 header.top.solid .bar{height:68px}
 header.top.dark{color:var(--paper)}
 header.top.hide{transform:translateY(-100%)}
@@ -107,7 +107,7 @@ h1,h2,h3,h4{font-family:var(--display);font-weight:500;line-height:1.08;margin:0
 .rv.d1{transition-delay:.08s}.rv.d2{transition-delay:.16s}.rv.d3{transition-delay:.24s}.rv.d4{transition-delay:.32s}
 .rvi{clip-path:inset(0 0 100% 0);transition:clip-path 1.4s var(--ease)}
 .rvi.in{clip-path:inset(0 0 0 0)}
-@media (prefers-reduced-motion:reduce){.rv,.rvi{opacity:1;transform:none;clip-path:none;transition:none}*{animation:none!important}}
+@media (prefers-reduced-motion:reduce){.marquee{text-align:center}.marquee .tr{animation:none!important;display:block;width:auto}.marquee span{display:none}.marquee span:nth-child(-n+6){display:inline;padding:0;font-size:clamp(10px,2.6vw,17px);letter-spacing:.14em}.marquee span:nth-child(-n+6)::after{content:" ✠ ";font-size:.7em;margin:0 .5em}.marquee span:nth-child(6)::after{content:none}.rv,.rvi{opacity:1;transform:none;clip-path:none;transition:none}*{animation:none!important}}
 
 /* ---------- hero ---------- */
 .hero{position:relative;height:100vh;min-height:640px;max-height:1100px;background:#0b0a09;color:var(--paper);overflow:hidden;display:grid;place-items:center}
@@ -464,14 +464,17 @@ form.cf .ok{grid-column:1/-1;padding:16px 20px;background:var(--ink);color:var(-
 @media (max-width:900px){.pod .podgrid{grid-template-columns:1fr}.pod .podvid{order:2}}
 /* marquee + footer */
 .marquee{background:var(--crimson);color:var(--gold3);overflow:hidden;white-space:nowrap;padding:13px 0;border-top:1px solid var(--gold);border-bottom:1px solid var(--gold)}
-.marquee .tr{display:inline-flex;width:max-content;animation:mq 55s linear infinite;will-change:transform}
-.marquee span{font-family:var(--lap);font-size:clamp(17px,1.9vw,24px);letter-spacing:.24em;padding:0 22px;display:inline-flex;align-items:center;gap:44px;flex:none}
+.marquee .tr{display:inline-flex;animation:mq 48s linear infinite}
+.marquee span{font-family:var(--lap);font-size:clamp(17px,1.9vw,24px);letter-spacing:.24em;padding:0 22px;display:inline-flex;align-items:center;gap:44px}
 .marquee span::after{content:"✠";font-size:.5em;color:var(--gold2)}
-@keyframes mq{to{transform:translateX(-50%)}}
+@keyframes mq{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
 footer.ft{background:#0e0d0b;color:rgba(246,241,231,.75);padding:56px 0 30px;font-size:16px}
 .ftop{display:flex;align-items:center;justify-content:space-between;gap:20px 40px;flex-wrap:wrap;padding-bottom:26px;border-bottom:1px solid var(--line-d)}
-.flinks{display:flex;flex-wrap:wrap;gap:6px 26px;padding:22px 0 0}
-.flinks a{font-size:15.5px;padding:2px 0!important}
+.fgroups{display:grid;grid-template-columns:1.25fr 1fr .8fr;gap:30px 48px;padding:26px 0 0}
+.fg h4{margin:0 0 8px!important;font-size:18px!important}
+.fg nav{display:flex;flex-wrap:wrap;gap:2px 0}
+.fg nav a{font-size:15.5px;padding:2px 0!important}
+.fg nav a:not(:last-child)::after{content:"·";margin:0 10px;color:rgba(214,184,120,.5)}
 .ft h4{font-family:var(--display);font-style:italic;font-weight:400;font-size:20px;color:var(--gold2);margin-bottom:16px}
 .ft a{text-decoration:none;display:block;padding:4px 0;transition:color .3s}
 .ft a:hover{color:var(--gold3)}
@@ -531,8 +534,9 @@ html.dv #dv{display:inline;font-size:28px;padding:10px 0}
   #dv{display:inline}
   .phead{padding-top:140px}
 }
+@media (max-width:820px){.fgroups{grid-template-columns:1fr;gap:18px}}
 @media (max-width:520px){
-  footer.ft{padding:44px 0 26px}.ftop{gap:14px}.ft .motto{font-size:clamp(13px,4vw,16px)}.flinks{gap:4px 18px}.flinks a{font-size:15px}.projects{grid-template-columns:1fr}.pcard{aspect-ratio:4/4.4}.people,.people.lead{grid-template-columns:1fr 1fr;gap:22px 14px}.person h3{font-size:18px}.hero .counter{display:none}}
+  footer.ft{padding:44px 0 26px}.ftop{gap:14px}.ft .motto{font-size:clamp(13px,4vw,16px)}.fg nav a{font-size:15px}.projects{grid-template-columns:1fr}.pcard{aspect-ratio:4/4.4}.people,.people.lead{grid-template-columns:1fr 1fr;gap:22px 14px}.person h3{font-size:18px}.hero .counter{display:none}}
 </style>
 </head>
 <body>
@@ -596,7 +600,10 @@ function buildChrome(){
   $$('#mm a').forEach((a,i)=>a.style.transitionDelay=(0.15+i*0.03)+'s');
   const words=PILLARS.map(w=>`<span>${w}</span>`).join('');$('#mq').innerHTML=words+words+words+words;
   $('#ftcols').innerHTML=`<div class="ftop"><a class="fb" href="#home"><img src="${HERO.sealSmall}" alt=""><span>International Catholic<br>Jurists Forum</span></a><p class="motto">${PILLARS.map(w=>w[0]+w.slice(1).toLowerCase()).join(' · ')}</p></div>
-  <nav class="flinks">${[['How We Started','how-we-started'],['What We Stand For','what-we-stand-for'],['Who We Are','who-we-are'],['Projects','projects'],['Books','books'],['Conferences','conferences'],['News','news'],['Podcasts','podcast-series'],['Media','media'],['CEaSE RP','resources-2'],['Nigeria','resources-on-the-persecution-and-genocide-of-christians-in-nigeria'],['The Charter of the Rights of the Family','charter-of-the-rights-of-the-family'],['Contact','contact']].map(([t,h])=>`<a href="#${h}">${t}</a>`).join('')}</nav>`;
+  <div class="fgroups">${[['About',[['How We Started','how-we-started'],['What We Stand For','what-we-stand-for'],['Who We Are','who-we-are'],['The Charter of the Rights of the Family','charter-of-the-rights-of-the-family']]],
+    ['Work',[['Projects','projects'],['Books','books'],['Conferences','conferences'],['Podcasts','podcast-series'],['Media','media'],['News','news']]],
+    ['Resources',[['CEaSE RP','resources-2'],['Nigeria','resources-on-the-persecution-and-genocide-of-christians-in-nigeria'],['Contact','contact']]]]
+    .map(([g,ls])=>`<div class="fg"><h4>${g}</h4><nav>${ls.map(([t,h])=>`<a href="#${h}">${t}</a>`).join('')}</nav></div>`).join('')}</div>`;
   $('#yr').textContent=new Date().getFullYear();
   $('#menuBtn').onclick=()=>toggleMenu();
   $('#srchBtn').onclick=()=>openPal();
@@ -614,8 +621,6 @@ function onScroll(){
   const y=scrollY,h=$('#hdr');
   h.classList.toggle('solid',y>60);
   h.classList.toggle('dark',darkTop&&y<=60);
-  h.classList.toggle('hide',y>500&&y>lastY+4&&!$('#mm').classList.contains('open'));
-  if(y<lastY-4)h.classList.remove('hide');
   lastY=y;
   const d=document.documentElement,max=d.scrollHeight-innerHeight;$('#progress').style.width=(max>0?y/max*100:0)+'%';
   $$('[data-par]').forEach(el=>{const r=el.parentElement.getBoundingClientRect();if(r.bottom<0||r.top>innerHeight)return;el.style.transform=`translate3d(0,${(r.top-innerHeight/2)*-0.15 - r.height*.12}px,0)`});
