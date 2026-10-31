@@ -347,6 +347,11 @@ select.yr{font-family:var(--display);font-size:18px;background:transparent;borde
 .vid.plain .pl i{width:56px;height:56px}
 .vid.plain .lab{position:static;font-size:12px}
 
+.player{position:relative;aspect-ratio:16/9;background:#000;margin:1.6em 0;box-shadow:0 28px 60px -30px rgba(0,0,0,.7);outline:1px solid rgba(180,141,69,.5);outline-offset:6px}
+.player iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.prose p+.player,.prose li+.player{margin-top:.6em}
+.vcard .player{margin:0;box-shadow:none;outline:0}
+.vcard:hover{transform:none}
 /* person page */
 .prof{display:grid;grid-template-columns:minmax(260px,400px) 1fr;gap:clamp(40px,6vw,96px);align-items:start}
 .prof .portrait{position:sticky;top:110px}
@@ -539,16 +544,36 @@ let io;
 function reveal(){io&&io.disconnect();io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{rootMargin:'0px 0px -8% 0px'});$$('.rv,.rvi').forEach(el=>io.observe(el))}
 
 /* ---------- content helpers ---------- */
+const CAN_EMBED=!/claude\.ai|claudeusercontent|anthropic/.test(location.hostname);
+const ytId=u=>{const m=String(u).match(/(?:youtube(?:-nocookie)?\.com\/(?:embed\/|watch\?(?:.*&)?v=|live\/|shorts\/)|youtu\.be\/)([\w-]{11})/);return m?m[1]:null};
+const player=(id,title='')=>`<div class="player"><iframe src="https://www.youtube-nocookie.com/embed/${id}?rel=0&modestbranding=1" title="${esc(title||'Video')}" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>`;
 function enhance(root){
   $$('[data-embed]',root).forEach(d=>{
     const yt=d.dataset.yt,src=d.dataset.embed,t=d.dataset.title||'';
     const href=yt?`https://www.youtube.com/watch?v=${yt}`:src.replace('/embed/','/');
     const host=yt?'YouTube':(src.match(/\/\/(?:www\.|player\.)?([^/.]+)/)||[,'video'])[1];
+    const w=document.createElement('div');
+    if(CAN_EMBED){
+      w.innerHTML=yt?player(yt,t):`<div class="player"><iframe src="${esc(src)}" title="${esc(t||host)}" loading="lazy" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowfullscreen></iframe></div>`;
+      d.replaceWith(w.firstChild);return;
+    }
     const a=document.createElement('a');a.href=href;a.target='_blank';a.rel='noopener';
     a.className='vid'+(d.dataset.thumb?'':' plain');
     a.innerHTML=(d.dataset.thumb?`<img src="${d.dataset.thumb}" alt="">`:'')+`<span class="pl"><i><svg viewBox="0 0 24 24"><path d="M7 4v16l13-8z"/></svg></i></span><span class="lab">Watch on ${host[0].toUpperCase()+host.slice(1)}${t&&!/youtube video player/i.test(t)?' · '+esc(t):''}</span>`;
     d.replaceWith(a);
   });
+  if(CAN_EMBED){
+    // a YouTube link that stands on its own line gets a player right beneath it
+    $$('.prose a[href]',root).forEach(a=>{
+      const id=ytId(a.href);if(!id||a.closest('.player'))return;
+      const blk=a.closest('p,li');if(!blk)return;
+      const others=blk.textContent.replace(a.textContent,'').trim();
+      if(others.length>60)return;
+      if(blk.nextElementSibling&&blk.nextElementSibling.dataset.yt===id)return;
+      const w=document.createElement('div');w.innerHTML=player(id,a.textContent.trim());const pl=w.firstChild;pl.dataset.yt=id;
+      blk.after(pl);
+    });
+  }
   $$('a[href^="http"]',root).forEach(a=>{a.target='_blank';a.rel='noopener'});
 }
 function phead(title,{crumbs=[],sub='',img}={}){
@@ -557,7 +582,8 @@ function phead(title,{crumbs=[],sub='',img}={}){
 }
 const crumbsFor=s=>PARENT[s]?[[PARENT[s],NAV.find(n=>n.t===PARENT[s]).kids?.[0][1]]]:[];
 function cardHTML(c,i){
-  const ext=/^https?:/.test(c.href);
+  const ext=/^https?:/.test(c.href), yid=CAN_EMBED&&ytId(c.href);
+  if(yid)return `<div class="tcard vcard rv d${i%4}">${player(yid,c.title)}<div class="tx"><h3>${esc(c.title)}</h3>${(c.sub||[]).map(s=>`<span class="sub">${esc(s)}</span>`).join('')}<a class="more" href="${esc(c.href)}" target="_blank" rel="noopener" style="margin-top:auto;font-size:16px;align-self:flex-start">YouTube ${ICON.ext.replace('<svg','<svg style="width:13px;height:13px"')}</a></div></div>`;
   return `<a class="tcard rv d${i%4}" href="${esc(c.href)}"${ext?' target="_blank" rel="noopener"':''} style="--r:${c.ratio?1/c.ratio:1.33}">${c.img?`<div class="im"><img src="${c.img}" alt=""></div>`:''}${ext?`<span class="ext">${ICON.ext}</span>`:''}<div class="tx"><h3>${esc(c.title)}</h3>${(c.sub||[]).map(s=>`<span class="sub">${esc(s)}</span>`).join('')}</div></a>`;
 }
 function personCard(c,i){return `<a class="person rv d${i%4}" href="${esc(c.href)}"><div class="ph">${c.img?`<img src="${c.img}" alt="${esc(c.title)}">`:''}</div><h3>${esc(c.title)}</h3>${(c.sub||[]).map(s=>`<div class="role">${esc(s)}</div>`).join('')}</a>`}
