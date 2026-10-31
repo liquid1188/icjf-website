@@ -376,6 +376,41 @@ select.yr{font-family:var(--display);font-size:18px;background:transparent;borde
 .prose p+.player,.prose li+.player{margin-top:.6em}
 .vcard .player{margin:0;box-shadow:none;outline:0}
 .vcard:hover{transform:none}
+.prose.book>.bchips{display:none;gap:8px;flex-wrap:wrap;margin:0 0 34px}
+.prose.book .bchips button{padding:7px 15px;border:1px solid var(--line);border-radius:40px;font-family:var(--display);font-size:16px;background:var(--paper)}
+.prose.book .bsec{margin:0 0 70px}
+.prose.book .bsec>h1{font-size:clamp(32px,3.4vw,44px);margin:0 0 30px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+.prose.book .bsec>h1::before{display:none}
+.bhero{display:grid;grid-template-columns:200px 1fr;gap:38px;align-items:start}
+.bcover img{margin:0!important;width:100%;box-shadow:14px 18px 36px -16px rgba(0,0,0,.55)!important}
+.btext>h3:first-child{margin-top:0}
+.prose .bbuy{display:flex;flex-wrap:wrap;gap:10px;align-items:center;font-family:var(--lap);font-size:12px;letter-spacing:.18em;color:var(--mute)}
+.prose .bbuy a{font-family:var(--lap);font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;color:var(--ink);border:1px solid var(--ink);padding:9px 14px;transition:all .3s}
+.prose .bbuy a:hover{background:var(--crimson);border-color:var(--crimson);color:var(--paper)}
+.bitems{display:grid;gap:22px}
+.bitem,.bq{background:var(--paper);border:1px solid var(--line);padding:28px 32px 24px;position:relative;margin:0}
+.bitem header h3,.bitem header h2{font-size:clamp(23px,2.2vw,28px);margin:0 0 6px;border:0;padding:0}
+.bitem header h2::before{display:none}
+.bitem header h3 a,.bitem header h2 a{text-decoration:none;color:var(--ink)}
+.bitem header h3 a:hover{color:var(--crimson)}
+.bitem .bmeta{font-family:var(--display);font-style:italic;font-weight:400;font-size:17px;color:var(--crimson);margin:0 0 16px}
+.bitem .bbody>*:first-child{margin-top:0}
+.bitem .bbody h4{font-size:20px;margin:1.2em 0 .3em}
+.bquotes{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:22px}
+.bq{font-family:var(--display);font-style:normal;font-size:20px;line-height:1.5;color:var(--ink);border-left:1px solid var(--line)}
+.bq::before{content:"“";position:absolute;top:-6px;left:18px;font-family:var(--display);font-size:80px;line-height:1;color:var(--gold);opacity:.6}
+.bq .bbody{padding-top:14px}
+.bq .bbody p{margin:0}
+.bq cite{display:block;margin-top:14px;font-style:italic;font-size:17px;color:var(--crimson)}
+.clip .bbody{max-height:13.5em;overflow:hidden;position:relative}
+.bq.clip .bbody{max-height:9.5em}
+.clip .bbody::after{content:"";position:absolute;left:0;right:0;bottom:0;height:5em;background:linear-gradient(transparent,var(--paper));pointer-events:none}
+.clip.open .bbody{max-height:none}
+.clip.open .bbody::after{display:none}
+.bmore{margin-top:12px;font-family:var(--display);font-style:italic;font-size:18px;color:var(--crimson);display:inline-flex;gap:8px;align-items:center;border-bottom:1px solid rgba(140,28,37,.3);padding-bottom:1px}
+.bmore:hover{border-color:var(--crimson)}
+@media (max-width:1100px){.prose.book>.bchips{display:flex;position:sticky;top:64px;z-index:5;background:var(--paper);padding:10px 0;margin:-10px 0 24px}}
+@media (max-width:620px){.bhero{grid-template-columns:1fr;gap:24px}.bcover{max-width:190px}.bitem,.bq{padding:24px 20px 20px}.bq{font-size:18px}.bquotes{grid-template-columns:1fr}}
 /* person page */
 .prof{display:grid;grid-template-columns:minmax(260px,400px) 1fr;gap:clamp(40px,6vw,96px);align-items:start}
 .prof .portrait{position:sticky;top:110px}
@@ -411,21 +446,41 @@ form.cf .req{color:var(--crimson)}
 form.cf .note{grid-column:1/-1;font-size:15px;color:var(--mute);margin:0}
 form.cf .ok{grid-column:1/-1;padding:16px 20px;background:var(--ink);color:var(--gold3);font-family:var(--display);font-size:19px;display:none}
 
+.pod .podgrid{display:grid;grid-template-columns:1fr 1.15fr;gap:clamp(40px,6vw,90px);align-items:center}
+.pod .podcopy h2{margin:26px 0 22px;text-wrap:balance;line-height:1.15}
+.pod .podcopy p{color:rgba(246,241,231,.78);font-size:18px;margin:0 0 1em;text-wrap:pretty}
+.pod .podcopy p.by{font-family:var(--display);font-style:italic;font-size:20px;color:var(--gold2)}
+.pod .podcopy strong{color:var(--paper);font-weight:600}
+.cospon{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.cospon span{font-family:var(--display);font-style:italic;font-size:18px;color:var(--gold2);width:100%;margin-bottom:-4px}
+.cospon a img{height:46px;width:auto;opacity:.95;transition:opacity .3s}
+.cospon a:hover img{opacity:1}
+.cospon i{width:1px;height:40px;background:rgba(214,184,120,.4)}
+.cospon .sl{width:50px;height:50px}
+.podvid{margin:0}
+.podvid .player,.podvid .vid{margin:0;outline:1px solid rgba(214,184,120,.5);outline-offset:8px}
+.podvid figcaption{margin-top:22px;font-size:16px;line-height:1.55;color:rgba(246,241,231,.65)}
+.podvid figcaption b{display:block;font-family:var(--display);font-style:italic;font-weight:400;font-size:19px;color:var(--gold2);margin-bottom:2px}
+@media (max-width:900px){.pod .podgrid{grid-template-columns:1fr}.pod .podvid{order:2}}
 /* marquee + footer */
-.marquee{background:var(--crimson);color:var(--gold3);overflow:hidden;white-space:nowrap;padding:26px 0;border-top:1px solid var(--gold);border-bottom:1px solid var(--gold)}
-.marquee .tr{display:inline-flex;animation:mq 40s linear infinite}
-.marquee span{font-family:var(--lap);font-size:clamp(24px,3vw,40px);letter-spacing:.24em;padding:0 34px;display:inline-flex;align-items:center;gap:68px}
+.marquee{background:var(--crimson);color:var(--gold3);overflow:hidden;white-space:nowrap;padding:13px 0;border-top:1px solid var(--gold);border-bottom:1px solid var(--gold)}
+.marquee .tr{display:inline-flex;width:max-content;animation:mq 55s linear infinite;will-change:transform}
+.marquee span{font-family:var(--lap);font-size:clamp(17px,1.9vw,24px);letter-spacing:.24em;padding:0 22px;display:inline-flex;align-items:center;gap:44px;flex:none}
 .marquee span::after{content:"✠";font-size:.5em;color:var(--gold2)}
 @keyframes mq{to{transform:translateX(-50%)}}
-footer.ft{background:#0e0d0b;color:rgba(246,241,231,.75);padding:90px 0 40px;font-size:16px}
-.ft .cols{display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:40px}
+footer.ft{background:#0e0d0b;color:rgba(246,241,231,.75);padding:56px 0 30px;font-size:16px}
+.ftop{display:flex;align-items:center;justify-content:space-between;gap:20px 40px;flex-wrap:wrap;padding-bottom:26px;border-bottom:1px solid var(--line-d)}
+.flinks{display:flex;flex-wrap:wrap;gap:6px 26px;padding:22px 0 0}
+.flinks a{font-size:15.5px;padding:2px 0!important}
 .ft h4{font-family:var(--display);font-style:italic;font-weight:400;font-size:20px;color:var(--gold2);margin-bottom:16px}
-.ft a{text-decoration:none;display:block;padding:4px 0;transition:color .3s,padding .3s}
-.ft a:hover{color:var(--gold3);padding-left:5px}
-.ft .fb{display:flex;align-items:center;gap:16px;margin-bottom:20px}
-.ft .fb img{width:70px;height:70px}
+.ft a{text-decoration:none;display:block;padding:4px 0;transition:color .3s}
+.ft a:hover{color:var(--gold3)}
+.ft .fb{display:flex;align-items:center;gap:14px;margin:0;text-decoration:none}
+.ft .fb:hover{padding-left:0}
+.ft .fb img{width:54px;height:54px}
 .ft .fb span{font-family:var(--lap);letter-spacing:.14em;font-size:14px;color:var(--paper);line-height:1.4}
-.ft .base{margin-top:70px;padding-top:26px;border-top:1px solid var(--line-d);display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;font-size:14px;color:rgba(246,241,231,.5)}
+.ft .motto{font-family:var(--display);font-style:italic;font-size:clamp(14px,1.5vw,19px);white-space:nowrap;color:var(--gold2);margin:0}
+.ft .base{margin-top:30px;padding-top:26px;border-top:1px solid var(--line-d);display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;font-size:14px;color:rgba(246,241,231,.5)}
 .ft .base button{text-decoration:underline;text-underline-offset:3px;font-size:14px}
 #dv{display:none}
 html.dv #dv{display:inline;font-size:28px;padding:10px 0}
@@ -459,7 +514,6 @@ html.dv #dv{display:inline;font-size:28px;padding:10px 0}
   .projects{grid-template-columns:1fr 1fr}
   .people.lead{grid-template-columns:repeat(2,1fr)}
   .layout{grid-template-columns:1fr}.toc{display:none}
-  .ft .cols{grid-template-columns:1fr 1fr}
 }
 @media (max-width:820px){
   body{font-size:17px}
@@ -477,7 +531,8 @@ html.dv #dv{display:inline;font-size:28px;padding:10px 0}
   #dv{display:inline}
   .phead{padding-top:140px}
 }
-@media (max-width:520px){.projects{grid-template-columns:1fr}.pcard{aspect-ratio:4/4.4}.people,.people.lead{grid-template-columns:1fr 1fr;gap:22px 14px}.person h3{font-size:18px}.ft .cols{grid-template-columns:1fr}.hero .counter{display:none}}
+@media (max-width:520px){
+  footer.ft{padding:44px 0 26px}.ftop{gap:14px}.ft .motto{font-size:clamp(13px,4vw,16px)}.flinks{gap:4px 18px}.flinks a{font-size:15px}.projects{grid-template-columns:1fr}.pcard{aspect-ratio:4/4.4}.people,.people.lead{grid-template-columns:1fr 1fr;gap:22px 14px}.person h3{font-size:18px}.hero .counter{display:none}}
 </style>
 </head>
 <body>
@@ -497,7 +552,7 @@ html.dv #dv{display:inline;font-size:28px;padding:10px 0}
 <div class="marquee" aria-hidden="true"><div class="tr" id="mq"></div></div>
 <footer class="ft">
   <div class="wrap">
-    <div class="cols" id="ftcols"></div>
+    <div id="ftcols"></div>
     <div class="base"><span>© <span id="yr"></span> International Catholic Jurists Forum</span><span><button id="dv">View desktop version</button></span></div>
   </div>
 </footer>
@@ -540,10 +595,8 @@ function buildChrome(){
   $('#mm').innerHTML=`<a href="#home">Home</a>`+NAV.map(n=>n.kids?`<a href="#${n.kids[0][1]}">${n.t}</a>${n.kids.map(([t,s])=>`<a class="sub" href="#${s}">${esc(t)}</a>`).join('')}`:`<a href="#${n.h}">${n.t}</a>`).join('')+`<div class="mmfoot">${PILLARS.join(' · ')}</div>`;
   $$('#mm a').forEach((a,i)=>a.style.transitionDelay=(0.15+i*0.03)+'s');
   const words=PILLARS.map(w=>`<span>${w}</span>`).join('');$('#mq').innerHTML=words+words+words+words;
-  $('#ftcols').innerHTML=`<div><div class="fb"><img src="${HERO.sealSmall}" alt=""><span>International Catholic<br>Jurists Forum</span></div><p style="max-width:34ch;font-family:var(--display);font-size:19px;font-style:italic;color:rgba(246,241,231,.6)">${PILLARS.map(w=>w[0]+w.slice(1).toLowerCase()).join(' · ')}</p></div>
-  <div><h4>About</h4><a href="#how-we-started">How We Started</a><a href="#what-we-stand-for">What We Stand For</a><a href="#who-we-are">Who We Are</a><a href="#charter-of-the-rights-of-the-family">The Charter of the Rights of the Family</a></div>
-  <div><h4>Work</h4><a href="#projects">Projects</a><a href="#books">Books</a><a href="#conferences">Conferences</a><a href="#podcast-series">Podcasts</a><a href="#media">Media</a></div>
-  <div><h4>Resources</h4><a href="#resources-2">CEaSE RP</a><a href="#resources-on-the-persecution-and-genocide-of-christians-in-nigeria">Nigeria</a><a href="#news">News</a><a href="#contact">Contact</a></div>`;
+  $('#ftcols').innerHTML=`<div class="ftop"><a class="fb" href="#home"><img src="${HERO.sealSmall}" alt=""><span>International Catholic<br>Jurists Forum</span></a><p class="motto">${PILLARS.map(w=>w[0]+w.slice(1).toLowerCase()).join(' · ')}</p></div>
+  <nav class="flinks">${[['How We Started','how-we-started'],['What We Stand For','what-we-stand-for'],['Who We Are','who-we-are'],['Projects','projects'],['Books','books'],['Conferences','conferences'],['News','news'],['Podcasts','podcast-series'],['Media','media'],['CEaSE RP','resources-2'],['Nigeria','resources-on-the-persecution-and-genocide-of-christians-in-nigeria'],['The Charter of the Rights of the Family','charter-of-the-rights-of-the-family'],['Contact','contact']].map(([t,h])=>`<a href="#${h}">${t}</a>`).join('')}</nav>`;
   $('#yr').textContent=new Date().getFullYear();
   $('#menuBtn').onclick=()=>toggleMenu();
   $('#srchBtn').onclick=()=>openPal();
@@ -634,7 +687,61 @@ function newsCard(p,th,cls=''){
   const t=th&&th[p.slug];
   return `<a class="ncard rv ${cls}" href="#${p.slug}"><div class="im${t?'':' none'}">${t?`<img src="${t}" alt="">`:`<img src="${HERO.hero[[...p.slug].reduce((a,c)=>a+c.charCodeAt(0),0)%HERO.hero.length].src}" alt=""><span>${esc((p.tags[0]||'News'))}</span>`}</div><div><div class="meta"><span>${fmtDate(p.date)}</span>${p.tags[0]?`<span class="tg">${esc(p.tags[0])}</span>`:''}</div><h3>${esc(p.title)}</h3><p>${esc(p.excerpt)}</p></div></a>`;
 }
+
+/* book pages: Description / Reviews / Articles become organized, collapsible cards */
+function bookify(prose){
+  const kids=[...prose.children];
+  const h1s=kids.filter(k=>k.tagName==='H1');
+  if(h1s.length<2||!/^(Description|Descrizione)/i.test(h1s[0].textContent.trim()))return false;
+  const frag=document.createDocumentFragment();
+  const chips=document.createElement('nav');chips.className='bchips';frag.appendChild(chips);
+  let sec=null,items=null,item=null,secIdx=0;
+  const newSec=h=>{sec=document.createElement('section');sec.className='bsec';sec.id='bsec-'+(secIdx++);sec.appendChild(h);frag.appendChild(sec);items=null;item=null;
+    const b=document.createElement('button');b.textContent=h.textContent.trim().replace(/ for Clerical Sexual Misconduct.*$/,'');b.onclick=()=>scrollTo({top:sec.getBoundingClientRect().top+scrollY-90,behavior:'smooth'});chips.appendChild(b)};
+  const newItem=h=>{if(!items){items=document.createElement('div');items.className='bitems';sec.appendChild(items)}
+    item=document.createElement('article');item.className='bitem';const hd=document.createElement('header');hd.appendChild(h);item.appendChild(hd);
+    const body=document.createElement('div');body.className='bbody';item.appendChild(body);items.appendChild(item)};
+  for(const k of kids){
+    if(k.tagName==='H1'){newSec(k);continue}
+    if(!sec){frag.appendChild(k);continue}
+    const isDesc=secIdx===1;
+    if(!isDesc&&(k.tagName==='H3'||k.tagName==='H2')){newItem(k);continue}
+    if(k.tagName==='HR'){continue}
+    if(item){const hd=item.querySelector('header'),body=item.querySelector('.bbody');
+      if(k.tagName==='H4'&&!body.children.length&&/•/.test(k.textContent)){k.className='bmeta';hd.appendChild(k)}else body.appendChild(k);continue}
+    sec.appendChild(k);
+  }
+  prose.innerHTML='';prose.appendChild(frag);prose.classList.add('book');prose.classList.remove('dropcap');
+  // description: cover beside the text, buy links as buttons
+  const d=prose.querySelector('.bsec');
+  if(d){const img=d.querySelector(':scope > img, :scope > p > img');
+    if(img){const wrap=document.createElement('div');wrap.className='bhero';const cv=document.createElement('div');cv.className='bcover';
+      const tx=document.createElement('div');tx.className='btext';
+      const h=d.querySelector('h1');[...d.childNodes].forEach(n=>{if(n!==h)tx.appendChild(n)});
+      const im=tx.querySelector('img');(im.closest('p')&&im.closest('p').textContent.trim()===''?im.closest('p'):im).remove();cv.appendChild(im);
+      wrap.append(cv,tx);d.appendChild(wrap)}
+    $$('p',d).forEach(p=>{const as=$$('a',p);if(as.length>=2&&as.every(a=>/^https?:/.test(a.getAttribute('href')||''))){p.classList.add('bbuy');$$('br',p).forEach(b=>b.remove())}});}
+  // testimonial sections without item headings: quote cards
+  $$('.bsec',prose).forEach(sc=>{if(sc.querySelector('.bitems'))return;
+    const ps=$$(':scope > p',sc).filter(p=>/[“"]/.test(p.textContent)&&/[-–—]\s?[A-Z][^-–—]{2,80}$/.test(p.textContent.trim()));
+    if(ps.length<2)return;const box=document.createElement('div');box.className='bquotes';ps[0].before(box);
+    ps.forEach(p=>{const t=p.innerHTML.trim(),m=t.match(/^(.*[”"…\.])\s*[-–—]\s?([^-–—<]{2,120})$/s);
+      const q=document.createElement('blockquote');q.className='bq';q.innerHTML=m?`<div class="bbody"><p>${m[1]}</p></div><cite>${m[2]}</cite>`:`<div class="bbody"><p>${t}</p></div>`;box.appendChild(q);p.remove()})});
+  // collapse long bodies
+  $$('.bitem,.bq',prose).forEach(it=>{const b=$('.bbody',it);if(!b)return;
+    if(b.textContent.trim().length<(it.classList.contains('bq')?420:520)&&!b.querySelector('img,.player,.vid'))return;
+    it.classList.add('clip');const btn=document.createElement('button');btn.className='bmore';btn.innerHTML='Read more <span>↓</span>';
+    btn.onclick=()=>{const open=it.classList.toggle('open');btn.innerHTML=open?'Show less <span>↑</span>':'Read more <span>↓</span>';if(!open)it.scrollIntoView({block:'nearest',behavior:'smooth'})};
+    (it.querySelector('cite')||b).after(btn)});
+  return true;
+}
 let tocSpy=null;
+function buildTOC2(prose,host){
+  const hs=$$('.bsec > h1',prose);if(!host)return;
+  host.innerHTML='<b>On this page</b>'+hs.map((h,i)=>`<button data-i="${i}">${esc(h.textContent.trim())}</button>`).join('');
+  $$('button',host).forEach(b=>b.onclick=()=>scrollTo({top:hs[b.dataset.i].getBoundingClientRect().top+scrollY-100,behavior:'smooth'}));
+  tocSpy=()=>{let k=0;hs.forEach((h,i)=>{if(h.getBoundingClientRect().top<160)k=i});$$('button',host).forEach((b,i)=>b.classList.toggle('on',i===k))};
+}
 function buildTOC(prose,host){
   const hs=$$('h1,h2',prose).filter(h=>h.textContent.trim().length>1);
   if(hs.length<3){host.parentElement.classList.add('full');host.remove();return}
@@ -653,7 +760,13 @@ async function home(){
   const objs=$$('li',wsd).map(li=>li.innerHTML);
   const origins=$$('p',hsd).map(p=>p.innerHTML);
   const exec=ww.sections[0]?.cards||[];
-  const pcd=D.parseFromString(pc.html,'text/html').body;const pcTitle=$('h2',pcd)?.textContent||'';const pcPs=$$('p',pcd).slice(0,2).map(p=>p.innerHTML);
+  const pcd=D.parseFromString(pc.html,'text/html').body;const pcTitle=$('h2',pcd)?.textContent||'';
+  const pps=$$('p',pcd);const pcDesc=(pps.find(p=>/^\s*Description:/.test(p.textContent))||{}).innerHTML||'';
+  const pcBy=(pps.find(p=>/^\s*Interviews conducted by/.test(p.textContent))||{}).textContent||'';
+  // featured episode: Podcast 5, with the Forum's Executive Director
+  let feat=null;{const ep=pps.find(p=>/^\s*Podcast 5\b/.test(p.textContent));
+    if(ep){let n=ep.nextElementSibling,id=null;while(n&&!id&&!/^\s*Podcast \d/.test(n.textContent)){const a=n.querySelector&&n.querySelector('a[href]');id=a&&ytId(a.href);n=n.nextElementSibling}
+      const hd=ep.querySelector('strong')?.textContent.trim()||'';if(id)feat={id,head:hd,text:ep.textContent.replace(hd,'').trim(),label:ep.textContent.trim()}}}
   const latest=IDX.posts.slice(0,5);
   const projNames=['Leo','Francis','Benedict','John Paul II'];
   V.innerHTML=`
@@ -711,11 +824,18 @@ async function home(){
     <div class="people lead">${exec.map(personCard).join('')}</div>
   </div></section>
 
-  <section class="s dark"><div class="wrap" style="max-width:980px;text-align:center">
-    
-    <h2 class="h-m rv d1" style="margin:10px 0 30px">${esc(pcTitle)}</h2>
-    ${pcPs.map(p=>`<p class="rv d2" style="color:rgba(246,241,231,.78);font-size:18px">${p}</p>`).join('')}
-    <div class="rv d3" style="margin-top:36px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap"><a class="btn gold" href="#podcast-series">${esc(pc.title)} ${ICON.arrow}</a><a class="btn gold" href="#contact">Contact ${ICON.arrow}</a></div>
+  <section class="s dark pod"><div class="wrap">
+    <div class="podgrid">
+      <div class="podcopy">
+        <div class="cospon rv"><span>Co-sponsored by</span><a href="https://enroutebooksandmedia.com/" target="_blank" rel="noopener"><img src="img/enroute-wordmark.webp" alt="En Route Books &amp; Media" width="800" height="166"></a><i></i><img class="sl" src="${HERO.sealSmall}" alt="International Catholic Jurists Forum"></div>
+        <h2 class="h-m rv d1">${esc(pcTitle.replace(/\s*\(as of[^)]*\)\s*$/,''))}</h2>
+        ${pcDesc?`<p class="rv d2">${pcDesc}</p>`:''}
+        ${pcBy?`<p class="by rv d2">${pcBy}</p>`:''}
+        <div class="rv d3" style="margin-top:34px;display:flex;gap:14px;flex-wrap:wrap"><a class="btn gold" href="#podcast-series">All episodes ${ICON.arrow}</a></div>
+      </div>
+      <figure class="podvid rv d2">${feat?(CAN_EMBED?player(feat.id,feat.label):`<a class="vid" href="https://www.youtube.com/watch?v=${feat.id}" target="_blank" rel="noopener"><span class="pl"><i><svg viewBox="0 0 24 24"><path d="M7 4v16l13-8z"/></svg></i></span><span class="lab">Watch on YouTube</span></a>`):''}
+        ${feat?`<figcaption><b>${esc(feat.head)}</b> ${esc(feat.text)}</figcaption>`:''}</figure>
+    </div>
   </div></section>`;
   enhance(V);
   startHero();
@@ -758,7 +878,7 @@ async function generic(s){
   if(s==='contact')return contact(p);
   const long=p.html.length>2500;
   V.innerHTML=phead(p.title,{crumbs})+`<section class="s"><div class="wrap"><div class="layout"><article class="prose${long?' dropcap':''} rv">${p.html}</article><aside class="toc"></aside></div></div></section>`;
-  enhance(V);buildTOC($('.prose'),$('.toc'));
+  const bk=bookify($('.prose'));enhance(V);bk?buildTOC2($('.prose'),$('.toc')):buildTOC($('.prose'),$('.toc'));
 }
 let ORDER=null;
 async function person(p){
