@@ -166,11 +166,10 @@ section.s.tint{background:var(--paper2)}
 .obj .n{font-family:var(--lap);font-size:15px;letter-spacing:.2em;color:var(--crimson);display:block;margin-bottom:18px;transition:color .5s}
 .obj p{margin:0;font-family:var(--display);font-size:22px;line-height:1.32}
 .obj p a{text-decoration-color:var(--gold)}
-.obj{min-height:230px;padding-bottom:84px!important}
-.obj::after{content:attr(data-n);position:absolute;right:22px;bottom:12px;font-family:var(--lap);font-size:76px;line-height:1;color:var(--crimson);opacity:.11;transition:opacity .5s,transform .8s var(--ease)}
+.obj::after{content:attr(data-n);position:absolute;right:-6px;bottom:-34px;font-family:var(--lap);font-size:130px;line-height:1;color:var(--ink);opacity:.035;transition:opacity .5s,transform .8s var(--ease)}
 .obj:hover{background:var(--ink);color:var(--paper)}
 .obj:hover .n{color:var(--gold2)}
-.obj:hover::after{opacity:.3;color:var(--gold2);transform:translateY(-4px)}
+.obj:hover::after{opacity:.09;color:var(--gold2);transform:translateY(-10px)}
 
 .origins{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(40px,7vw,100px);align-items:center}
 .origins .years{position:relative;display:flex;flex-direction:column;gap:6px}
@@ -669,13 +668,13 @@ async function home(){
   </section>
 
   <section class="s" id="mission"><div class="wrap">
-    <div class="shead"><div><span class="num rv">I</span><h2 class="h-l rv d1">${esc(h3s[0]?.textContent||'Mission Statement')}</h2></div><a class="more rv" href="#what-we-stand-for">Read more ${ICON.arrow}</a></div>
+    <div class="shead"><div><h2 class="h-l rv d1">${esc(h3s[0]?.textContent||'Mission Statement')}</h2></div><a class="more rv" href="#what-we-stand-for">Read more ${ICON.arrow}</a></div>
     <div class="mission"><p class="big rv">${mission[0]||''}</p><div class="side rv d2">${mission.slice(1).map(p=>`<p>${p}</p>`).join('')}</div></div>
   </div></section>
 
   <section class="s tint"><div class="wrap">
-    <div class="shead"><div><span class="num rv">II</span><h2 class="h-l rv d1">${esc(h3s[1]?.textContent||'')}</h2></div></div>
-    <div class="objectives">${objs.map((o,i)=>`<div class="obj rv d${i%3}" data-n="${ROM(i+1)}"><p>${o}</p></div>`).join('')}</div>
+    <div class="shead"><div><h2 class="h-l rv d1">${esc(h3s[1]?.textContent||'')}</h2></div></div>
+    <div class="objectives">${objs.map((o,i)=>`<div class="obj rv d${i%3}" data-n="${ROM(i+1)}"><span class="n">${ROM(i+1)}</span><p>${o}</p></div>`).join('')}</div>
   </div></section>
 
   <div class="photoBand"><img data-par src="${HERO.hero[5].src}" alt=""><blockquote><p class="rv">${PILLARS.slice(0,3).map(w=>w[0]+w.slice(1).toLowerCase()).join(', ')},<br><em>${PILLARS.slice(3).map(w=>w[0]+w.slice(1).toLowerCase()).join(', ')}</em></p></blockquote></div>
@@ -683,37 +682,37 @@ async function home(){
   <section class="s dark"><div class="wrap">
     <div class="origins">
       <div class="years" id="years">${['2013','2014','2021'].map((y,i)=>`<div class="yr rv d${i}" data-y="${y}">${y}<small>${YL[i]}</small></div>`).join('')}</div>
-      <div class="copy"><span class="num rv">III</span><h2 class="h-l rv d1" style="margin-bottom:30px">${esc(hs.title)}</h2><ol class="ystrip rv">${['2013','2014','2021'].map((y,i)=>`<li><b>${y}</b><span>${YL[i]}</span></li>`).join('')}</ol>${origins.map((p,i)=>`<p class="rv d${i%3}" data-yrs="${(p.match(/\b20(13|14|21)\b/g)||[]).join(' ')}">${p}</p>`).join('')}<a class="more rv" href="#who-we-are" style="margin-top:14px">Who We Are ${ICON.arrow}</a></div>
+      <div class="copy"><h2 class="h-l rv d1" style="margin-bottom:30px">${esc(hs.title)}</h2><ol class="ystrip rv">${['2013','2014','2021'].map((y,i)=>`<li><b>${y}</b><span>${YL[i]}</span></li>`).join('')}</ol>${origins.map((p,i)=>`<p class="rv d${i%3}" data-yrs="${(p.match(/\b20(13|14|21)\b/g)||[]).join(' ')}">${p}</p>`).join('')}<a class="more rv" href="#who-we-are" style="margin-top:14px">Who We Are ${ICON.arrow}</a></div>
     </div>
   </div></section>
 
   <section class="s"><div class="wrap">
-    <div class="shead"><div><span class="num rv">IV</span><h2 class="h-l rv d1">${esc(pr.title)}</h2></div><a class="more rv" href="#projects">View all ${ICON.arrow}</a></div>
+    <div class="shead"><div><h2 class="h-l rv d1">${esc(pr.title)}</h2></div><a class="more rv" href="#projects">View all ${ICON.arrow}</a></div>
     <div class="projects">${(pr.sections[0]?.cards||[]).map((c,i)=>{const m=c.title.match(/^(.*?):\s*(.*)$/);return `<a class="pcard rv d${i}" href="${esc(c.href)}"><img src="${c.img}" alt=""><div class="cap"><h3>${esc(m?m[1]:c.title)}${m?`<em>${esc(m[2])}</em>`:''}</h3></div></a>`}).join('')}</div>
   </div></section>
 
   <section class="s tint"><div class="wrap">
-    <div class="shead"><div><span class="num rv">V</span><h2 class="h-l rv d1">${esc(bk.title)}</h2></div><a class="more rv" href="#books">View all ${ICON.arrow}</a></div>
+    <div class="shead"><div><h2 class="h-l rv d1">${esc(bk.title)}</h2></div><a class="more rv" href="#books">View all ${ICON.arrow}</a></div>
     <div class="shelf rv">${(bk.sections[0]?.cards||[]).map(bookCard).join('')}</div>
   </div></section>
 
   <section class="s dark"><div class="wrap">
-    <div class="shead"><div><span class="num rv">VI</span><h2 class="h-l rv d1">${esc(cf.title)}</h2></div><a class="more rv" href="#conferences">View all ${ICON.arrow}</a></div>
+    <div class="shead"><div><h2 class="h-l rv d1">${esc(cf.title)}</h2></div><a class="more rv" href="#conferences">View all ${ICON.arrow}</a></div>
     <div class="tl">${tlItems(cf.items.slice(0,5))}</div>
   </div></section>
 
   <section class="s"><div class="wrap">
-    <div class="shead"><div><span class="num rv">VII</span><h2 class="h-l rv d1">News</h2></div><a class="more rv" href="#news">View all ${ICON.arrow}</a></div>
+    <div class="shead"><div><h2 class="h-l rv d1">News</h2></div><a class="more rv" href="#news">View all ${ICON.arrow}</a></div>
     <div class="newsgrid">${newsCard(latest[0],t0,'feat')}${latest.slice(1,5).map(p=>newsCard(p,t0,'side')).join('')}</div>
   </div></section>
 
   <section class="s tint"><div class="wrap">
-    <div class="shead"><div><span class="num rv">VIII</span><h2 class="h-l rv d1">${esc(ww.sections[0]?.heading||'')}</h2></div><a class="more rv" href="#who-we-are">View all ${ICON.arrow}</a></div>
+    <div class="shead"><div><h2 class="h-l rv d1">${esc(ww.sections[0]?.heading||'')}</h2></div><a class="more rv" href="#who-we-are">View all ${ICON.arrow}</a></div>
     <div class="people lead">${exec.map(personCard).join('')}</div>
   </div></section>
 
   <section class="s dark"><div class="wrap" style="max-width:980px;text-align:center">
-    <span class="num rv" style="justify-content:center">IX</span>
+    
     <h2 class="h-m rv d1" style="margin:10px 0 30px">${esc(pcTitle)}</h2>
     ${pcPs.map(p=>`<p class="rv d2" style="color:rgba(246,241,231,.78);font-size:18px">${p}</p>`).join('')}
     <div class="rv d3" style="margin-top:36px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap"><a class="btn gold" href="#podcast-series">${esc(pc.title)} ${ICON.arrow}</a><a class="btn gold" href="#contact">Contact ${ICON.arrow}</a></div>
@@ -747,7 +746,7 @@ async function generic(s){
     if(p.html&&p.html.replace(/<hr\/?>|\s/g,'').length)body+=`<div class="prose" style="margin-bottom:50px">${p.html}</div>`;
     p.sections.forEach((sec,si)=>{
       if(isPeople){
-        body+=`<div style="margin-bottom:90px"><div class="shead"><div><span class="num rv">${ROM(si+1)}</span><h2 class="h-l rv">${esc(sec.heading)}</h2></div>${si?`<label class="pfilter rv">${ICON.search}<input placeholder="Find an advisor" data-filter></label>`:''}</div><div class="people${si?'':' lead'}">${sec.cards.map(personCard).join('')}</div></div>`;
+        body+=`<div style="margin-bottom:90px"><div class="shead"><div><h2 class="h-l rv">${esc(sec.heading)}</h2></div>${si?`<label class="pfilter rv">${ICON.search}<input placeholder="Find an advisor" data-filter></label>`:''}</div><div class="people${si?'':' lead'}">${sec.cards.map(personCard).join('')}</div></div>`;
       }else{
         body+=`${sec.heading?`<h2 class="h-m rv" style="margin:40px 0 30px">${esc(sec.heading)}</h2>`:''}<div class="grid-cards${isBooks?' cover':''}">${sec.cards.map(cardHTML).join('')}</div>`;
       }
