@@ -112,7 +112,7 @@ h1,h2,h3,h4{font-family:var(--display);font-weight:500;line-height:1.08;margin:0
 @media (prefers-reduced-motion:reduce){.marquee{text-align:center}.marquee .tr{animation:none!important;display:block;width:auto}.marquee span{display:none}.marquee span:nth-child(-n+6){display:inline;padding:0;font-size:clamp(10px,2.6vw,17px);letter-spacing:.14em}.marquee span:nth-child(-n+6)::after{content:" ✠ ";font-size:.7em;margin:0 .5em}.marquee span:nth-child(6)::after{content:none}.rv,.rvi{opacity:1;transform:none;clip-path:none;transition:none}*{animation:none!important}}
 
 /* ---------- hero ---------- */
-.hero{position:relative;height:100vh;min-height:640px;max-height:1100px;background:#0b0a09;color:var(--paper);overflow:hidden;display:grid;place-items:center}
+.hero{position:relative;height:100vh;height:100svh;min-height:600px;max-height:1100px;background:#0b0a09;color:var(--paper);overflow:hidden;display:grid;place-items:center}
 .hero .slides,.hero .slides figure{position:absolute;inset:0;margin:0}
 .hero .slides figure{opacity:0;transition:opacity 3.2s cubic-bezier(.45,0,.55,1)}
 .hero .slides figure.on{opacity:1}
@@ -121,7 +121,7 @@ h1,h2,h3,h4{font-family:var(--display);font-weight:500;line-height:1.08;margin:0
 .hero .slides figure.on img,.hero .slides figure.out img{animation:kb 14s linear forwards}
 @keyframes kb{to{transform:scale(1.02)}}
 .hero::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(11,10,9,.15) 0%,rgba(11,10,9,.55) 60%,rgba(11,10,9,.92) 100%),linear-gradient(180deg,rgba(11,10,9,.55) 0%,transparent 30%,transparent 65%,rgba(11,10,9,.85) 100%)}
-.hero .inner{position:relative;z-index:2;text-align:center;padding:calc(90px + env(safe-area-inset-top)) 20px clamp(80px,12vh,140px);display:flex;flex-direction:column;align-items:center}
+.hero .inner{position:relative;z-index:2;text-align:center;padding:calc(80px + env(safe-area-inset-top)) 20px calc(clamp(110px,15vh,170px) + env(safe-area-inset-bottom));display:flex;flex-direction:column;align-items:center}
 .sealwrap{position:relative;width:clamp(232px,23vw,290px);aspect-ratio:1;margin-bottom:28px}
 .sealwrap img{position:absolute;inset:19%;width:62%;height:62%;filter:drop-shadow(0 10px 40px rgba(0,0,0,.6));animation:sealIn 2s var(--ease) both}
 .sealwrap svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;animation:spin 80s linear infinite;filter:drop-shadow(0 4px 18px rgba(0,0,0,.45))}
@@ -149,10 +149,10 @@ h1,h2,h3,h4{font-family:var(--display);font-weight:500;line-height:1.08;margin:0
 .hero .est{position:absolute;z-index:3;right:clamp(20px,4vw,48px);bottom:34px;font-family:var(--lap);font-size:12px;letter-spacing:.25em;color:var(--gold2)}
 
 /* ---------- sections ---------- */
-section.s{padding:clamp(80px,11vw,150px) 0;position:relative}
+section.s{padding:clamp(44px,5.5vw,80px) 0;position:relative}
 section.s.dark{background:var(--ink);color:var(--paper)}
 section.s.tint{background:var(--paper2)}
-.shead{display:flex;align-items:end;justify-content:space-between;gap:30px;margin-bottom:clamp(36px,5vw,64px);flex-wrap:wrap}
+.shead{display:flex;align-items:end;justify-content:space-between;gap:20px 30px;margin-bottom:clamp(22px,3vw,40px);flex-wrap:wrap}
 .num{font-family:var(--lap);font-size:14px;letter-spacing:.24em;color:var(--gold);margin-bottom:18px;display:flex;align-items:center;gap:14px}
 .num::after{content:"";width:44px;height:1px;background:currentColor;opacity:.7}
 
@@ -221,7 +221,7 @@ section.s.tint{background:var(--paper2)}
 .cf-prev{left:clamp(0px,2vw,20px)}.cf-next{right:clamp(0px,2vw,20px)}
 .cflow{--bw:clamp(170px,15vw,220px)}
 .cf-dots{display:flex;justify-content:center;gap:9px;margin-top:0}
-.s.bks{padding:clamp(56px,7vw,96px) 0}
+.s.bks{padding:clamp(40px,4.5vw,64px) 0}
 .s.bks .shead{margin-bottom:clamp(14px,2vw,24px)}
 @media (max-width:620px){.cflow{--bw:200px}}
 .cf-dots button{width:8px;height:8px;border-radius:50%;background:rgba(21,19,15,.2);transition:all .3s;padding:0}
@@ -292,7 +292,12 @@ section.s.tint{background:var(--paper2)}
 .ncard h3{font-size:clamp(22px,1.9vw,26px);line-height:1.2;transition:color .3s}
 .ncard:hover h3{color:var(--crimson)}
 .ncard p{margin:10px 0 0;font-size:16px;color:var(--mute);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
-.ncard.feat{grid-column:span 7;grid-row:span 3}
+.ncard.feat{grid-column:span 6;grid-row:span 2}
+.ncard.q{grid-column:span 3}
+.ncard.q h3{font-size:clamp(18px,1.4vw,21px)}
+.ncard.q p{display:none}
+.ncard.q .meta{margin:12px 0 6px;font-size:15px}
+.ncard.row{grid-column:span 4}
 .ncard.feat .im{aspect-ratio:4/3}
 .ncard.feat h3{font-size:clamp(28px,3vw,42px)}
 .ncard.side{grid-column:span 5;flex-direction:row;gap:20px;align-items:start}
@@ -532,7 +537,7 @@ form.cf .req{color:var(--crimson)}
 form.cf .note{grid-column:1/-1;font-size:15px;color:var(--mute);margin:0}
 form.cf .ok{grid-column:1/-1;padding:16px 20px;background:var(--ink);color:var(--gold3);font-family:var(--display);font-size:19px;display:none}
 
-.pod{padding-bottom:clamp(100px,13vw,170px)!important}
+.pod{padding-bottom:clamp(56px,6.5vw,90px)!important}
 .pod .podgrid{display:grid;grid-template-columns:1fr 1.15fr;gap:clamp(40px,6vw,90px);align-items:center}
 .pod .podcopy h2{margin:26px 0 22px;text-wrap:balance;line-height:1.15}
 .pod .podcopy p{color:rgba(246,241,231,.78);font-size:18px;margin:0 0 1em;text-wrap:pretty}
@@ -611,7 +616,7 @@ html.dv #dv{display:inline;font-size:28px;padding:10px 0}
   .ystrip{display:grid}
   .prof .portrait{position:static;max-width:380px}
   .objectives{grid-template-columns:1fr}
-  .ncard,.ncard.feat,.ncard.side{grid-column:1/-1}
+  .ncard,.ncard.feat,.ncard.side,.ncard.row{grid-column:1/-1}.ncard.q{grid-column:span 6}.ncard.feat{grid-row:auto}
   .ncard.side{flex-direction:column}.ncard.side .im{flex:none;width:100%;aspect-ratio:16/10}.ncard.side p{display:-webkit-box}
   .tl::before{left:6px}.tli{grid-template-columns:1fr;padding-left:34px}.tli .dot{left:0}.tli .y{position:static;font-size:22px;margin-bottom:6px}.tli .b{padding-left:0}.tli .y.ghost{display:none}
   .brand span{font-size:10.5px}.brand span b{font-size:12px}.brand img{width:40px;height:40px}
@@ -921,7 +926,7 @@ async function home(){
   let feat=null;{const ep=pps.find(p=>/^\s*Podcast 5\b/.test(p.textContent));
     if(ep){let n=ep.nextElementSibling,id=null;while(n&&!id&&!/^\s*Podcast \d/.test(n.textContent)){const a=n.querySelector&&n.querySelector('a[href]');id=a&&ytId(a.href);n=n.nextElementSibling}
       const hd=ep.querySelector('strong')?.textContent.trim()||'';if(id)feat={id,head:hd,text:ep.textContent.replace(hd,'').trim(),label:ep.textContent.trim()}}}
-  const latest=IDX.posts.slice(0,5);
+  const latest=IDX.posts.slice(0,8);
   const projNames=['Leo','Francis','Benedict','John Paul II'];
   V.innerHTML=`
   <section class="hero" id="top">
@@ -969,7 +974,7 @@ async function home(){
 
   <section class="s"><div class="wrap">
     <div class="shead"><div><h2 class="h-l rv d1">News</h2></div><a class="more rv" href="#news">View all ${ICON.arrow}</a></div>
-    <div class="newsgrid">${newsCard(latest[0],t0,'feat')}${latest.slice(1,5).map(p=>newsCard(p,t0,'side')).join('')}</div>
+    <div class="newsgrid">${newsCard(latest[0],t0,'feat')}${latest.slice(1,5).map(p=>newsCard(p,t0,'q')).join('')}${latest.slice(5,8).map(p=>newsCard(p,t0,'row')).join('')}</div>
   </div></section>
 
   <section class="s tint wall"><div class="wrap">
