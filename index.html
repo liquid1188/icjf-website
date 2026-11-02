@@ -168,10 +168,11 @@ section.s.tint{background:var(--paper2)}
 .obj .n{font-family:var(--lap);font-size:15px;letter-spacing:.2em;color:var(--crimson);display:block;margin-bottom:18px;transition:color .5s}
 .obj p{margin:0;font-family:var(--display);font-size:22px;line-height:1.32}
 .obj p a{text-decoration-color:var(--gold)}
-.obj::after{content:attr(data-n);position:absolute;right:-6px;bottom:-34px;font-family:var(--lap);font-size:130px;line-height:1;color:var(--ink);opacity:.06;transition:opacity .5s,transform .8s var(--ease)}
+.obj{padding-bottom:142px!important}
+.obj::after{content:attr(data-n);position:absolute;right:22px;bottom:18px;font-family:var(--lap);font-size:117px;line-height:.82;color:var(--ink);opacity:.06;transition:opacity .5s,transform .8s var(--ease)}
 .obj:hover{background:var(--ink);color:var(--paper)}
 .obj:hover .n{color:var(--gold2)}
-.obj:hover::after{opacity:.09;color:var(--gold2);transform:translateY(-10px)}
+.obj:hover::after{opacity:.12;color:var(--gold2);transform:translateY(-4px)}
 
 .origins{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(40px,7vw,100px);align-items:center}
 .origins .years{position:relative;display:flex;flex-direction:column;gap:6px}
@@ -472,6 +473,7 @@ form.cf .req{color:var(--crimson)}
 form.cf .note{grid-column:1/-1;font-size:15px;color:var(--mute);margin:0}
 form.cf .ok{grid-column:1/-1;padding:16px 20px;background:var(--ink);color:var(--gold3);font-family:var(--display);font-size:19px;display:none}
 
+.pod{padding-bottom:clamp(100px,13vw,170px)!important}
 .pod .podgrid{display:grid;grid-template-columns:1fr 1.15fr;gap:clamp(40px,6vw,90px);align-items:center}
 .pod .podcopy h2{margin:26px 0 22px;text-wrap:balance;line-height:1.15}
 .pod .podcopy p{color:rgba(246,241,231,.78);font-size:18px;margin:0 0 1em;text-wrap:pretty}
@@ -489,12 +491,12 @@ form.cf .ok{grid-column:1/-1;padding:16px 20px;background:var(--ink);color:var(-
 .podvid figcaption b{display:block;font-family:var(--display);font-style:italic;font-weight:400;font-size:19px;color:var(--gold2);margin-bottom:2px}
 @media (max-width:900px){.pod .podgrid{grid-template-columns:1fr}.pod .podvid{order:2}}
 /* marquee + footer */
-.marquee{background:var(--crimson);color:var(--gold3);overflow:hidden;white-space:nowrap;padding:13px 0;border-top:1px solid var(--gold);border-bottom:1px solid var(--gold)}
+.marquee{background:var(--crimson);color:var(--gold3);overflow:hidden;white-space:nowrap;padding:21px 0 22px;line-height:1;border-top:1px solid var(--gold);border-bottom:1px solid var(--gold)}
 .marquee .tr{display:inline-flex;will-change:transform}
 .marquee span{font-family:var(--lap);font-size:clamp(17px,1.9vw,24px);letter-spacing:.24em;padding:0 22px;display:inline-flex;align-items:center;gap:44px}
 .marquee span::after{content:"✠";font-size:.5em;color:var(--gold2)}
 @keyframes mq{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
-footer.ft{background:#0e0d0b;color:rgba(246,241,231,.75);padding:56px 0 30px;font-size:16px}
+footer.ft{background:#0e0d0b;color:rgba(246,241,231,.75);padding:60px 0 calc(64px + env(safe-area-inset-bottom));font-size:16px}
 .ftop{display:flex;align-items:center;justify-content:space-between;gap:20px 40px;flex-wrap:wrap;padding-bottom:26px;border-bottom:1px solid var(--line-d)}
 .fgroups{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px clamp(18px,4vw,60px);padding:28px 0 0;max-width:820px}
 .fg h4{margin:0 0 10px!important;font-size:18px!important}
@@ -561,7 +563,7 @@ html.dv #dv{display:inline;font-size:28px;padding:10px 0}
 }
 @media (max-width:520px){.fgroups{grid-template-columns:1.15fr 1fr .9fr;gap:20px 14px}.fg nav a{font-size:13.5px}.fg h4{font-size:16px!important}}
 @media (max-width:520px){
-  footer.ft{padding:44px 0 26px}.ftop{gap:14px}.ft .motto{font-size:clamp(13px,4vw,16px)}.fg nav a{font-size:15px}.projects{grid-template-columns:1fr}.pcard{aspect-ratio:4/4.4}.people,.people.lead{grid-template-columns:1fr 1fr;gap:22px 14px}.person h3{font-size:18px}.hero .counter{display:none}}
+  footer.ft{padding:48px 0 calc(72px + env(safe-area-inset-bottom))}.ftop{gap:14px}.ft .motto{font-size:clamp(13px,4vw,16px)}.fg nav a{font-size:15px}.projects{grid-template-columns:1fr}.pcard{aspect-ratio:4/4.4}.people,.people.lead{grid-template-columns:1fr 1fr;gap:22px 14px}.person h3{font-size:18px}.hero .counter{display:none}}
 </style>
 </head>
 <body>
