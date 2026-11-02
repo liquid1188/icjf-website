@@ -164,12 +164,12 @@ section.s.tint{background:var(--paper2)}
 .mission .side a{color:var(--crimson)}
 
 .objectives{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);border-left:1px solid var(--line)}
-.obj{padding:38px 34px 42px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);position:relative;overflow:hidden;transition:background .5s var(--ease),color .5s}
+.obj{padding:38px 34px 42px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);position:relative;overflow:hidden;transition:background .35s ease,color .35s ease}
 .obj .n{font-family:var(--lap);font-size:15px;letter-spacing:.2em;color:var(--crimson);display:block;margin-bottom:18px;transition:color .5s}
 .obj p{margin:0;font-family:var(--display);font-size:22px;line-height:1.32}
 .obj p a{text-decoration-color:var(--gold)}
 .obj{padding-bottom:142px!important}
-.obj::after{content:attr(data-n);position:absolute;right:22px;bottom:18px;font-family:var(--lap);font-size:117px;line-height:.82;color:var(--ink);opacity:.06;transition:opacity .5s,transform .8s var(--ease)}
+.obj::after{content:attr(data-n);position:absolute;right:22px;bottom:18px;font-family:var(--lap);font-size:117px;line-height:.82;color:var(--ink);opacity:.06;transition:opacity .35s ease,color .35s ease,transform .35s ease}
 .obj:hover{background:var(--ink);color:var(--paper)}
 .obj:hover .n{color:var(--gold2)}
 .obj:hover::after{opacity:.12;color:var(--gold2);transform:translateY(-4px)}
