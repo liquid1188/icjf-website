@@ -62,6 +62,19 @@ nav.main>div:hover .dd,nav.main>div:focus-within .dd{opacity:1;visibility:visibl
 .dd a:hover{padding-left:22px;color:var(--crimson)}
 .dd a:hover::before{content:"";position:absolute;left:8px;top:50%;width:6px;height:1px;background:var(--gold)}
 .tools{display:flex;align-items:center;gap:6px;margin-left:10px}
+.donbtn{font-family:var(--lap);font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;padding:11px 16px;background:var(--crimson);color:var(--gold3);border:1px solid var(--crimson);margin-right:6px;transition:background .3s,color .3s}
+.donbtn:hover{background:var(--wine)}
+@media (max-width:520px){
+  header.top .bar{gap:10px}
+  .brand{gap:9px}.brand img{width:34px!important;height:34px!important}
+  .brand span{font-size:9.5px!important;letter-spacing:.1em!important;white-space:nowrap}
+  .brand span b{font-size:11px!important;letter-spacing:.1em!important}
+  .tools{gap:5px;margin-left:auto;flex:none}
+  .brand{min-width:0;overflow:hidden}
+  #srchBtn{display:none}
+  .iconbtn{width:36px;height:36px}.iconbtn svg{width:16px;height:16px}
+  .donbtn{padding:9px 10px;font-size:9.5px;letter-spacing:.14em;margin-right:1px}}
+@media (max-width:350px){.brand span{font-size:8.2px!important;letter-spacing:.06em!important}.brand span b{font-size:9.6px!important;letter-spacing:.08em!important}.brand img{width:30px!important;height:30px!important}.donbtn{padding:8px 8px;font-size:9px;letter-spacing:.1em}}
 .iconbtn{width:42px;height:42px;display:grid;place-items:center;border-radius:50%;border:1px solid currentColor;opacity:.75;transition:all .3s}
 .iconbtn:hover{opacity:1;background:var(--crimson);color:var(--paper);border-color:var(--crimson)}
 .iconbtn svg{width:18px;height:18px}
@@ -505,6 +518,39 @@ select.yr{font-family:var(--display);font-size:18px;background:transparent;borde
 .pfoot{margin-top:22px}
 .pfoot a{font-family:var(--display);font-style:italic;font-size:19px;color:var(--crimson)}
 @media (max-width:520px){.pgrid{gap:16px}.pt{font-size:15px}}
+.pdfview{margin:1.4em 0;border:1px solid var(--line);background:#fff;height:min(80vh,900px)}
+.pdfview iframe{width:100%;height:100%;border:0}
+@media (max-width:700px){.pdfview{display:none}}
+/* donate */
+.don{display:grid;grid-template-columns:1fr 1.05fr;gap:clamp(36px,6vw,90px);align-items:start}
+.don .intro p{font-family:var(--display);font-size:clamp(22px,2.2vw,30px);line-height:1.35;margin:0 0 .8em}
+.don .intro .small{font-family:var(--body);font-size:16px;color:var(--mute)}
+.dcard{background:var(--paper2);border:1px solid rgba(180,141,69,.45);outline:1px solid rgba(180,141,69,.25);outline-offset:-8px;padding:clamp(24px,3.5vw,44px)}
+.dfreq{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--ink);margin-bottom:22px}
+.dfreq button{padding:12px;font-family:var(--lap);font-size:12px;letter-spacing:.18em;text-transform:uppercase;transition:all .25s}
+.dfreq button.on{background:var(--ink);color:var(--gold3)}
+.damts{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:22px}
+.damts button{padding:14px 8px;border:1px solid var(--line);background:var(--paper);font-family:var(--display);font-size:22px;transition:all .2s}
+.damts button.on{border-color:var(--crimson);background:var(--crimson);color:var(--gold3)}
+.damts input{grid-column:1/-1;font:inherit;font-size:18px;padding:12px 14px;border:1px solid var(--line);background:var(--paper);outline:none}
+.damts input:focus{border-color:var(--crimson)}
+.dpay{display:grid;gap:12px}
+.dpay button{display:flex;align-items:center;justify-content:center;gap:12px;padding:15px 18px;font-family:var(--lap);font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;transition:transform .2s,box-shadow .3s}
+.dpay button:hover{transform:translateY(-2px);box-shadow:0 14px 30px -18px rgba(0,0,0,.5)}
+.dpay .card{background:#635bff;color:#fff}
+.dpay .pp{background:#ffc439;color:#1a1a1a}
+.dpay img{height:20px;width:auto;margin:0}
+.dpay .card img{filter:brightness(0) invert(1)}
+.dmarks{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:center;margin:16px 0 4px}
+.dmarks img{height:20px;width:auto;opacity:.75}
+.dmsg{margin:14px 0 0;font-family:var(--display);font-style:italic;font-size:18px;color:var(--crimson)}
+.dmsg:empty{display:none}
+.dother{margin-top:34px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.dother div{border-top:2px solid var(--crimson);padding-top:14px}
+.dother h4{font-size:21px;margin:0 0 6px}
+.dother p{margin:0;font-size:15.5px;color:var(--ink3)}
+.dother a{color:var(--crimson)}
+@media (max-width:820px){.don{grid-template-columns:1fr}.dother{grid-template-columns:1fr}}
 /* person page */
 .prof{display:grid;grid-template-columns:minmax(260px,400px) 1fr;gap:clamp(40px,6vw,96px);align-items:start}
 .prof .portrait{position:sticky;top:110px}
@@ -585,6 +631,15 @@ footer.ft{background:#0e0d0b;color:rgba(246,241,231,.75);padding:60px 0 calc(64p
 .ft .base .dvw{display:none}
 @media (max-width:820px){.ft .base .dvw{display:inline}}
 html.dv .ft .base .dvw{display:inline}
+.nl{display:grid;grid-template-columns:1fr minmax(220px,340px) auto;gap:12px 18px;align-items:center;padding:24px 0;border-bottom:1px solid var(--line-d)}
+.nl h4{margin:0 0 4px!important}
+.nl p{margin:0;font-size:15px;color:rgba(246,241,231,.6)}
+.nl input{font:inherit;font-size:16px;padding:12px 14px;background:rgba(246,241,231,.06);border:1px solid rgba(214,184,120,.35);color:var(--paper);outline:none;min-width:0}
+.nl input:focus{border-color:var(--gold2)}
+.nl .btn{padding:13px 22px}
+.nlmsg{grid-column:1/-1;font-family:var(--display);font-style:italic;font-size:17px;color:var(--gold2)}
+.nlmsg:empty{display:none}
+@media (max-width:820px){.nl{grid-template-columns:1fr auto}.nl>div{grid-column:1/-1}}
 .ft .base{margin-top:30px;padding-top:26px;border-top:1px solid var(--line-d);display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;font-size:14px;color:rgba(246,241,231,.5)}
 .ft .base button{text-decoration:underline;text-underline-offset:3px;font-size:14px}
 #dv{display:none}
@@ -649,6 +704,7 @@ html.dv #dv{display:inline;font-size:28px;padding:10px 0}
     <a class="brand" href="#home" aria-label="International Catholic Jurists Forum, home"><img id="brandSeal" alt="" width="46" height="46"><span>International Catholic<b>Jurists Forum</b></span></a>
     <nav class="main" id="nav"></nav>
     <div class="tools">
+      <a class="donbtn" href="#donate">Donate</a>
       <button class="iconbtn" id="srchBtn" aria-label="Search the site"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg></button>
       <button class="iconbtn" id="menuBtn" aria-label="Open menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 8h16M4 16h16"/></svg></button>
     </div>
@@ -678,6 +734,10 @@ const ROM=n=>{const m=[[1000,'M'],[900,'CM'],[500,'D'],[400,'CD'],[100,'C'],[90,
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const fmtDate=d=>new Date(d+'T12:00:00').toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
 const YL=['Rome conference','ICOLF founded','Renamed ICJF'];
+// Online giving: paste the Forum's Stripe Payment Link and PayPal donate link here when ready.
+const DONATE={stripe:'',stripeMonthly:'',paypal:''};
+// Email list: paste a Mailchimp/Buttondown form action URL here when ready.
+const NEWSLETTER={action:''};
 const PILLARS=['LAW','LIFE','FAITH','FAMILY','FIDELITY','FREEDOM'];
 const ICON={ext:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 17 17 7M9 7h8v8"/></svg>',arrow:'<span class="ar">→</span>',search:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>',cross:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M10.6 2h2.8l-.5 6.4L19.3 7.9V10.7l-6.4-.5.5 11.8h-2.8l.5-11.8-6.4.5V7.9l6.4.5z"/></svg>'};
 const store={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
@@ -699,7 +759,7 @@ const chunk=n=>get(`data/n/${n}.json`), thumbs=n=>get(`data/n/t${n}.json`);
 function buildChrome(){
   $('#brandSeal').src=HERO.sealSmall;
   $('#nav').innerHTML=NAV.map(n=>n.kids?`<div><button class="nl" data-k="${n.k.join(' ')}" aria-haspopup="true">${n.t}</button><div class="dd">${n.kids.map(([t,s])=>`<a href="#${s}">${esc(t)}</a>`).join('')}</div></div>`:`<div><a class="nl" href="#${n.h}" data-k="${n.h}">${n.t}</a></div>`).join('');
-  $('#mm').innerHTML=`<a href="#home">Home</a>`+NAV.map(n=>n.kids?`<a href="#${n.kids[0][1]}">${n.t}</a>${n.kids.map(([t,s])=>`<a class="sub" href="#${s}">${esc(t)}</a>`).join('')}`:`<a href="#${n.h}">${n.t}</a>`).join('')+`<div class="mmfoot">${PILLARS.join(' · ')}</div>`;
+  $('#mm').innerHTML=`<a href="#home">Home</a>`+NAV.map(n=>n.kids?`<a href="#${n.kids[0][1]}">${n.t}</a>${n.kids.map(([t,s])=>`<a class="sub" href="#${s}">${esc(t)}</a>`).join('')}`:`<a href="#${n.h}">${n.t}</a>`).join('')+`<a href="#donate">Donate</a><a href="#" id="mmSearch">Search</a><div class="mmfoot">${PILLARS.join(' · ')}</div>`;
   $$('#mm a').forEach((a,i)=>a.style.transitionDelay=(0.15+i*0.03)+'s');
   const words=PILLARS.map(w=>`<span>${w}</span>`).join('');const mq=$('#mq');mq.innerHTML=words;
   requestAnimationFrame(()=>{const setW=mq.scrollWidth;let n=1;while(mq.scrollWidth<innerWidth+setW*1.2&&n<12){mq.insertAdjacentHTML('beforeend',words);n++}
@@ -707,14 +767,20 @@ function buildChrome(){
     const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
     if(!reduce){const tick=t=>{const dt=Math.min(64,t-last);last=t;x-=speed*dt/1000;if(-x>=setW)x+=setW;mq.style.transform=`translate3d(${x}px,0,0)`;requestAnimationFrame(tick)};requestAnimationFrame(tick)}});
   $('#ftcols').innerHTML=`<div class="ftop"><a class="fb" href="#home"><img src="${HERO.sealSmall}" alt=""><span>International Catholic<br>Jurists Forum</span></a><blockquote class="fq">“…a forum for Catholic jurists and scholars to study, research, and discuss important issues of the day related to attacks on the rights of the family, life, and religious freedom.”<a href="#what-we-stand-for">Mission Statement</a></blockquote></div>
-  <div class="fgroups">${[['About',[['How We Started','how-we-started'],['What We Stand For','what-we-stand-for'],['Who We Are','who-we-are'],['Charter of the Rights of the Family','charter-of-the-rights-of-the-family']]],
+  <form class="nl" id="nlForm" novalidate><div><h4>News from the Forum</h4><p>Conferences, books, and statements, sent occasionally.</p></div><label class="sr" for="nlEmail">Email</label><input id="nlEmail" type="email" placeholder="Your email address" autocomplete="email" required><button class="btn gold" type="submit">Subscribe</button><span class="nlmsg" role="status"></span></form>
+  <div class="fgroups">${[['About',[['How We Started','how-we-started'],['What We Stand For','what-we-stand-for'],['Who We Are','who-we-are'],['Charter of the Rights of the Family','charter-of-the-rights-of-the-family'],['Model Declaration','model-declaration-on-the-rights-of-the-family']]],
     ['Work',[['Projects','projects'],['Books','books'],['Conferences','conferences']]],
     ['Media',[['News','news'],['Podcasts','podcast-series'],['Media','media']]],
-    ['Resources',[['CEaSE RP','resources-2'],['Nigeria','resources-on-the-persecution-and-genocide-of-christians-in-nigeria'],['Contact','contact']]]]
+    ['Resources',[['CEaSE RP','resources-2'],['Nigeria','resources-on-the-persecution-and-genocide-of-christians-in-nigeria'],['Contact','contact'],['Donate','donate']]]]
     .map(([g,ls])=>`<div class="fg"><h4>${g}</h4><nav>${ls.map(([t,h])=>`<a href="#${h}">${t}</a>`).join('')}</nav></div>`).join('')}</div>`;
   $('#yr').textContent=new Date().getFullYear();
+  const nf=$('#nlForm');if(nf)nf.onsubmit=e=>{e.preventDefault();const em=$('#nlEmail',nf),m=$('.nlmsg',nf);
+    if(!em.checkValidity()){m.textContent='Please enter a valid email address.';return}
+    if(NEWSLETTER.action){const f=document.createElement('form');f.method='post';f.action=NEWSLETTER.action;f.target='_blank';f.innerHTML=`<input name="EMAIL" value="${esc(em.value)}"><input name="email" value="${esc(em.value)}">`;document.body.appendChild(f);f.submit();f.remove();m.textContent='Thank you. Please check your inbox to confirm.';em.value=''}
+    else m.textContent='Sign-up opens soon. For now, please write to us through the Contact page.'};
   $('#menuBtn').onclick=()=>toggleMenu();
   $('#srchBtn').onclick=()=>openPal();
+  $('#mmSearch').onclick=e=>{e.preventDefault();toggleMenu(false);openPal()};
   const dv=$('#dv'),on=document.documentElement.classList.contains('dv');
   dv.textContent=on?'View mobile version':'View desktop version';
   dv.onclick=()=>{store.set('icjf-dv',on?'':'1');
@@ -1163,6 +1229,35 @@ async function post(meta){
   $$('.art-meta .t').forEach(b=>b.onclick=()=>{newsState={q:'',tag:b.dataset.t,year:'',n:24};location.hash='news'});
   enhance(V);
 }
+function donate(){
+  darkTop=true;
+  const L=n=>`img/pay/${n}.svg`,col={stripe:'#635bff',paypal:'#003087',visa:'#1a1f71',mastercard:'#eb001b',americanexpress:'#2e77bc',applepay:'#000',googlepay:'#4285f4',venmo:'#3d95ce'};
+  V.innerHTML=phead('Support the Forum',{sub:'Give to the International Catholic Jurists Forum'})+`<section class="s wall"><div class="wrap"><div class="don">
+  <div class="intro rv"><p>Gifts to the Forum support its conferences, books, podcasts, and research on the rights of the family, life, and religious freedom.</p><p class="small">You can give once or monthly, by card or PayPal. Every gift goes to the work of the Forum.</p></div>
+  <div class="dcard rv d2">
+    <div class="dfreq"><button class="on" data-f="once">One time</button><button data-f="monthly">Monthly</button></div>
+    <div class="damts">${[25,50,100,250,500,1000].map((a,i)=>`<button data-a="${a}"${i===2?' class="on"':''}>$${a.toLocaleString()}</button>`).join('')}<input id="damt" inputmode="decimal" placeholder="Other amount ($)"></div>
+    <div class="dpay"><button class="card" data-p="stripe"><img src="${L('stripe')}" alt=""> Give by card</button><button class="pp" data-p="paypal"><img src="${L('paypal')}" alt=""> Give with PayPal</button></div>
+    <div class="dmarks">${['visa','mastercard','americanexpress','applepay','googlepay','venmo'].map(n=>`<img src="${L(n)}" alt="${n}" title="${n}">`).join('')}</div>
+    <p class="dmsg" role="status"></p>
+  </div></div>
+  <div class="dother">
+    <div class="rv"><h4>By check</h4><p>To give by mail, <a href="#contact">contact the Forum</a> for the mailing address.</p></div>
+    <div class="rv d1"><h4>Stock or donor-advised fund</h4><p>For gifts of stock or grants from a donor-advised fund, <a href="#contact">contact the Forum</a>.</p></div>
+    <div class="rv d2"><h4>Questions</h4><p>For questions about giving, please <a href="#contact">write to us</a>.</p></div>
+  </div></div></section>`;
+  // tint the monochrome brand marks
+  $$('.dmarks img').forEach(i=>{fetch(i.src).then(r=>r.text()).then(t=>{const n=i.alt;i.src='data:image/svg+xml;utf8,'+encodeURIComponent(t.replace('<svg','<svg fill="'+(col[n]||'#333')+'"'))}).catch(()=>{})});
+  let freq='once',amt=100;
+  $$('.dfreq button').forEach(b=>b.onclick=()=>{freq=b.dataset.f;$$('.dfreq button').forEach(x=>x.classList.toggle('on',x===b))});
+  $$('.damts button').forEach(b=>b.onclick=()=>{amt=+b.dataset.a;$('#damt').value='';$$('.damts button').forEach(x=>x.classList.toggle('on',x===b))});
+  $('#damt').oninput=e=>{const v=parseFloat(e.target.value.replace(/[^\d.]/g,''));if(v>0){amt=v;$$('.damts button').forEach(x=>x.classList.remove('on'))}};
+  $$('.dpay button').forEach(b=>b.onclick=()=>{const p=b.dataset.p,m=$('.dmsg');
+    const url=p==='stripe'?(freq==='monthly'&&DONATE.stripeMonthly||DONATE.stripe):DONATE.paypal;
+    if(!url){m.textContent='Online giving opens soon. In the meantime, please use the Contact page.';return}
+    const u=new URL(url);if(p==='paypal'){u.searchParams.set('amount',amt)}else if(!DONATE.stripeMonthly||freq==='once'){u.searchParams.set('__prefilled_amount',Math.round(amt*100))}
+    window.open(u.toString(),'_blank','noopener')});
+}
 function notFound(){darkTop=true;V.innerHTML=phead('Page not found')+`<section class="s"><div class="wrap" style="text-align:center"><p class="lede">That page isn't on this site.</p><p><a class="btn" href="#home">Home ${ICON.arrow}</a></p></div></section>`}
 
 /* ---------- router ---------- */
@@ -1173,6 +1268,7 @@ async function route(){
   try{
     if(s==='home')await home();
     else if(s==='news')await news();
+    else if(s==='donate')donate();
     else if(IDX.pages[s])await generic(s);
     else if(postBySlug[s])await post(postBySlug[s]);
     else notFound();
