@@ -825,14 +825,14 @@ async function home(){
     <div class="mission"><p class="big rv">${mission[0]||''}</p><div class="side rv d2">${mission.slice(1).map(p=>`<p>${p}</p>`).join('')}</div></div>
   </div></section>
 
-  <section class="s tint wall"><div class="wrap">
+  <section class="s tint"><div class="wrap">
     <div class="shead"><div><h2 class="h-l rv d1">${esc(h3s[1]?.textContent||'')}</h2></div></div>
     <div class="objectives">${objs.map((o,i)=>`<div class="obj rv d${i%3}" data-n="${ROM(i+1)}"><p>${o}</p></div>`).join('')}</div>
   </div></section>
 
   <div class="photoBand"><img data-par src="${HERO.hero[5].src}" alt=""><blockquote><p class="rv">${PILLARS.slice(0,3).map(w=>w[0]+w.slice(1).toLowerCase()).join(', ')},<br><em>${PILLARS.slice(3).map(w=>w[0]+w.slice(1).toLowerCase()).join(', ')}</em></p></blockquote></div>
 
-  <section class="s dark wall"><div class="wrap">
+  <section class="s dark"><div class="wrap">
     <div class="origins">
       <div class="years" id="years">${['2013','2014','2021'].map((y,i)=>`<div class="yr rv d${i}" data-y="${y}">${y}<small>${YL[i]}</small></div>`).join('')}</div>
       <div class="copy"><h2 class="h-l rv d1" style="margin-bottom:30px">${esc(hs.title)}</h2><ol class="ystrip rv">${['2013','2014','2021'].map((y,i)=>`<li><b>${y}</b><span>${YL[i]}</span></li>`).join('')}</ol>${origins.map((p,i)=>`<p class="rv d${i%3}" data-yrs="${(p.match(/\b20(13|14|21)\b/g)||[]).join(' ')}">${p}</p>`).join('')}<a class="more rv" href="#who-we-are" style="margin-top:14px">Who We Are ${ICON.arrow}</a></div>
@@ -844,7 +844,7 @@ async function home(){
     <div class="projects">${(pr.sections[0]?.cards||[]).map((c,i)=>{const m=c.title.match(/^(.*?):\s*(.*)$/);return `<a class="pcard rv d${i}" href="${esc(c.href)}"><img src="${c.img}" alt=""><div class="cap"><h3>${esc(m?m[1]:c.title)}${m?`<em>${esc(m[2])}</em>`:''}</h3></div></a>`}).join('')}</div>
   </div></section>
 
-  <section class="s tint"><div class="wrap">
+  <section class="s tint wall"><div class="wrap">
     <div class="shead"><div><h2 class="h-l rv d1">${esc(bk.title)}</h2></div><a class="more rv" href="#books">View all ${ICON.arrow}</a></div>
     <div class="shelf rv">${(bk.sections[0]?.cards||[]).map(bookCard).join('')}</div>
   </div></section>
