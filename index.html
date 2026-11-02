@@ -121,7 +121,7 @@ h1,h2,h3,h4{font-family:var(--display);font-weight:500;line-height:1.08;margin:0
 .hero .slides figure.on img,.hero .slides figure.out img{animation:kb 14s linear forwards}
 @keyframes kb{to{transform:scale(1.02)}}
 .hero::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(11,10,9,.15) 0%,rgba(11,10,9,.55) 60%,rgba(11,10,9,.92) 100%),linear-gradient(180deg,rgba(11,10,9,.55) 0%,transparent 30%,transparent 65%,rgba(11,10,9,.85) 100%)}
-.hero .inner{position:relative;z-index:2;text-align:center;padding:90px 20px 40px;display:flex;flex-direction:column;align-items:center}
+.hero .inner{position:relative;z-index:2;text-align:center;padding:calc(90px + env(safe-area-inset-top)) 20px clamp(80px,12vh,140px);display:flex;flex-direction:column;align-items:center}
 .sealwrap{position:relative;width:clamp(232px,23vw,290px);aspect-ratio:1;margin-bottom:28px}
 .sealwrap img{position:absolute;inset:19%;width:62%;height:62%;filter:drop-shadow(0 10px 40px rgba(0,0,0,.6));animation:sealIn 2s var(--ease) both}
 .sealwrap svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;animation:spin 80s linear infinite;filter:drop-shadow(0 4px 18px rgba(0,0,0,.45))}
