@@ -499,6 +499,9 @@ select.yr{font-family:var(--display);font-size:18px;background:transparent;borde
 .pl a:hover{background:var(--crimson);border-color:var(--crimson);color:var(--paper)}
 .pl a.pw::before{content:"▶ ";font-size:.85em}
 .pl a.pa::before{content:"♪ "}
+.pep .ptag{margin-left:auto;font-family:var(--lap);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold3);background:var(--ink);padding:4px 8px}
+.pmedia.pmsq{background:var(--ink)}
+.pmedia.pmsq img{width:100%;height:100%;object-fit:contain;margin:0!important;box-shadow:none!important}
 .pfoot{margin-top:22px}
 .pfoot a{font-family:var(--display);font-style:italic;font-size:19px;color:var(--crimson)}
 @media (max-width:520px){.pgrid{gap:16px}.pt{font-size:15px}}
@@ -889,7 +892,35 @@ function podcastify(prose){
   $$('.pep',frag).forEach(e=>{if(!$('.pmedia',e).childElementCount)$('.pmedia',e).remove()});
   prose.innerHTML='';prose.appendChild(frag);prose.classList.add('book','pods');prose.classList.remove('dropcap');
   $$('.pinfo',prose).forEach(i=>{const ps=$$('p',i);if(ps.length>2){const d=document.createElement('details');d.innerHTML='<summary>About this series</summary>';ps.slice(1).forEach(p=>d.appendChild(p));i.appendChild(d)}});
+  // newest first
+  $$('.pgrid',prose).forEach(g=>[...g.children].reverse().forEach(c=>g.appendChild(c)));
   $$('.pser',prose).forEach(sc=>{const c=$$('.pep',sc).length;sc.querySelector('h2').insertAdjacentHTML('beforeend',`<span class="pc">${c} episodes</span>`)});
+  podcastUpdates(prose);
+}
+// Pull any newer episodes straight from each series' Spreaker show, so the page stays current on its own.
+async function podcastUpdates(prose){
+  for(const sc of $$('.pser',prose)){
+    const links=$$('.pep a[href*="spreaker.com/episode/"]',sc);if(!links.length)continue;
+    const known=new Set(links.map(a=>(a.href.match(/--(\d+)\/?$/)||[])[1]).filter(Boolean));
+    try{
+      const one=[...known][0];
+      const ep=await fetch(`https://api.spreaker.com/v2/episodes/${one}`).then(r=>r.json());
+      const show=ep.response.episode.show_id;
+      const list=await fetch(`https://api.spreaker.com/v2/shows/${show}/episodes?limit=50&sorting=newest`).then(r=>r.json());
+      const maxN=Math.max(0,...$$('.pep .pnum',sc).map(x=>+x.textContent||0));
+      const fresh=list.response.items.filter(e=>{if(known.has(String(e.episode_id)))return false;const m=e.title.match(/^\s*Episode\s+(\d+)\s*:/i);return m&&+m[1]>maxN});
+      if(!fresh.length||!document.body.contains(sc))continue;
+      const grid=$('.pgrid',sc);
+      fresh.reverse().forEach(e=>{
+        const m=e.title.match(/^\s*Episode\s+(\d+)\s*:\s*(.*?)\s*(\(([^)]*)\))?\s*$/i);
+        const num=m?m[1]:'',title=m?m[2]:e.title,date=m&&m[4]?m[4]:new Date(e.published_at.replace(' ','T')+'Z').toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
+        const img=(e.image_original_url||e.image_url||'').replace(/t_square_limited_\d+/,'t_square_limited_720');
+        const card=document.createElement('article');card.className='pep pnew';
+        card.innerHTML=`<header><span class="pnum">${esc(num)}</span><span class="pd">${esc(date)}</span><span class="ptag">New</span></header>${img?`<div class="pmedia pmsq"><img src="${esc(img)}" alt="" loading="lazy"></div>`:''}<div class="pt"><p>${esc(title)}</p></div><div class="pl"><a class="pa" href="${esc(e.site_url)}" target="_blank" rel="noopener">Listen on Spreaker</a></div>`;
+        grid.prepend(card)});
+      const pc=$('h2 .pc',sc);if(pc)pc.textContent=`${$$('.pep',sc).length} episodes`;
+    }catch(err){/* offline or API change: the page simply shows the listed episodes */}
+  }
 }
 function memorial(prose){
   const items=[];let name=null;
