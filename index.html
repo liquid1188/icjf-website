@@ -206,14 +206,24 @@ section.s.tint{background:var(--paper2)}
 .pcard .cap h3{font-size:clamp(23px,2vw,29px);line-height:1.12}
 .pcard .cap h3 em{display:block;font-size:.7em;color:var(--gold3);margin-top:6px}
 
-.shelf{display:flex;gap:clamp(22px,3vw,40px);overflow-x:auto;scroll-snap-type:x mandatory;padding:20px 4px 40px;scrollbar-width:thin;scrollbar-color:var(--gold) transparent;perspective:1400px}
-.book{flex:0 0 clamp(170px,17vw,220px);scroll-snap-align:start;text-decoration:none;color:inherit}
-.book .cv{position:relative;transform-style:preserve-3d;transform:rotateY(-18deg);transition:transform .9s var(--ease);box-shadow:18px 22px 40px -18px rgba(0,0,0,.55);background:#ddd}
+.book .cv{position:relative;box-shadow:18px 22px 40px -18px rgba(0,0,0,.55);background:#ddd}
 .book .cv::before{content:"";position:absolute;top:0;bottom:0;left:0;width:9px;background:linear-gradient(90deg,rgba(0,0,0,.35),rgba(255,255,255,.18),rgba(0,0,0,.1));z-index:2}
 .book .cv::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,rgba(255,255,255,.22) 0%,transparent 35%,transparent 70%,rgba(0,0,0,.12));pointer-events:none}
-.book .cv img{width:100%;aspect-ratio:2/3;object-fit:cover}
-.book:hover .cv{transform:rotateY(0) translateY(-8px)}
-.book h4{font-family:var(--display);font-size:18.5px;line-height:1.25;margin:20px 0 0;font-weight:500}
+.book .cv img{width:100%;height:auto;max-height:calc(var(--bw)*1.25);object-fit:contain;background:#fff}
+.book h4{font-family:var(--display);font-size:19px;line-height:1.25;margin:22px 0 0;min-height:4.9em;font-weight:500;text-align:center;opacity:0;transform:translateY(6px);transition:opacity .5s,transform .5s var(--ease)}
+.book.cur h4{opacity:1;transform:none}
+.cflow{position:relative;perspective:1600px;margin-top:10px}
+.cflow .shelf{display:flex;gap:clamp(6px,1.5vw,18px);overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;align-items:flex-end;padding:30px calc(50% - var(--bw)/2) 20px;--bw:clamp(230px,25vw,330px);transform-style:preserve-3d;-webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
+.cflow .shelf::-webkit-scrollbar{display:none}
+.cflow .book{flex:0 0 var(--bw);align-self:flex-start;display:flex;flex-direction:column;justify-content:flex-end;min-height:calc(var(--bw)*1.25 + 70px);scroll-snap-align:center;text-decoration:none;color:inherit;transition:transform .45s var(--ease),opacity .45s,filter .45s;will-change:transform}
+.cf-btn{position:absolute;top:calc(30px + var(--bw,200px)*.6);transform:translateY(-50%);z-index:5;width:52px;height:52px;border-radius:50%;background:var(--paper);border:1px solid var(--gold);color:var(--crimson);font-size:20px;box-shadow:0 10px 30px -14px rgba(0,0,0,.5);transition:background .3s,color .3s}
+.cf-btn:hover{background:var(--crimson);color:var(--paper);border-color:var(--crimson)}
+.cf-prev{left:clamp(0px,2vw,20px)}.cf-next{right:clamp(0px,2vw,20px)}
+.cflow{--bw:clamp(230px,25vw,330px)}
+.cf-dots{display:flex;justify-content:center;gap:9px;margin-top:6px}
+.cf-dots button{width:8px;height:8px;border-radius:50%;background:rgba(21,19,15,.2);transition:all .3s;padding:0}
+.cf-dots button.on{background:var(--crimson);width:24px;border-radius:5px}
+@media (max-width:620px){.cf-btn{width:42px;height:42px;font-size:17px}}
 
 .grid-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:clamp(18px,2vw,28px)}
 .tcard{display:flex;flex-direction:column;text-decoration:none;color:inherit;background:var(--paper);border:1px solid var(--line);transition:transform .6s var(--ease),box-shadow .6s,border-color .6s;position:relative}
@@ -848,7 +858,7 @@ async function home(){
 
   <section class="s tint wall"><div class="wrap">
     <div class="shead"><div><h2 class="h-l rv d1">${esc(bk.title)}</h2></div><a class="more rv" href="#books">View all ${ICON.arrow}</a></div>
-    <div class="shelf rv">${(bk.sections[0]?.cards||[]).map(bookCard).join('')}</div>
+    <div class="cflow rv"><button class="cf-btn cf-prev" aria-label="Previous book">←</button><div class="shelf" id="shelf">${(bk.sections[0]?.cards||[]).map(bookCard).join('')}</div><button class="cf-btn cf-next" aria-label="Next book">→</button><div class="cf-dots" id="cfDots"></div></div>
   </div></section>
 
   <section class="s dark"><div class="wrap">
@@ -881,9 +891,31 @@ async function home(){
   </div></section>`;
   enhance(V);
   startHero();
+  coverflow();
   // light the year that matches the paragraph in view
   const yio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){const ys=e.target.dataset.yrs.split(' ');$$('#years .yr').forEach(y=>y.classList.toggle('on',ys.includes(y.dataset.y)))}}),{rootMargin:'-40% 0px -40% 0px'});
   $$('[data-yrs]').forEach(p=>p.dataset.yrs&&yio.observe(p));
+}
+function coverflow(){
+  const sh=$('#shelf');if(!sh)return;const bs=$$('.book',sh),dots=$('#cfDots');
+  dots.innerHTML=bs.map((_,i)=>`<button aria-label="Book ${i+1}"></button>`).join('');const ds=$$('button',dots);
+  let cur=0;
+  const update=()=>{const c=sh.scrollLeft+sh.clientWidth/2;let best=0,bd=1e9;
+    bs.forEach((b,i)=>{const bc=b.offsetLeft+b.offsetWidth/2,d=(bc-c)/b.offsetWidth,a=Math.min(Math.abs(d),3);
+      if(Math.abs(d)<bd){bd=Math.abs(d);best=i}
+      b.style.transform=`translateZ(${-a*90}px) rotateY(${Math.max(-1,Math.min(1,d))*-32}deg) scale(${1-Math.min(a,2)*.09})`;
+      b.style.opacity=String(1-Math.min(a,2.5)*.22);b.style.zIndex=String(100-Math.round(a*10));});
+    if(best!==cur||!bs[cur].classList.contains('cur')){bs.forEach((b,i)=>b.classList.toggle('cur',i===best));ds.forEach((d,i)=>d.classList.toggle('on',i===best));cur=best}};
+  const go=i=>{i=(i+bs.length)%bs.length;const b=bs[i];sh.scrollTo({left:b.offsetLeft+b.offsetWidth/2-sh.clientWidth/2,behavior:'smooth'})};
+  let raf=0;sh.addEventListener('scroll',()=>{cancelAnimationFrame(raf);raf=requestAnimationFrame(update)},{passive:true});
+  $('.cf-prev').onclick=()=>{pause();go(cur-1)};$('.cf-next').onclick=()=>{pause();go(cur+1)};
+  ds.forEach((d,i)=>d.onclick=()=>{pause();go(i)});
+  bs.forEach((b,i)=>b.addEventListener('click',e=>{if(i!==cur){e.preventDefault();pause();go(i)}}));
+  let timer=null,idle=null;const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const play=()=>{if(reduce)return;clearInterval(timer);timer=setInterval(()=>{if(!document.body.contains(sh))return clearInterval(timer);go(cur+1)},4800)};
+  const pause=()=>{clearInterval(timer);clearTimeout(idle);idle=setTimeout(play,9000)};
+  ['pointerenter','touchstart','focusin','wheel'].forEach(ev=>sh.parentElement.addEventListener(ev,pause,{passive:true}));
+  requestAnimationFrame(()=>{sh.scrollLeft=0;update();play()});addEventListener('resize',update);
 }
 let heroT;
 function startHero(){
