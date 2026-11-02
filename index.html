@@ -376,6 +376,9 @@ select.yr{font-family:var(--display);font-size:18px;background:transparent;borde
 .prose h4,.prose h5,.prose h6{font-size:22px;margin:1.4em 0 .4em;font-style:italic;color:var(--crimson);font-weight:500}
 .prose a{color:var(--crimson);text-decoration-color:rgba(140,28,37,.35);text-underline-offset:3px;text-decoration-thickness:1px;transition:text-decoration-color .3s}
 .prose a:hover{text-decoration-color:var(--crimson)}
+a.orgl{color:inherit;text-decoration:underline;text-decoration-color:rgba(180,141,69,.6);text-underline-offset:3px;text-decoration-thickness:1px}
+a.orgl:hover{color:var(--crimson);text-decoration-color:var(--crimson)}
+.dark a.orgl:hover,.s.dark a.orgl:hover{color:var(--gold3)}
 .prose ul,.prose ol{padding-left:1.3em;margin:0 0 1.2em}
 .prose li{margin:.35em 0}
 .prose ul{list-style:none;padding-left:1.4em}
@@ -745,6 +748,47 @@ const NEWSLETTER={action:''};
 const FOCUS=[50,55,45,38,40,50,45,32,42,45,40,45,40,40,50,50];
 const PAGEPHOTO={'how-we-started':1,'what-we-stand-for':9,'who-we-are':10,'projects':3,'books':0,'conferences':14,'news':8,'resources-2':6,'resources-on-the-persecution-and-genocide-of-christians-in-nigeria':11,'mug-shots-of-martyred-priests':13,'petition-against-religious-persecution-in-nigeria':12,'media':15,'podcast-series':2,'contact':4,'donate':7,'charter-of-the-rights-of-the-family':5,'model-declaration-on-the-rights-of-the-family':5};
 const photoFor=(key,title)=>{if(key in PAGEPHOTO)return PAGEPHOTO[key];let h=0;for(const c of (key||title))h=(h*31+c.charCodeAt(0))>>>0;return h%HERO.hero.length};
+// Organizations named in the Forum's text, linked on first mention per page (wording unchanged).
+const ORGS=[
+ [/International Center on Law, Life,? Faith and Family|\bICOLF\b/,'https://web.archive.org/web/2016/http://icolf.org/'],
+ [/En Route Books (?:&|&amp;|and) Media/,'https://enroutebooksandmedia.com/'],
+ [/WCAT Radio/,'https://www.wcatradio.com/'],
+ [/Ave Maria School of Law/,'https://www.avemarialaw.edu/'],
+ [/Pontifical Council for the Family/,'https://www.vatican.va/roman_curia/pontifical_councils/family/index.htm'],
+ [/Dicastery for (?:the )?Laity,? (?:the )?Family and Life/,'https://www.laityfamilylife.va/'],
+ [/(?:International )?Union of Catholic Jurists|Union Internationale des Juristes Catholiques/,'https://www.laityfamilylife.va/content/laityfamilylife/en/associazioni-e-movimenti/repertorio/unione-internazionale-dei-giuristi-cattolici.html'],
+ [/Cardinal Stefan Wyszy[nń]ski University(?: in Warsaw)?/,'https://uksw.edu.pl/en/'],
+ [/Jagiellonian University/,'https://en.uj.edu.pl/'],
+ [/Ralston College/,'https://www.ralston.ac/'],
+ [/(?:The )?Ruth Institute/,'https://ruthinstitute.org/'],
+ [/Center for Family and Human Rights|\bC-Fam\b/,'https://c-fam.org/'],
+ [/Ethics and Public Policy Center/,'https://eppc.org/'],
+ [/Catholic Information Center/,'https://cicdc.org/'],
+ [/Franciscan University of Steubenville|University of Steubenville/,'https://franciscan.edu/'],
+ [/Christ Medicus Foundation/,'https://christmedicus.org/'],
+ [/Sacred Heart Major Seminary/,'https://www.shms.edu/'],
+ [/Aid to the Church in Need/,'https://www.churchinneed.org/'],
+ [/Open Doors International/,'https://www.opendoors.org/'],
+ [/University of Notre Dame,? (?:School of Law,? )?Sydney/,'https://www.notredame.edu.au/'],
+ [/Global Liberty Alliance/,'https://globallibertyalliance.org/']];
+function linkOrgs(root){
+  const done=new Set();
+  $$('a[href]',root).forEach(a=>ORGS.forEach(([re,u],i)=>{if(a.href.startsWith(u)||re.test(a.textContent))done.add(i)}));
+  const scopes=$$('.prose, .tli .b, .pinfo, .pt, .mission, .origins .copy, .pod .podcopy',root);
+  for(const sc of scopes){
+    const w=document.createTreeWalker(sc,NodeFilter.SHOW_TEXT,{acceptNode:n=>n.parentElement.closest('a,button,h1,script,style,.btn')?NodeFilter.FILTER_REJECT:NodeFilter.FILTER_ACCEPT});
+    const nodes=[];while(w.nextNode())nodes.push(w.currentNode);
+    for(let node of nodes){
+      ORGS.forEach(([re,u],i)=>{
+        if(done.has(i)||!node||!node.parentNode)return;
+        const m=node.textContent.match(re);if(!m)return;
+        const after=node.splitText(m.index);const rest=after.splitText(m[0].length);
+        const a=document.createElement('a');a.href=u;a.target='_blank';a.rel='noopener';a.className='orgl';a.textContent=m[0];
+        after.replaceWith(a);done.add(i);node=rest;
+      });
+    }
+  }
+}
 const PILLARS=['LAW','LIFE','FAITH','FAMILY','FIDELITY','FREEDOM'];
 const ICON={ext:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 17 17 7M9 7h8v8"/></svg>',arrow:'<span class="ar">→</span>',search:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>',cross:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M10.6 2h2.8l-.5 6.4L19.3 7.9V10.7l-6.4-.5.5 11.8h-2.8l.5-11.8-6.4.5V7.9l6.4.5z"/></svg>'};
 const store={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
@@ -817,6 +861,7 @@ const CAN_EMBED=!/claude\.ai|claudeusercontent|anthropic/.test(location.hostname
 const ytId=u=>{const m=String(u).match(/(?:youtube(?:-nocookie)?\.com\/(?:embed\/|watch\?(?:.*&)?v=|live\/|shorts\/)|youtu\.be\/)([\w-]{11})/);return m?m[1]:null};
 const player=(id,title='')=>`<div class="player"><iframe src="https://www.youtube-nocookie.com/embed/${id}?rel=0&modestbranding=1" title="${esc(title||'Video')}" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>`;
 function enhance(root){
+  try{linkOrgs(root)}catch(e){}
   $$('[data-embed]',root).forEach(d=>{
     const yt=d.dataset.yt,src=d.dataset.embed,t=d.dataset.title||'';
     const href=yt?`https://www.youtube.com/watch?v=${yt}`:src.replace('/embed/','/');
@@ -1158,6 +1203,7 @@ async function generic(s){
   if(p.kind==='person')return person(p);
   if(p.kind==='timeline'){
     V.innerHTML=phead(p.title,{crumbs})+`<section class="s"><div class="wrap">${p.html?`<div class="prose">${p.html}</div>`:''}<div class="tl">${tlItems(p.items)}</div></div></section>`;
+    enhance(V);
     return;
   }
   if(p.kind==='tiles'){
