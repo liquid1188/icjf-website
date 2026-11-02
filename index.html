@@ -176,7 +176,7 @@ section.s.tint{background:var(--paper2)}
 
 .origins{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(40px,7vw,100px);align-items:center}
 .origins .years{position:relative;display:flex;flex-direction:column;gap:6px}
-.origins .yr{font-family:var(--lap);font-size:clamp(64px,9vw,128px);line-height:.95;color:transparent;-webkit-text-stroke:1px rgba(214,184,120,.45);transition:all .8s var(--ease);cursor:default}
+.origins .yr{font-family:var(--lap);font-size:clamp(64px,9vw,128px);line-height:.95;color:transparent;-webkit-text-stroke:1px rgba(214,184,120,.45);transition:color .6s ease,-webkit-text-stroke-color .6s ease;cursor:default}
 .origins .yr small{display:block;font-family:var(--display);font-style:italic;-webkit-text-stroke:0;color:var(--gold2);font-size:19px;letter-spacing:0;margin:-4px 0 14px 6px}
 .origins .yr.on{color:var(--gold2);-webkit-text-stroke-color:transparent}
 .origins .copy p{font-size:18px;line-height:1.75;color:rgba(246,241,231,.82);margin:0 0 1.3em;text-wrap:pretty}
@@ -210,17 +210,20 @@ section.s.tint{background:var(--paper2)}
 .book .cv::before{content:"";position:absolute;top:0;bottom:0;left:0;width:9px;background:linear-gradient(90deg,rgba(0,0,0,.35),rgba(255,255,255,.18),rgba(0,0,0,.1));z-index:2}
 .book .cv::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,rgba(255,255,255,.22) 0%,transparent 35%,transparent 70%,rgba(0,0,0,.12));pointer-events:none}
 .book .cv img{width:100%;height:auto;max-height:calc(var(--bw)*1.25);object-fit:contain;background:#fff}
-.book h4{font-family:var(--display);font-size:19px;line-height:1.25;margin:22px 0 0;min-height:4.9em;font-weight:500;text-align:center;opacity:0;transform:translateY(6px);transition:opacity .5s,transform .5s var(--ease)}
+.book h4{font-family:var(--display);font-size:17px;line-height:1.25;margin:14px 0 0;min-height:3.75em;font-weight:500;text-align:center;opacity:0;transform:translateY(6px);transition:opacity .5s,transform .5s var(--ease)}
 .book.cur h4{opacity:1;transform:none}
 .cflow{position:relative;perspective:1600px;margin-top:10px}
-.cflow .shelf{display:flex;gap:clamp(6px,1.5vw,18px);overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;align-items:flex-end;padding:30px calc(50% - var(--bw)/2) 20px;--bw:clamp(230px,25vw,330px);transform-style:preserve-3d;-webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
+.cflow .shelf{display:flex;gap:clamp(10px,1.6vw,24px);overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;align-items:flex-end;padding:10px calc(50% - var(--bw)/2) 6px;--bw:clamp(170px,15vw,220px);transform-style:preserve-3d;-webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
 .cflow .shelf::-webkit-scrollbar{display:none}
-.cflow .book{flex:0 0 var(--bw);align-self:flex-start;display:flex;flex-direction:column;justify-content:flex-end;min-height:calc(var(--bw)*1.25 + 70px);scroll-snap-align:center;text-decoration:none;color:inherit;transition:transform .45s var(--ease),opacity .45s,filter .45s;will-change:transform}
-.cf-btn{position:absolute;top:calc(30px + var(--bw,200px)*.6);transform:translateY(-50%);z-index:5;width:52px;height:52px;border-radius:50%;background:var(--paper);border:1px solid var(--gold);color:var(--crimson);font-size:20px;box-shadow:0 10px 30px -14px rgba(0,0,0,.5);transition:background .3s,color .3s}
+.cflow .book{flex:0 0 var(--bw);align-self:flex-start;display:flex;flex-direction:column;justify-content:flex-end;min-height:calc(var(--bw)*1.25 + 10px);scroll-snap-align:center;text-decoration:none;color:inherit;transition:transform .45s var(--ease),opacity .45s,filter .45s;will-change:transform}
+.cf-btn{position:absolute;top:calc(10px + var(--bw,200px)*.55);transform:translateY(-50%);z-index:5;width:52px;height:52px;border-radius:50%;background:var(--paper);border:1px solid var(--gold);color:var(--crimson);font-size:20px;box-shadow:0 10px 30px -14px rgba(0,0,0,.5);transition:background .3s,color .3s}
 .cf-btn:hover{background:var(--crimson);color:var(--paper);border-color:var(--crimson)}
 .cf-prev{left:clamp(0px,2vw,20px)}.cf-next{right:clamp(0px,2vw,20px)}
-.cflow{--bw:clamp(230px,25vw,330px)}
-.cf-dots{display:flex;justify-content:center;gap:9px;margin-top:6px}
+.cflow{--bw:clamp(170px,15vw,220px)}
+.cf-dots{display:flex;justify-content:center;gap:9px;margin-top:0}
+.s.bks{padding:clamp(56px,7vw,96px) 0}
+.s.bks .shead{margin-bottom:clamp(14px,2vw,24px)}
+@media (max-width:620px){.cflow{--bw:200px}}
 .cf-dots button{width:8px;height:8px;border-radius:50%;background:rgba(21,19,15,.2);transition:all .3s;padding:0}
 .cf-dots button.on{background:var(--crimson);width:24px;border-radius:5px}
 @media (max-width:620px){.cf-btn{width:42px;height:42px;font-size:17px}}
@@ -954,7 +957,7 @@ async function home(){
     <div class="projects">${(pr.sections[0]?.cards||[]).map((c,i)=>{const m=c.title.match(/^(.*?):\s*(.*)$/);return `<a class="pcard rv d${i}" href="${esc(c.href)}"><img src="${c.img}" alt=""><div class="cap"><h3>${esc(m?m[1]:c.title)}${m?`<em>${esc(m[2])}</em>`:''}</h3></div></a>`}).join('')}</div>
   </div></section>
 
-  <section class="s tint wall"><div class="wrap">
+  <section class="s tint wall bks"><div class="wrap">
     <div class="shead"><div><h2 class="h-l rv d1">${esc(bk.title)}</h2></div><a class="more rv" href="#books">View all ${ICON.arrow}</a></div>
     <div class="cflow rv"><button class="cf-btn cf-prev" aria-label="Previous book">←</button><div class="shelf" id="shelf">${(bk.sections[0]?.cards||[]).map(bookCard).join('')}</div><button class="cf-btn cf-next" aria-label="Next book">→</button><div class="cf-dots" id="cfDots"></div></div>
   </div></section>
@@ -990,9 +993,13 @@ async function home(){
   enhance(V);
   startHero();
   coverflow();
-  // light the year that matches the paragraph in view
-  const yio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){const ys=e.target.dataset.yrs.split(' ');$$('#years .yr').forEach(y=>y.classList.toggle('on',ys.includes(y.dataset.y)))}}),{rootMargin:'-40% 0px -40% 0px'});
-  $$('[data-yrs]').forEach(p=>p.dataset.yrs&&yio.observe(p));
+  // light the years one after another as the section scrolls past; each stays lit
+  const yrs=$$('#years .yr'),org=$('.origins');
+  const lightYears=()=>{if(!document.body.contains(org))return removeEventListener('scroll',lightYears);
+    const r=org.getBoundingClientRect(),p=(innerHeight*.75-r.top)/(r.height*.8);
+    const n=Math.max(0,Math.min(yrs.length,Math.floor(p*yrs.length)+1*(p>0)));
+    yrs.forEach((y,i)=>y.classList.toggle('on',i<n))};
+  addEventListener('scroll',lightYears,{passive:true});lightYears();
 }
 function coverflow(){
   const sh=$('#shelf');if(!sh)return;const bs=$$('.book',sh),dots=$('#cfDots');
@@ -1001,8 +1008,8 @@ function coverflow(){
   const update=()=>{const c=sh.scrollLeft+sh.clientWidth/2;let best=0,bd=1e9;
     bs.forEach((b,i)=>{const bc=b.offsetLeft+b.offsetWidth/2,d=(bc-c)/b.offsetWidth,a=Math.min(Math.abs(d),3);
       if(Math.abs(d)<bd){bd=Math.abs(d);best=i}
-      b.style.transform=`translateZ(${-a*90}px) rotateY(${Math.max(-1,Math.min(1,d))*-32}deg) scale(${1-Math.min(a,2)*.09})`;
-      b.style.opacity=String(1-Math.min(a,2.5)*.22);b.style.zIndex=String(100-Math.round(a*10));});
+      b.style.transform=`translateZ(${-a*60}px) rotateY(${Math.max(-1,Math.min(1,d))*-24}deg) scale(${1-Math.min(a,3)*.07})`;
+      b.style.opacity=String(1-Math.min(a,3)*.16);b.style.zIndex=String(100-Math.round(a*10));});
     if(best!==cur||!bs[cur].classList.contains('cur')){bs.forEach((b,i)=>b.classList.toggle('cur',i===best));ds.forEach((d,i)=>d.classList.toggle('on',i===best));cur=best}};
   const go=i=>{i=(i+bs.length)%bs.length;const b=bs[i];sh.scrollTo({left:b.offsetLeft+b.offsetWidth/2-sh.clientWidth/2,behavior:'smooth'})};
   let raf=0;sh.addEventListener('scroll',()=>{cancelAnimationFrame(raf);raf=requestAnimationFrame(update)},{passive:true});
@@ -1013,7 +1020,7 @@ function coverflow(){
   const play=()=>{if(reduce)return;clearInterval(timer);timer=setInterval(()=>{if(!document.body.contains(sh))return clearInterval(timer);go(cur+1)},4800)};
   const pause=()=>{clearInterval(timer);clearTimeout(idle);idle=setTimeout(play,9000)};
   ['pointerenter','touchstart','focusin','wheel'].forEach(ev=>sh.parentElement.addEventListener(ev,pause,{passive:true}));
-  requestAnimationFrame(()=>{sh.scrollLeft=0;update();play()});addEventListener('resize',update);
+  requestAnimationFrame(()=>{const st=Math.min(2,bs.length-1),b0=bs[st];sh.scrollLeft=b0.offsetLeft+b0.offsetWidth/2-sh.clientWidth/2;update();play()});addEventListener('resize',update);
 }
 let heroT;
 function startHero(){
