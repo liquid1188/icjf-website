@@ -574,6 +574,10 @@ footer.ft{background:#0e0d0b;color:rgba(246,241,231,.75);padding:60px 0 calc(64p
 .ft .fb img{width:54px;height:54px}
 .ft .fb span{font-family:var(--lap);letter-spacing:.14em;font-size:14px;color:var(--paper);line-height:1.4}
 .ft .motto{font-family:var(--display);font-style:italic;font-size:clamp(14px,1.5vw,19px);white-space:nowrap;color:var(--gold2);margin:0}
+.fq{margin:0;max-width:540px;font-family:var(--display);font-style:italic;font-size:clamp(16px,1.35vw,19px);line-height:1.45;color:rgba(239,224,187,.82);border-left:1px solid rgba(214,184,120,.45);padding-left:22px;text-wrap:pretty}
+.fq a{display:block!important;margin-top:8px;font-style:normal;font-family:var(--lap);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)!important;padding:0!important}
+.ft .credit a{display:inline!important;padding:0!important;color:rgba(239,224,187,.8);text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(214,184,120,.4)}
+.ft .credit a:hover{color:var(--gold3)}
 .ft .base{margin-top:30px;padding-top:26px;border-top:1px solid var(--line-d);display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;font-size:14px;color:rgba(246,241,231,.5)}
 .ft .base button{text-decoration:underline;text-underline-offset:3px;font-size:14px}
 #dv{display:none}
@@ -648,7 +652,7 @@ html.dv #dv{display:inline;font-size:28px;padding:10px 0}
 <footer class="ft">
   <div class="wrap">
     <div id="ftcols"></div>
-    <div class="base"><span>© <span id="yr"></span> International Catholic Jurists Forum</span><span><button id="dv">View desktop version</button></span></div>
+    <div class="base"><span>© <span id="yr"></span> International Catholic Jurists Forum</span><span class="credit">Site by <a href="https://lickitysplitweb.com" target="_blank" rel="noopener">Lickity Split Web Design</a></span><span><button id="dv">View desktop version</button></span></div>
   </div>
 </footer>
 <div id="pal" role="dialog" aria-label="Search">
@@ -694,7 +698,7 @@ function buildChrome(){
     let x=0,last=performance.now();const speed=38;
     const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
     if(!reduce){const tick=t=>{const dt=Math.min(64,t-last);last=t;x-=speed*dt/1000;if(-x>=setW)x+=setW;mq.style.transform=`translate3d(${x}px,0,0)`;requestAnimationFrame(tick)};requestAnimationFrame(tick)}});
-  $('#ftcols').innerHTML=`<div class="ftop"><a class="fb" href="#home"><img src="${HERO.sealSmall}" alt=""><span>International Catholic<br>Jurists Forum</span></a></div>
+  $('#ftcols').innerHTML=`<div class="ftop"><a class="fb" href="#home"><img src="${HERO.sealSmall}" alt=""><span>International Catholic<br>Jurists Forum</span></a><blockquote class="fq">“…a forum for Catholic jurists and scholars to study, research, and discuss important issues of the day related to attacks on the rights of the family, life, and religious freedom.”<a href="#what-we-stand-for">Mission Statement</a></blockquote></div>
   <div class="fgroups">${[['About',[['How We Started','how-we-started'],['What We Stand For','what-we-stand-for'],['Who We Are','who-we-are'],['Charter of the Rights of the Family','charter-of-the-rights-of-the-family']]],
     ['Work',[['Projects','projects'],['Books','books'],['Conferences','conferences'],['Podcasts','podcast-series'],['Media','media'],['News','news']]],
     ['Resources',[['CEaSE RP','resources-2'],['Nigeria','resources-on-the-persecution-and-genocide-of-christians-in-nigeria'],['Contact','contact']]]]
