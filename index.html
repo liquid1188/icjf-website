@@ -190,7 +190,7 @@ section.s.tint{background:var(--paper2)}
 .photoBand{height:clamp(240px,40vw,520px);position:relative;overflow:hidden;background:#111}
 .photoBand img{width:100%;height:130%;object-fit:cover;filter:grayscale(1) contrast(1.1) brightness(.8);will-change:transform}
 .photoBand blockquote{position:absolute;inset:0;margin:0;display:grid;place-items:center;text-align:center;color:var(--paper);padding:20px;background:linear-gradient(0deg,rgba(11,10,9,.65),rgba(11,10,9,.25))}
-.photoBand blockquote p{font-family:var(--display);font-weight:300;font-size:clamp(28px,4.4vw,62px);line-height:1.1;max-width:20ch;margin:0}
+.photoBand blockquote p{font-family:var(--display);font-weight:300;font-size:clamp(26px,3.6vw,52px);line-height:1.15;max-width:24ch;margin:0;text-wrap:balance}
 .photoBand blockquote p em{color:var(--gold3)}
 
 /* cards */
@@ -694,7 +694,7 @@ function buildChrome(){
     let x=0,last=performance.now();const speed=38;
     const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
     if(!reduce){const tick=t=>{const dt=Math.min(64,t-last);last=t;x-=speed*dt/1000;if(-x>=setW)x+=setW;mq.style.transform=`translate3d(${x}px,0,0)`;requestAnimationFrame(tick)};requestAnimationFrame(tick)}});
-  $('#ftcols').innerHTML=`<div class="ftop"><a class="fb" href="#home"><img src="${HERO.sealSmall}" alt=""><span>International Catholic<br>Jurists Forum</span></a><p class="motto">${PILLARS.map(w=>w[0]+w.slice(1).toLowerCase()).join(' · ')}</p></div>
+  $('#ftcols').innerHTML=`<div class="ftop"><a class="fb" href="#home"><img src="${HERO.sealSmall}" alt=""><span>International Catholic<br>Jurists Forum</span></a></div>
   <div class="fgroups">${[['About',[['How We Started','how-we-started'],['What We Stand For','what-we-stand-for'],['Who We Are','who-we-are'],['Charter of the Rights of the Family','charter-of-the-rights-of-the-family']]],
     ['Work',[['Projects','projects'],['Books','books'],['Conferences','conferences'],['Podcasts','podcast-series'],['Media','media'],['News','news']]],
     ['Resources',[['CEaSE RP','resources-2'],['Nigeria','resources-on-the-persecution-and-genocide-of-christians-in-nigeria'],['Contact','contact']]]]
@@ -948,7 +948,7 @@ async function home(){
     <div class="objectives">${objs.map((o,i)=>`<div class="obj rv d${i%3}" data-n="${ROM(i+1)}"><p>${o}</p></div>`).join('')}</div>
   </div></section>
 
-  <div class="photoBand"><img data-par src="${HERO.hero[5].src}" alt=""><blockquote><p class="rv">${PILLARS.slice(0,3).map(w=>w[0]+w.slice(1).toLowerCase()).join(', ')},<br><em>${PILLARS.slice(3).map(w=>w[0]+w.slice(1).toLowerCase()).join(', ')}</em></p></blockquote></div>
+  <div class="photoBand"><img data-par src="${HERO.hero[5].src}" alt=""><blockquote><p class="rv">${(()=>{const t=(mission.join(' ').replace(/<[^>]+>/g,'').match(/Founded on a natural law perspective of human rights within the Catholic Intellectual Tradition/)||[''])[0];return t?t.replace('within the Catholic Intellectual Tradition','<em>within the Catholic Intellectual Tradition</em>'):''})()}</p></blockquote></div>
 
   <section class="s dark"><div class="wrap">
     <div class="origins">
