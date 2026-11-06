@@ -43,15 +43,15 @@ header.top.solid{background:var(--paper);box-shadow:0 1px 0 var(--line),0 10px 3
 header.top.solid .bar{height:68px}
 header.top.dark{color:var(--paper)}
 header.top.hide{transform:translateY(-100%)}
-.brand{display:flex;align-items:center;gap:12px;text-decoration:none;min-width:0}
-.brand img{width:46px;height:46px;transition:transform 1.2s var(--ease)}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;min-width:0;flex:none}.brand span{width:min-content}
+.brand img{width:64px;height:64px;transition:transform 1.2s var(--ease),width .4s var(--ease),height .4s var(--ease)}header.top.solid .brand img{width:52px;height:52px}
 .brand:hover img{transform:rotate(-14deg)}
 .brand span{font-family:var(--lap);font-size:13px;letter-spacing:.16em;line-height:1.25;font-weight:500}
 .brand span b{display:block;font-weight:600;font-size:15px;letter-spacing:.14em}
 nav.main{margin-left:auto;display:flex;align-items:center;gap:2px}
 nav.main>div{position:relative}
-nav.main a.nl,nav.main button.nl{display:block;padding:10px 13px;font-family:var(--display);font-size:19px;font-weight:500;text-decoration:none;position:relative;letter-spacing:.01em}
-nav.main a.nl::after,nav.main button.nl::after{content:"";position:absolute;left:13px;right:13px;bottom:6px;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .45s var(--ease)}
+nav.main a.nl,nav.main button.nl{display:block;padding:10px 10px;font-family:var(--display);font-size:19px;font-weight:500;text-decoration:none;position:relative;letter-spacing:.01em}
+nav.main a.nl::after,nav.main button.nl::after{content:"";position:absolute;left:10px;right:10px;bottom:6px;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .45s var(--ease)}
 nav.main .nl:hover::after,nav.main .nl.on::after{transform:scaleX(1)}
 nav.main .nl.on{color:var(--crimson)}
 header.dark nav.main .nl.on{color:var(--gold2)}
@@ -702,7 +702,7 @@ html.dv .dvrow{display:block}
 @media (max-width:520px){.fgroups{grid-template-columns:1fr 1fr;gap:22px 18px}.fg nav a{font-size:13.5px}.fg h4{font-size:16px!important}}
 @media (max-width:520px){
   footer.ft{padding:48px 0 calc(72px + env(safe-area-inset-bottom))}.ftop{gap:14px}.ft .motto{font-size:clamp(13px,4vw,16px)}.fg nav a{font-size:15px}.projects{grid-template-columns:1fr}.pcard{aspect-ratio:4/4.4}.people,.people.lead{grid-template-columns:1fr 1fr;gap:22px 14px}.person h3{font-size:18px}.hero .counter{display:none}}
-.tl .b .tl-media{margin-top:12px;font-size:.92em}.tl .b .tl-media a{text-decoration:underline;text-underline-offset:3px}.tl .b .tl-media .tl-k{display:block;text-decoration:none;font-size:.78em;letter-spacing:.1em;text-transform:uppercase;opacity:.65;text-decoration:none}.tl .b .tl-cov{display:flex;gap:16px;align-items:center;margin-top:16px;padding:12px;border:1px solid rgba(0,0,0,.12);background:rgba(255,255,255,.45);text-decoration:none;color:inherit;max-width:560px}.tl .b .tl-cov:hover{border-color:currentColor}.tl .b .tl-cov img{width:96px;height:72px;object-fit:cover;flex:none}.tl .b .tl-cov .tl-k{display:block;font-size:.72em;letter-spacing:.12em;text-transform:uppercase;opacity:.6;margin-bottom:4px}.tl .b .tl-cov>span{font-size:.95em;line-height:1.35}.tl .b .tl-more{margin-top:12px;font-size:.92em}.tl .b .tl-more a{text-decoration:underline;text-underline-offset:3px}.prose img.seal-img{box-shadow:none;background:none;border:0;width:170px;height:auto;filter:drop-shadow(0 10px 18px rgba(0,0,0,.22))}</style>
+.tl .b .tl-media{margin-top:12px;font-size:.92em}.tl .b .tl-media a{text-decoration:underline;text-underline-offset:3px}.tl .b .tl-media .tl-k{display:block;text-decoration:none;font-size:.78em;letter-spacing:.1em;text-transform:uppercase;opacity:.65;text-decoration:none}.tl .b .tl-cov{display:flex;gap:16px;align-items:center;margin-top:16px;padding:12px;border:1px solid rgba(0,0,0,.12);background:rgba(255,255,255,.45);text-decoration:none;color:inherit;max-width:560px}.tl .b .tl-cov:hover{border-color:currentColor}.tl .b .tl-cov img{width:96px;height:72px;object-fit:cover;flex:none}.tl .b .tl-cov .tl-k{display:block;font-size:.72em;letter-spacing:.12em;text-transform:uppercase;opacity:.6;margin-bottom:4px}.tl .b .tl-cov>span{font-size:.95em;line-height:1.35}.tl .b .tl-more{margin-top:12px;font-size:.92em}.tl .b .tl-more a{text-decoration:underline;text-underline-offset:3px}.prose img.seal-img{box-shadow:none;background:none;border:0;width:170px;height:auto;filter:drop-shadow(0 10px 18px rgba(0,0,0,.22))}@media (max-width:1240px) and (min-width:1101px){nav.main a.nl,nav.main button.nl{font-size:17px;padding:10px 8px}.brand img{width:56px;height:56px}}</style>
 </head>
 <body>
 <div id="progress"></div>
@@ -821,8 +821,8 @@ function buildChrome(){
   <form class="nl" id="nlForm" novalidate><div><h4>News from the Forum</h4><p>Conferences, books, and statements, sent occasionally.</p></div><label class="sr" for="nlEmail">Email</label><input id="nlEmail" type="email" placeholder="Your email address" autocomplete="email" required><button class="btn gold" type="submit">Subscribe</button><span class="nlmsg" role="status"></span></form>
   <div class="fgroups">${[['About',[['How We Started','how-we-started'],['What We Stand For','what-we-stand-for'],['Who We Are','who-we-are'],['Charter of the Rights of the Family','charter-of-the-rights-of-the-family'],['Model Declaration','model-declaration-on-the-rights-of-the-family']]],
     ['Work',[['Projects','projects'],['Books','books'],['Conferences','conferences']]],
-    ['Media',[['News','news'],['Podcasts','podcast-series'],['Media','media']]],
-    ['Resources',[['CEaSE RP','resources-2'],['Nigeria','resources-on-the-persecution-and-genocide-of-christians-in-nigeria'],['Contact','contact'],['Donate','donate']]]]
+    ['Media',[['News','news'],['Podcasts','podcast-series'],['Press','press']]],
+    ['Resources',[['CEaSE RP','resources-2'],['Persecution of Christians in Nigeria','persecution-and-genocide-of-christians-in-nigeria'],['Catechesis on Old Age','catechesis-on-old-age'],['Contact','contact'],['Donate','donate']]]]
     .map(([g,ls])=>`<div class="fg"><h4>${g}</h4><nav>${ls.map(([t,h])=>`<a href="#${h}">${t}</a>`).join('')}</nav></div>`).join('')}</div>`;
   $('#yr').textContent=new Date().getFullYear();
   const nf=$('#nlForm');if(nf)nf.onsubmit=e=>{e.preventDefault();const em=$('#nlEmail',nf),m=$('.nlmsg',nf);
