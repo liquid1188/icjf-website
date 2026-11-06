@@ -31,6 +31,8 @@ shell = open('_shell.html').read()
 ver = hashlib.sha1((open('assets/site.css').read() + open('assets/site.js').read()).encode()).hexdigest()[:10]
 shell = shell.replace('{{BASE}}', BASE).replace('{{V}}', ver)
 
+import cms_merge
+cms_merge.run()
 IDX = json.load(open('data/index.json'))
 PAGES = IDX['pages']
 POSTS = IDX['posts']
@@ -82,6 +84,8 @@ def clean_html(h):
 
 def save_img(data_uri, path):
     """Write a base64 data URI to a file (for link previews). Returns the path or None."""
+    if data_uri and not data_uri.startswith('data:'):
+        return data_uri.lstrip('/') if os.path.exists(data_uri.lstrip('/')) else None
     m = re.match(r'data:image/(\w+);base64,(.*)', data_uri or '', re.S)
     if not m:
         return None
