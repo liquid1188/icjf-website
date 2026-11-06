@@ -756,6 +756,7 @@ const YL=['Rome conference','ICOLF founded','Renamed ICJF'];
 const DONATE={stripe:'',stripeMonthly:'',paypal:''};
 // Email list: paste a Mailchimp/Buttondown form action URL here when ready.
 const NEWSLETTER={action:''};
+const WEB3FORMS_KEY='bca9940b-833c-4b10-b08e-58123d08a6fe';
 const FOCUS=[50,55,45,38,40,50,45,32,42,45,40,45,40,40,50,50];
 const PAGEPHOTO={'how-we-started':1,'what-we-stand-for':9,'who-we-are':10,'projects':3,'books':0,'conferences':14,'news':8,'resources-2':6,'resources-on-the-persecution-and-genocide-of-christians-in-nigeria':11,'mug-shots-of-martyred-priests':13,'petition-against-religious-persecution-in-nigeria':12,'press':15,'podcast-series':2,'contact':4,'donate':7,'charter-of-the-rights-of-the-family':5,'model-declaration-on-the-rights-of-the-family':5};
 const photoFor=(key,title)=>{if(key in PAGEPHOTO)return PAGEPHOTO[key];let h=0;for(const c of (key||title))h=(h*31+c.charCodeAt(0))>>>0;return h%HERO.hero.length};
@@ -1261,9 +1262,19 @@ async function person(p){
 function contact(p){
   const d=new DOMParser().parseFromString(p.html,'text/html').body;
   V.innerHTML=phead(p.title)+`<section class="s wall"><div class="wrap"><div class="contact"><div class="lead rv">${d.innerHTML}<img class="sealbig" src="${HERO.seal}" alt=""></div>
-  <form class="cf rv d2" novalidate><span class="w" style="grid-column:1/-1;font-family:var(--display);font-style:italic;font-size:17px;color:var(--mute);margin-bottom:-18px">Name <span class="req">*</span></span><label>First<input name="first" required autocomplete="given-name"></label><label>Last<input name="last" required autocomplete="family-name"></label><label class="w">Email <span class="req">*</span><input type="email" name="email" required autocomplete="email"></label><label class="w">Comment or Message <span class="req">*</span><textarea name="message" required></textarea></label><div><button class="btn solid" type="submit">Submit ${ICON.arrow}</button></div><p class="ok" role="status"></p></form></div></div></section>`;
+  <form class="cf rv d2" novalidate><span class="w" style="grid-column:1/-1;font-family:var(--display);font-style:italic;font-size:17px;color:var(--mute);margin-bottom:-18px">Name <span class="req">*</span></span><label>First<input name="first" required autocomplete="given-name"></label><label>Last<input name="last" required autocomplete="family-name"></label><label class="w">Email <span class="req">*</span><input type="email" name="email" required autocomplete="email"></label><label class="w">Comment or Message <span class="req">*</span><textarea name="message" required></textarea></label><input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" style="display:none"><div><button class="btn solid" type="submit">Submit ${ICON.arrow}</button></div><p class="ok" role="status"></p></form></div></div></section>`;
   const f=$('form.cf');
-  f.onsubmit=e=>{e.preventDefault();const ok=$('.ok',f);if(!f.checkValidity()){ok.style.display='block';ok.textContent='Please fill in your name, email, and message.';return}ok.style.display='block';ok.textContent='This is a preview. The form will be connected to the Forum’s inbox at launch, so nothing was sent.'};
+  f.onsubmit=async e=>{e.preventDefault();const ok=$('.ok',f),btn=$('button[type=submit]',f);ok.style.display='block';
+    if(!f.checkValidity()){ok.textContent='Please fill in your name, email, and message.';return}
+    if(f.botcheck.checked)return;
+    const name=(f.first.value+' '+f.last.value).trim();
+    btn.disabled=true;ok.textContent='Sending…';
+    try{const r=await fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify({access_key:WEB3FORMS_KEY,subject:'ICJF website message from '+name,from_name:'ICJF Website',name,email:f.email.value,replyto:f.email.value,message:f.message.value})});
+      const j=await r.json().catch(()=>({}));
+      if(r.ok&&j.success){f.reset();ok.textContent='Thank you. Your message has been sent to the Forum.'}
+      else throw new Error(j.message||r.status)}
+    catch(err){ok.textContent='Sorry, the message could not be sent. Please try again in a moment.'}
+    finally{btn.disabled=false}};
 }
 
 let newsState={q:'',tag:'',year:'',n:24};
