@@ -62,7 +62,7 @@ const store={get(k){try{return localStorage.getItem(k)}catch(e){return null}},se
 const NAV=[
   {t:'About',k:['how-we-started','what-we-stand-for','who-we-are'],kids:[['How We Started','how-we-started'],['What We Stand For','what-we-stand-for'],['Who We Are','who-we-are']]},
   {t:'Projects',h:'projects'},{t:'Books',h:'books'},{t:'Conferences',h:'conferences'},{t:'News',h:'news'},
-  {t:'Resources',k:['charter-of-the-rights-of-the-family','model-declaration-on-the-rights-of-the-family','resources-2','cease-rp','catechesis-on-old-age','persecution-and-genocide-of-christians-in-nigeria','resources-on-the-persecution-and-genocide-of-christians-in-nigeria','mug-shots-of-martyred-priests','petition-against-religious-persecution-in-nigeria'],kids:[['Charter of the Rights of the Family','charter-of-the-rights-of-the-family'],['Model Declaration on the Rights of the Family','model-declaration-on-the-rights-of-the-family'],['CEaSE RP','resources-2'],['Persecution of Christians in Nigeria','persecution-and-genocide-of-christians-in-nigeria'],['Catechesis on Old Age','catechesis-on-old-age']]},
+  {t:'Resources',k:['charter-of-the-rights-of-the-family','model-declaration-on-the-rights-of-the-family','resources-2','cease-rp','catechesis-on-old-age','persecution-and-genocide-of-christians-in-nigeria','resources-on-the-persecution-and-genocide-of-christians-in-nigeria','mug-shots-of-martyred-priests','petition-against-religious-persecution-in-nigeria'],kids:[['Charter of the Rights of the Family','charter-of-the-rights-of-the-family'],['Model Declaration on the Rights of the Family','model-declaration-on-the-rights-of-the-family'],['The Holy See on Gender Ideology','holy-see-on-gender-ideology'],['CEaSE RP','resources-2'],['Persecution of Christians in Nigeria','persecution-and-genocide-of-christians-in-nigeria'],['Catechesis on Old Age','catechesis-on-old-age']]},
   {t:'Press',h:'press'},{t:'Podcasts',h:'podcast-series'},{t:'Contact',h:'contact'}];
 const PARENT={};NAV.forEach(n=>(n.kids||[]).forEach(([,s])=>PARENT[s]=n.t));
 ['how-we-started','what-we-stand-for','who-we-are'].forEach(s=>PARENT[s]='About');
@@ -88,7 +88,7 @@ function buildChrome(){
   <div class="fgroups">${[['About',[['How We Started','how-we-started'],['What We Stand For','what-we-stand-for'],['Who We Are','who-we-are'],['Charter of the Rights of the Family','charter-of-the-rights-of-the-family'],['Model Declaration','model-declaration-on-the-rights-of-the-family']]],
     ['Work',[['Projects','projects'],['Books','books'],['Conferences','conferences']]],
     ['Media',[['News','news'],['Podcasts','podcast-series'],['Press','press']]],
-    ['Resources',[['CEaSE RP','resources-2'],['Persecution of Christians in Nigeria','persecution-and-genocide-of-christians-in-nigeria'],['Catechesis on Old Age','catechesis-on-old-age'],['Contact','contact'],['Donate','donate']]]]
+    ['Resources',[['The Holy See on Gender Ideology','holy-see-on-gender-ideology'],['CEaSE RP','resources-2'],['Persecution of Christians in Nigeria','persecution-and-genocide-of-christians-in-nigeria'],['Catechesis on Old Age','catechesis-on-old-age'],['Contact','contact'],['Donate','donate']]]]
     .map(([g,ls])=>`<div class="fg"><h4>${g}</h4><nav>${ls.map(([t,h])=>`<a href="#${h}">${t}</a>`).join('')}</nav></div>`).join('')}</div>`;
   $('#yr').textContent=new Date().getFullYear();
   const nf=$('#nlForm');if(nf)nf.onsubmit=e=>{e.preventDefault();const em=$('#nlEmail',nf),m=$('.nlmsg',nf);
@@ -277,10 +277,10 @@ function podcastify(prose){
   }
   $$('.pep',frag).forEach(e=>{if(!$('.pmedia',e).childElementCount)$('.pmedia',e).remove()});
   prose.innerHTML='';prose.appendChild(frag);prose.classList.add('book','pods');prose.classList.remove('dropcap');
-  $$('.pinfo',prose).forEach(i=>{const ps=$$('p',i);if(ps.length>2){const d=document.createElement('details');d.innerHTML='<summary>About this series</summary>';ps.slice(1).forEach(p=>d.appendChild(p));i.appendChild(d)}});
+  $$('.pinfo',prose).forEach(i=>{const ps=$$('p',i);if(ps.length>2&&$$('.pep',i.closest('.pser')||i).length){const d=document.createElement('details');d.innerHTML='<summary>About this series</summary>';ps.slice(1).forEach(p=>d.appendChild(p));i.appendChild(d)}});
   // newest first
   $$('.pgrid',prose).forEach(g=>[...g.children].reverse().forEach(c=>g.appendChild(c)));
-  $$('.pser',prose).forEach(sc=>{const c=$$('.pep',sc).length;sc.querySelector('h2').insertAdjacentHTML('beforeend',`<span class="pc">${c} episodes</span>`)});
+  $$('.pser',prose).forEach(sc=>{const c=$$('.pep',sc).length;if(c)sc.querySelector('h2').insertAdjacentHTML('beforeend',`<span class="pc">${c} episodes</span>`)});
   podcastUpdates(prose);
 }
 // Pull any newer episodes straight from each series' Spreaker show, so the page stays current on its own.
@@ -304,7 +304,7 @@ async function podcastUpdates(prose){
         const card=document.createElement('article');card.className='pep pnew';
         card.innerHTML=`<header><span class="pnum">${esc(num)}</span><span class="pd">${esc(date)}</span><span class="ptag">New</span></header>${img?`<div class="pmedia pmsq"><img src="${esc(img)}" alt="" loading="lazy"></div>`:''}<div class="pt"><p>${esc(title)}</p></div><div class="pl"><a class="pa" href="${esc(e.site_url)}" target="_blank" rel="noopener">Listen on Spreaker</a></div>`;
         grid.prepend(card)});
-      const pc=$('h2 .pc',sc);if(pc)pc.textContent=`${$$('.pep',sc).length} episodes`;
+      const pc=$('h2 .pc',sc);if(pc&&$$('.pep',sc).length)pc.textContent=`${$$('.pep',sc).length} episodes`;
     }catch(err){/* offline or API change: the page simply shows the listed episodes */}
   }
 }
