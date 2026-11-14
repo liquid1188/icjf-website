@@ -30,9 +30,13 @@ OG_DEFAULT = 'img/og-default.jpg'
 shell = open('_shell.html').read()
 ver = hashlib.sha1((open('assets/site.css').read() + open('assets/site.js').read()).encode()).hexdigest()[:10]
 shell = shell.replace('{{BASE}}', BASE).replace('{{V}}', ver)
+# Analytics: set "goatcounter" in site.json to the account code (the part before .goatcounter.com).
+GC = (CFG.get('goatcounter') or '').strip()
+shell = shell.replace('{{ANALYTICS}}', f'<script data-goatcounter="https://{GC}.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>' if GC else '')
 
-import cms_merge
+import cms_merge, extract_images
 cms_merge.run()
+extract_images.run()
 IDX = json.load(open('data/index.json'))
 PAGES = IDX['pages']
 POSTS = IDX['posts']
@@ -228,6 +232,14 @@ for slug, meta in sorted(PAGES.items()):
         desc = 'Support the work of the International Catholic Jurists Forum.'
     write(slug, head(title, desc, slug, img, typ, ld), '\n'.join(body), p.get('modified'))
     nav_links.append((title, slug, kind))
+
+# ---------- pages drawn only by the front end ----------
+if 'donate' not in {w[0] for w in written}:
+    write('donate', head('Support the Forum', 'Support the work of the International Catholic Jurists Forum.', 'donate',
+                         ld=[crumbs_ld([('Home', 'home'), ('Donate', 'donate')])]),
+          '<h1>Support the Forum</h1><p>Gifts to the Forum support its conferences, books, podcasts, and research on the rights '
+          'of the family, life, and religious freedom.</p><p>To give by check, stock, or donor-advised fund, '
+          f'<a href="{path_for("contact")}">contact the Forum</a>.</p>')
 
 # ---------- news ----------
 posts_sorted = sorted(POSTS, key=lambda x: x['date'], reverse=True)

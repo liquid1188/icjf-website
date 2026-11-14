@@ -10,6 +10,7 @@ on:
       - "site.json"
       - "build.py"
       - "cms_merge.py"
+      - "extract_images.py"
   workflow_dispatch:
 permissions:
   contents: write

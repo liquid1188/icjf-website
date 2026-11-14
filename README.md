@@ -10,5 +10,16 @@ Static rebuild of icjurist.org by Lickity Split. All text is carried over verbat
 - `data/p/*.json` — one file per page
 - `data/n/*.json` — news bodies and thumbnails, in chunks
 - `data/hero.json` — homepage photography and the ICJF seal
+- `extract_images.py` — runs with every build; moves any base64 images in `data/` out to `img/e/` so they cache and lazy-load
+- `site.json` `goatcounter` — GoatCounter account code for analytics (blank means off)
 
 Noindexed until launch (`noindex` in `site.json`).
+
+## Launch checklist (when icjurist.org points straight at GitHub Pages)
+
+Right now icjurist.org is a GoDaddy masked forward (a frame around the github.io address), so the site stays noindexed until the DNS change.
+
+1. GoDaddy DNS: remove the forwarding; add A records for `@` to 185.199.108.153, 185.199.109.153, 185.199.110.153, 185.199.111.153; CNAME `www` to `liquid1188.github.io`. Leave MX and other email records alone.
+2. In the same commit: add a `CNAME` file containing `icjurist.org`, and set `site.json` to `"base": "/"` and `"noindex": false`.
+3. Repo Settings, Pages: custom domain `icjurist.org`, then tick Enforce HTTPS once the certificate is issued.
+4. Submit `https://icjurist.org/sitemap.xml` in Google Search Console; check a page in Facebook's Sharing Debugger.

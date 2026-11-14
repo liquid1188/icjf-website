@@ -98,12 +98,6 @@ function buildChrome(){
   $('#menuBtn').onclick=()=>toggleMenu();
   $('#srchBtn').onclick=()=>openPal();
   $('#mmSearch').onclick=e=>{e.preventDefault();toggleMenu(false);openPal()};
-  const dv=$('#dv'),on=document.documentElement.classList.contains('dv');
-  dv.textContent=on?'View mobile version':'View desktop version';
-  dv.onclick=()=>{store.set('icjf-dv',on?'':'1');
-    // apply immediately, then reload so iOS Safari lays the page out at the new width
-    $('meta[name=viewport]').setAttribute('content',on?'width=device-width, initial-scale=1, viewport-fit=cover':'width=1280, viewport-fit=cover');
-    document.documentElement.classList.toggle('dv',!on);setTimeout(()=>location.reload(),60)};
 }
 function toggleMenu(force){const m=$('#mm'),open=force??!m.classList.contains('open');m.classList.toggle('open',open);m.setAttribute('aria-hidden',!open);$('#menuBtn').innerHTML=open?'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 6l12 12M18 6 6 18"/></svg>':'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 8h16M4 16h16"/></svg>';document.body.style.overflow=open?'hidden':'';if(open)$('#hdr').classList.add('dark')}
 
@@ -179,12 +173,12 @@ function cardHTML(c,i){
   if(yid)return `<div class="tcard vcard rv d${i%4}">${player(yid,c.title)}<div class="tx"><h3>${esc(c.title)}</h3>${(c.sub||[]).map(s=>`<span class="sub">${esc(s)}</span>`).join('')}<a class="more" href="${esc(c.href)}" target="_blank" rel="noopener" style="margin-top:auto;font-size:16px;align-self:flex-start">YouTube ${ICON.ext.replace('<svg','<svg style="width:13px;height:13px"')}</a></div></div>`;
   return `<a class="tcard rv d${i%4}" href="${esc(c.href)}"${ext?' target="_blank" rel="noopener"':''} style="--r:${c.ratio?1/c.ratio:1.33}">${c.img?`<div class="im"><img src="${c.img}" alt=""></div>`:''}${ext?`<span class="ext">${ICON.ext}</span>`:''}<div class="tx"><h3>${esc(c.title)}</h3>${(c.sub||[]).map(s=>`<span class="sub">${esc(s)}</span>`).join('')}</div></a>`;
 }
-function personCard(c,i){return `<a class="person rv d${i%4}" href="${esc(c.href)}"><div class="ph">${c.img?`<img src="${c.img}" alt="${esc(c.title)}">`:''}</div><h3>${esc(c.title)}</h3>${(c.sub||[]).map(s=>`<div class="role">${esc(s)}</div>`).join('')}</a>`}
+function personCard(c,i){return `<a class="person rv d${i%4}" href="${esc(c.href)}"><div class="ph">${c.img?`<img src="${c.img}" alt="${esc(c.title)}" loading="lazy" decoding="async">`:''}</div><h3>${esc(c.title)}</h3>${(c.sub||[]).map(s=>`<div class="role">${esc(s)}</div>`).join('')}</a>`}
 function bookCard(c){const ext=/^https?:/.test(c.href);return `<a class="book" href="${esc(c.href)}"${ext?' target="_blank" rel="noopener"':''}><div class="cv"><img src="${c.img}" alt=""></div><h4>${esc(c.title)}</h4></a>`}
 let NEWSFALL=[],NEWSFALLi=0;
 function newsCard(p,th,cls=''){
   const t=th&&th[p.slug];
-  return `<a class="ncard rv ${cls}" href="#${p.slug}"><div class="im${t?'':' none'}">${t?`<img src="${t}" alt="">`:(()=>{const pool=NEWSFALL.length?NEWSFALL:[...Array(HERO.hero.length).keys()];const i=NEWSFALL.length?pool[(NEWSFALLi++)%pool.length]:[...p.slug].reduce((a,c)=>a+c.charCodeAt(0),0)%pool.length;return `<img src="${HERO.hero[i].src}" alt="" style="object-position:50% ${FOCUS[i]}%"><span>${esc((p.tags[0]||'News'))}</span>`})()}</div><div><div class="meta"><span>${fmtDate(p.date)}</span>${p.tags[0]?`<span class="tg">${esc(p.tags[0])}</span>`:''}</div><h3>${esc(p.title)}</h3><p>${esc(p.excerpt)}</p></div></a>`;
+  return `<a class="ncard rv ${cls}" href="#${p.slug}"><div class="im${t?'':' none'}">${t?`<img src="${t}" alt="" loading="lazy" decoding="async">`:(()=>{const pool=NEWSFALL.length?NEWSFALL:[...Array(HERO.hero.length).keys()];const i=NEWSFALL.length?pool[(NEWSFALLi++)%pool.length]:[...p.slug].reduce((a,c)=>a+c.charCodeAt(0),0)%pool.length;return `<img src="${HERO.hero[i].src}" alt="" style="object-position:50% ${FOCUS[i]}%"><span>${esc((p.tags[0]||'News'))}</span>`})()}</div><div><div class="meta"><span>${fmtDate(p.date)}</span>${p.tags[0]?`<span class="tg">${esc(p.tags[0])}</span>`:''}</div><h3>${esc(p.title)}</h3><p>${esc(p.excerpt)}</p></div></a>`;
 }
 
 /* book pages: Description / Reviews / Articles become organized, collapsible cards */
@@ -357,7 +351,7 @@ async function home(){
   const projNames=['Leo','Francis','Benedict','John Paul II'];
   V.innerHTML=`
   <section class="hero" id="top">
-    <div class="slides">${HERO.hero.map((h,i)=>`<figure${i===0?' class="on"':''} style="--o:${[30,70,50,20,80][i%5]}% ${[40,60,30,70,50][i%5]}%"><img src="${h.src}" alt=""></figure>`).join('')}</div>
+    <div class="slides">${HERO.hero.map((h,i)=>`<figure${i===0?' class="on"':''} style="--o:${[30,70,50,20,80][i%5]}% ${[40,60,30,70,50][i%5]}%"><img ${i<2?'src':'data-src'}="${h.src}" alt=""${i===0?' fetchpriority="high"':''}></figure>`).join('')}</div>
     <div class="inner">
       <div class="sealwrap"><svg viewBox="0 0 200 200" aria-hidden="true"><defs><path id="ring" d="M100,100 m-84.6,0 a84.6,84.6 0 1,1 169.2,0 a84.6,84.6 0 1,1 -169.2,0"/></defs><circle cx="100" cy="100" r="89.5" fill="none" stroke="rgba(18,15,12,.9)" stroke-width="21"/><circle cx="100" cy="100" r="100" fill="none" stroke="#d6b878" stroke-width=".9"/><circle cx="100" cy="100" r="79" fill="none" stroke="rgba(214,184,120,.75)" stroke-width=".8"/><text><textPath href="#ring" textLength="526" lengthAdjust="spacing">${(PILLARS.join(' ✠ ')+' ✠ ')}</textPath></text></svg><img src="${HERO.seal}" alt="Seal of the International Catholic Jurists Forum"></div>
       <h1><span class="ln"><span>International</span></span><span class="ln"><span>Catholic Jurists</span></span><span class="ln"><span>Forum</span></span></h1>
@@ -469,7 +463,8 @@ function startHero(){
   clearInterval(heroT);let i=0;const f=$$('.hero .slides figure');
   heroT=setInterval(()=>{if(!document.body.contains(f[0]))return clearInterval(heroT);
     f.forEach(x=>x.classList.remove('out'));f[i].classList.replace('on','out');i=(i+1)%f.length;
-    void f[i].offsetWidth;f[i].classList.add('on');const n=$('#slN');if(n)n.textContent=ROM(i+1)},8000);
+    void f[i].offsetWidth;f[i].classList.add('on');const n=$('#slN');if(n)n.textContent=ROM(i+1);
+    const nx=f[(i+1)%f.length].querySelector('img[data-src]');if(nx){nx.src=nx.dataset.src;nx.removeAttribute('data-src')}},8000);
 }
 function tlItems(items){let last='';return items.map(it=>{const g=it.year===last;last=it.year;return `<div class="tli rv"><div class="y${g?' ghost':''}">${it.year}</div><span class="dot"></span><div class="b">${it.html}</div></div>`}).join('')}
 
@@ -628,6 +623,7 @@ document.addEventListener('click',e=>{
 });
 addEventListener('popstate',route);
 new MutationObserver(ms=>{for(const m of ms)for(const n of m.addedNodes)if(n.nodeType===1&&!n.closest('#pal')){if(n.matches('a[href^="#"]'))fixLinks(n.parentNode);else fixLinks(n)}}).observe(document.body,{childList:true,subtree:true});
+let routed=false;
 async function route(){
   toggleMenu(false);closePal();tocSpy=null;
   let s=curSlug();if(s==='media'){history.replaceState(null,'',slugToPath('press'));s='press';}
@@ -642,6 +638,7 @@ async function route(){
   }catch(e){console.error(e);notFound()}
   {const c=document.querySelector('link[rel=canonical]');if(c&&c.dataset.origin)c.href=c.dataset.origin+(s==='home'?'/':'/'+s+'/')}
   document.title=(s==='home'?'':($('.phead h1')?.textContent+' · '))+'International Catholic Jurists Forum';
+  if(routed&&window.goatcounter&&window.goatcounter.count)window.goatcounter.count({path:location.pathname.replace(BASE,'/'),title:document.title});routed=true;
   V.classList.remove('swap');void V.offsetWidth;V.classList.add('swap');
   scrollTo({top:0,behavior:'instant'});lastY=0;onScroll();reveal();
 }
