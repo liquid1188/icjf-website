@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <base href="{{BASE}}">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<script>document.documentElement.classList.add('js');try{localStorage.removeItem('icjf-dv')}catch(e){}</script>
+<script>document.documentElement.classList.add('js');try{if(localStorage.getItem('icjf-dv')){document.querySelector('meta[name=viewport]').setAttribute('content','width=1280, viewport-fit=cover');document.documentElement.classList.add('dv')}}catch(e){}</script>
 {{HEAD}}
 <meta name="theme-color" content="#f6f1e7">
 <link rel="icon" href="favicon.png">
@@ -33,7 +33,7 @@
 <footer class="ft">
   <div class="wrap">
     <div id="ftcols"></div>
-    <div class="base"><span>© <span id="yr"></span> International Catholic Jurists Forum</span><span class="credit">Site by <a href="https://lickitysplitweb.com" target="_blank" rel="noopener">Lickity Split Web Design</a></span></div>
+    <div class="base"><span>© <span id="yr"></span> International Catholic Jurists Forum</span><span class="credit">Site by <a href="https://lickitysplitweb.com" target="_blank" rel="noopener">Lickity Split Web Design</a></span></div><div class="dvrow"><button id="dv">View desktop version</button></div>
   </div>
 </footer>
 <div id="pal" role="dialog" aria-label="Search">

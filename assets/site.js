@@ -98,6 +98,12 @@ function buildChrome(){
   $('#menuBtn').onclick=()=>toggleMenu();
   $('#srchBtn').onclick=()=>openPal();
   $('#mmSearch').onclick=e=>{e.preventDefault();toggleMenu(false);openPal()};
+  const dv=$('#dv'),on=document.documentElement.classList.contains('dv');
+  dv.textContent=on?'View mobile version':'View desktop version';
+  dv.onclick=()=>{store.set('icjf-dv',on?'':'1');
+    // apply immediately, then reload so iOS Safari lays the page out at the new width
+    $('meta[name=viewport]').setAttribute('content',on?'width=device-width, initial-scale=1, viewport-fit=cover':'width=1280, viewport-fit=cover');
+    document.documentElement.classList.toggle('dv',!on);setTimeout(()=>location.reload(),60)};
 }
 function toggleMenu(force){const m=$('#mm'),open=force??!m.classList.contains('open');m.classList.toggle('open',open);m.setAttribute('aria-hidden',!open);$('#menuBtn').innerHTML=open?'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 6l12 12M18 6 6 18"/></svg>':'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 8h16M4 16h16"/></svg>';document.body.style.overflow=open?'hidden':'';if(open)$('#hdr').classList.add('dark')}
 
