@@ -3,5 +3,6 @@
   "base": "/icjf-website/",
   "noindex": true,
   "redirects": {},
-  "goatcounter": ""
+  "goatcounter": "",
+  "ga4": ""
 }

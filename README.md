@@ -11,7 +11,7 @@ Static rebuild of icjurist.org by Lickity Split. All text is carried over verbat
 - `data/n/*.json` — news bodies and thumbnails, in chunks
 - `data/hero.json` — homepage photography and the ICJF seal
 - `extract_images.py` — runs with every build; moves any base64 images in `data/` out to `img/e/` so they cache and lazy-load
-- `site.json` `goatcounter` — GoatCounter account code for analytics (blank means off)
+- `site.json` `ga4` — Google Analytics 4 Measurement ID (G-…); `goatcounter` — GoatCounter code. Blank means off.
 
 Noindexed until launch (`noindex` in `site.json`).
 

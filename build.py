@@ -32,7 +32,16 @@ ver = hashlib.sha1((open('assets/site.css').read() + open('assets/site.js').read
 shell = shell.replace('{{BASE}}', BASE).replace('{{V}}', ver)
 # Analytics: set "goatcounter" in site.json to the account code (the part before .goatcounter.com).
 GC = (CFG.get('goatcounter') or '').strip()
-shell = shell.replace('{{ANALYTICS}}', f'<script data-goatcounter="https://{GC}.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>' if GC else '')
+# Google Analytics 4: set "ga4" in site.json to the Measurement ID (G-XXXXXXXXXX). GA4's enhanced
+# measurement counts in-site navigation on its own (history changes), so no extra page_view calls are sent.
+GA = (CFG.get('ga4') or '').strip()
+analytics = ''
+if GA:
+    analytics += (f'<script async src="https://www.googletagmanager.com/gtag/js?id={GA}"></script>'
+                  f"<script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments)}}gtag('js',new Date());gtag('config','{GA}');</script>")
+if GC:
+    analytics += f'<script data-goatcounter="https://{GC}.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>'
+shell = shell.replace('{{ANALYTICS}}', analytics)
 
 import cms_merge, extract_images
 cms_merge.run()
